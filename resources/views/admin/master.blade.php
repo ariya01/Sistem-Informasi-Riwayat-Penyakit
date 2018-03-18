@@ -35,7 +35,7 @@
                   </h6>
                 </div>
               </a>
-              <a class="dropdown-item preview-item">
+              <a href="{{url('logout')}}" class="dropdown-item preview-item">
                 <div class="preview-thumbnail">
                   <i style="color: black; " class="fa fa-sign-out icon-lg"></i>
                 </div>
@@ -59,7 +59,7 @@
               <div class="profile-image"> <img src="images/profile/1.png" alt="image"/> <span class="online-status online"></span> </div>
               <div class="profile-name">
                 <p class="name">Hai,<br>{{Auth::user()->name}}</p>
-                <!-- <p class="designation">{{Auth::user()->name}}</p> -->
+                <p class="designation">{{Auth::user()->roles->first()->name}}</p>
               </div>
             </div>
           </li>

@@ -35,4 +35,9 @@ class MyControll extends Controller
     	$role =DB::table('roles')->get();
     	return view('admin.akun',compact('data','role'));
     }
+    public function logout()
+    {
+    	Auth::logout();
+    	return redirect('/');
+    }
 }
