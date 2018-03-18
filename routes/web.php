@@ -1,5 +1,5 @@
 <?php
-
+use App\Models\Role;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -11,6 +11,12 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/','MyControll@login')->name('welcome');
+Route::post('/signin','MyControll@signin');
+Route::group(['middleware' => 'admin'], function () {
+	Route::get('/home','MyControll@home')->name('home');
+	Route::get('/akun','MyControll@akun');
+});
+Route::get('/generate',function(){
+	return bcrypt('12345678');
 });

@@ -14,7 +14,7 @@
 </head>
 
 <body>
-  <form>
+  <form  class="form-login" method="post" action="{{url('signin')}}">
     <label class="inputGroup inputGroup1" style="margin-bottom: 10% ; margin-top: 10%; font-family: verdana; text-align: center; font-size: 20px;">
         SISTEM INFORMASI RIWAYAT PENYAKIT
     </label> 
@@ -111,16 +111,19 @@
     
     <div class="inputGroup inputGroup1">
         <label for="email1">Email</label>
-        <input type="text" id="email" class="email" maxlength="256"/>
+        <input type="text" name="email" id="email" class="email" maxlength="256"/>
         <p class="helper helper1">email@domain.com</p>
         <span class="indicator"></span>
     </div>
     <div class="inputGroup inputGroup2">
         <label for="password">Password</label>
-        <input type="password" id="password" class="password" />
+        <input type="password" name="password" id="password" class="password" />
     </div>
-    <div class="inputGroup inputGroup3">
-        <button id="login">Log in</button>
+    <input type="hidden" name="_token" value="{!! csrf_token() !!}">
+    <div class="inputGroup inputGroup3" >
+        <!-- <button id="login" type="submit">Log in</button> -->
+    <input type="hidden" name="_token" value="{!! csrf_token() !!}">
+              <button class="btn btn-theme btn-block" href="index.html" type="submit"><i class="fa fa-lock"></i> SIGN IN</button>
     </div>  
 </form>
   <script src='https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.3/TweenMax.min.js'></script>
