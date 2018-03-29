@@ -28,4 +28,10 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function detail()
+    {
+       return $this->hasOne(Detail::class,'id_user','id');
+    }
+    
 }

@@ -15,17 +15,13 @@ class CreateRiwayatsTable extends Migration
     {
         Schema::create('riwayat', function (Blueprint $table) {
             $table->increments('id_riwayat');
-            $table->integer('id_rawat')->unsigned();
-            $table->integer('id_rumah')->unsigned();
+            $table->unsignedInteger('id_waktunya');
             $table->timestamps();
 
-             $table->foreign('id_rawat')
-            ->references('id_rawat')->on('rawat')
+            $table->foreign('id_waktunya')
+            ->references('id_waktu')->on('waktu')
             ->onDelete('cascade')->onUpdate('cascade');
 
-            $table->foreign('id_rumah')
-            ->references('id_rumah')->on('rs')
-            ->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

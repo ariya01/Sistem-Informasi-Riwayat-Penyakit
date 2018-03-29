@@ -15,9 +15,19 @@ class CreateRawatsTable extends Migration
     {
         Schema::create('rawat', function (Blueprint $table) {
             $table->increments('id_rawat');
+            $table->integer('id_rumah')->unsigned();
+            $table->integer('id_riwayat')->unsigned();
             $table->date('masuk');
             $table->date('keluar');
             $table->timestamps();
+
+            $table->foreign('id_rumah')
+            ->references('id_rumah')->on('rs')
+            ->onDelete('cascade')->onUpdate('cascade');
+
+            $table->foreign('id_riwayat')
+            ->references('id_riwayat')->on('riwayat')
+            ->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

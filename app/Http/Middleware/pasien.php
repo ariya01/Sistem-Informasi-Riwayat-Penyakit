@@ -4,7 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Auth;
-class admin
+class pasien
 {
     /**
      * Handle an incoming request.
@@ -16,7 +16,7 @@ class admin
     public function handle($request, Closure $next)
     {
         $user = Auth::user();
-        if($user->roles->first()->name == "admin")
+        if($user->roles->first()->name == "pasien")
         {
             return $next($request);
         }
