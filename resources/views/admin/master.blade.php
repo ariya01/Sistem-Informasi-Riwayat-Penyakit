@@ -4,29 +4,29 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>Sistem Informasi Riwayat Penyakit</title>
-  <link rel="stylesheet" href="node_modules/mdi/css/materialdesignicons.min.css">
-  <link rel="stylesheet" href="node_modules/simple-line-icons/css/simple-line-icons.css">
+  <link rel="stylesheet" href="{{asset('node_modules/mdi/css/materialdesignicons.min.css')}}">
+  <link rel="stylesheet" href="{{asset('node_modules/simple-line-icons/css/simple-line-icons.css')}}">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link rel="stylesheet" href="css/style.css">
-  <link rel="shortcut icon" href="images/favicon.png" />
+  <link rel="stylesheet" href="{{asset('css/style.css')}}">
+  <link rel="shortcut icon" href="{{asset('images/favicon.png')}}" />
   @yield('css')
 </head>
 <body>
   <div class="container-scroller">
     <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
       <div class="text-center navbar-brand-wrapper d-flex align-items-top justify-content-center">
-        <a class="navbar-brand brand-logo" href="index.html"><img src="images/logo.svg" alt="logo"/></a>
-        <a class="navbar-brand brand-logo-mini" href="index.html"><img src="images/logo-mini.svg" alt="logo"/></a>
+        <a class="navbar-brand brand-logo" href="index.html"><img src="{{asset('images/logo.svg')}}" alt="logo"/></a>
+        <a class="navbar-brand brand-logo-mini" href="index.html"><img src="{{asset('images/logo-mini.svg')}}" alt="logo"/></a>
       </div>
       <div class="navbar-menu-wrapper d-flex align-items-center">
         <ul class="navbar-nav navbar-nav-right">
           <li class="nav-item dropdown">
             <a class="nav-link count-indicator dropdown-toggle" id="messageDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
-              <img class="img-xs rounded-circle" src="images/profile/1.png" alt="">
+              <img class="img-xs rounded-circle" src="{{asset('images/profile/1.png')}}" alt="">
             </a>
             <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="messageDropdown">
               <div class="dropdown-divider"></div>
-              <a class="dropdown-item preview-item">
+              <a href="{{url('detail/'.Auth::user()->id)}}" class="dropdown-item preview-item">
                 <div class="preview-thumbnail">
                   <i style="color: black; " class="fa fa-cog icon-lg"></i>
                 </div>
@@ -56,7 +56,7 @@
         <ul class="nav">
           <li class="nav-item nav-profile">
             <div class="nav-link">
-              <div class="profile-image"> <img src="images/profile/1.png" alt="image"/> <span class="online-status online"></span> </div>
+              <div class="profile-image"> <img src="{{asset('images/profile/1.png')}}" alt="image"/> <span class="online-status online"></span> </div>
               <div class="profile-name">
                 <p>Hai,</p>
                 <p class="name">{{Auth::user()->name_user}}</p>
@@ -88,14 +88,14 @@
   </div>
   @yield('js')
   <!-- <script src="node_modules/jquery/dist/jquery.min.js"></script> -->
-  <script src="node_modules/popper.js/dist/umd/popper.min.js"></script>
-  <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
-  <script src="node_modules/chart.js/dist/Chart.min.js"></script>
-  <script src="js/off-canvas.js"></script>
-  <script src="js/misc.js"></script>
-  <script src="js/dashboard.js"></script>
+  <script src="{{asset('node_modules/popper.js/dist/umd/popper.min.js')}}"></script>
+  <script src="{{asset('node_modules/bootstrap/dist/js/bootstrap.min.js')}}"></script>
+  <script src="{{asset('node_modules/chart.js/dist/Chart.min.js')}}"></script>
+  <script src="{{asset('js/off-canvas.js')}}"></script>
+  <script src="{{asset('js/misc.js')}}"></script>
+  <script src="{{asset('js/dashboard.js')}}"></script>
   <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB5NXz9eVnyJOA81wimI8WYE08kW_JMe8g&callback=initMap" async defer></script> -->
-  <script src="js/maps.js"></script>
+  <script src="{{asset('js/maps.js')}}"></script>
 </body>
 
 </html>

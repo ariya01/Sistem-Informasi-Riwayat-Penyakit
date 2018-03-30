@@ -21,11 +21,13 @@ Route::group(['middleware' => 'admin'], function () {
 	Route::post('/tambahakun','MyControll@tambahakun');
 	Route::post('/hapusakun','MyControll@hapusakun');
 	Route::post('/ubahakun','MyControll@ubahakun');
-	Route::get('/get/{id}','MyControll@getajax');
+	Route::get('/get/{id}','MyControll@getajax')->name('test');
+	Route::get('/detail/{id}','MyControll@detail')->name('detail');
+	Route::post('/isidetail','MyControll@isidetail');
 });
 Route::group(['middleware' => 'dokter'], function () {
 	Route::get('/rumah','MyControll@rumah')->name('rumah');
 });
 Route::get('/generate',function(){
-	return bcrypt('12345678');
+	return bcrypt('1');
 });

@@ -18,7 +18,24 @@
           <div class="float-right">
             <p class="card-text text-right">Jumlah Pasien</p>
             <div class="fluid-container">
-              <h3 class="card-title font-weight-bold text-right mb-0">$65,650</h3>
+              <h3 class="card-title font-weight-bold text-right mb-0">{{$pasien}}</h3>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 grid-margin stretch-card">
+    <div class="card card-statistics">
+      <div class="card-body">
+        <div class="clearfix">
+          <div class="float-left">
+            <i class="fa fa-lock text-primary icon-lg"></i>
+          </div>
+          <div class="float-right">
+            <p class="card-text text-right">Jumlah Admin</p>
+            <div class="fluid-container">
+              <h3 class="card-title font-weight-bold text-right mb-0">{{$admin}}</h3>
             </div>
           </div>
         </div>
@@ -35,7 +52,7 @@
           <div class="float-right">
             <p class="card-text text-right">Jumlah Dokter</p>
             <div class="fluid-container">
-              <h3 class="card-title font-weight-bold text-right mb-0">$65,650</h3>
+              <h3 class="card-title font-weight-bold text-right mb-0">{{$dokter}}</h3>
             </div>
           </div>
         </div>

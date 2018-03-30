@@ -112,6 +112,8 @@ src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLN
       <th>Email</th>
       <th>Role</th>
       <th>Perintah</th>
+      <th>Detail</th>
+      <th>Bantuan</th>
     </tr>
   </thead>
   <tbody>
@@ -132,7 +134,6 @@ src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLN
               <input type="hidden" name="id_user" value="{{$a->id}}">
               {{ csrf_field() }}
               <div class="tooltip-wrapper disabled" data-title="Kamu tidak bisa menghapus dirmu sendiri">
-                
                 <button id="hapus" type="submit" class="btn btn-danger btn-rounded btn-fw" disabled><i class="fa fa-times" aria-hidden="true"></i>Hapus</button>
               </div>
               @else
@@ -143,6 +144,20 @@ src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLN
             </form>
           </div>
         </div>
+      </td>
+       <td>
+        @if($a->id_det==null)
+        <label class="badge badge-warning">Belum Terisi</label>
+        @else
+        <label class="badge badge-info">Sudah</label>
+        @endif
+      </td>
+      <td>
+        @if($a->id_det==null)
+        <a href="{{url('/detail/'.$a->id)}}"><button type="button" id="idnya" class="btn btn-primary btn-rounded btn-fw xyz"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>Isi</button></a>
+        @else
+        <a href="{{url('/detail/'.$a->id)}}"><button type="button" id="idnya" class="btn btn-primary btn-rounded btn-fw xyz"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>Ubah</button></a>
+        @endif
       </td>
     </tr>
     @endforeach
@@ -255,7 +270,7 @@ src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLN
         <input type="hidden" name="id_user" id="id_user">
         <div class="modal-footer">
           <button type="button" class="btn btn-danger" data-dismiss="modal">Batal</button>
-          <button type="submit" class="btn btn-primary" >Tambah</button>
+          <button type="submit" class="btn btn-primary" >Ubah</button>
         </div>
       </form>
     </div>
