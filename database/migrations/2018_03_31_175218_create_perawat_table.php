@@ -15,11 +15,15 @@ class CreatePerawatTable extends Migration
     {
         Schema::create('perawat', function (Blueprint $table) {
             $table->increments('id_perawat');
+            $table->integer('id_riwayat')->unsigned();
             $table->integer('id_user')->unsigned();
             $table->timestamps();
 
             $table->foreign('id_user')
             ->references('id')->on('users')
+            ->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('id_riwayat')
+            ->references('id_riwayat')->on('riwayat')
             ->onDelete('cascade')->onUpdate('cascade');
         });
     }
