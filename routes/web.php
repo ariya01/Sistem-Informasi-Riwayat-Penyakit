@@ -15,7 +15,7 @@ Route::get('/','MyControll@login')->name('welcome');
 Route::post('/signin','MyControll@signin');
 Route::get('hak','MyControll@hak')->name('hak');
 Route::get('/logout','MyControll@logout');
-Route::group(['middleware' => 'admin'], function () {
+Route::group(['middleware' => 'auth','admin'], function () {
 	Route::get('/home','MyControll@home')->name('home');
 	Route::get('/akun','MyControll@akun')->name('akun');
 	Route::post('/tambahakun','MyControll@tambahakun');
@@ -29,6 +29,12 @@ Route::group(['middleware' => 'admin'], function () {
 	Route::post('hapusdok','MyControll@hapusdok');
 	Route::post('aktifdok','MyControll@aktifdok');
 	Route::post('nondok','MyControll@nondok');
+	Route::post('tambahdok','MyControll@tambahdok');
+	Route::get('/pendidikandok/{id}','MyControll@pendidikandok')->name('pendidikandok');
+	Route::get('/getdok/{id}','MyControll@getdok');
+	Route::post('/editdok','MyControll@editdok');
+	Route::get('pasien','MyControll@pasien');
+	Route::get('/detailpasien/{id}','MyControll@detailpasien');
 });
 Route::group(['middleware' => 'dokter'], function () {
 	Route::get('/rumah','MyControll@rumah')->name('rumah');

@@ -66,7 +66,7 @@
           </li>
           <li class="nav-item"><a class="nav-link" href="{{url('home')}}"><i style="margin-right: 5%;" class="fa fa-home icon-md" aria-hidden="true"></i><span class="menu-title">Dashboard</span></a></li>
           <li class="nav-item"><a class="nav-link" href="{{url('dokter')}}"><i style="margin-right: 7%;" class="fa fa-user-md icon-md"></i><span class="menu-title">Dokter</span></a></li>
-          <li class="nav-item"><a class="nav-link" href="pages/widgets.html"><i style="margin-right: 5%;" class="fa fa-wheelchair icon-md"></i><span class="menu-title">Pasien</span></a></li>
+          <li class="nav-item"><a class="nav-link" href="{{url('pasien')}}"><i style="margin-right: 5%;" class="fa fa-wheelchair icon-md"></i><span class="menu-title">Pasien</span></a></li>
           <li class="nav-item"><a class="nav-link" href="pages/widgets.html"><i style="margin-right: 7%;" class="fa fa-hospital-o icon-md"></i><span class="menu-title">Rumah Sakit</span></a></li>
            <li class="nav-item"><a class="nav-link" href="pages/widgets.html"><i style="margin-right: 5%;" class="fa fa-medkit icon-md"></i><span class="menu-title">Obat</span></a></li>
            <li class="nav-item"><a class="nav-link" href="pages/widgets.html"><i style="margin-right: 5%;" class="fa fa-heartbeat icon-md"></i><span class="menu-title">Penyakit</span></a></li>

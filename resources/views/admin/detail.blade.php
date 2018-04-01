@@ -26,6 +26,26 @@ src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLN
     confirmButtonText: 'Iya'
   })
 </script>
+@elseif(session()->get('message')=='Gagal1')
+<script type="text/javascript">
+  swal
+  ({
+    title: 'Gagal',
+    text: 'Coba lagi',
+    type: 'error',
+    confirmButtonText: 'Iya'
+  })
+</script>
+@elseif(session()->get('message')=='Berhasil1')
+<script type="text/javascript">
+  swal
+  ({
+    title: 'Berhasil',
+    text: 'Akun berhasil terupdate',
+    type: 'success',
+    confirmButtonText: 'Iya'
+  })
+</script>
 @endif
 <div class="col-12">
   <div
@@ -81,7 +101,7 @@ src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLN
                     </div>
                   </div>
                   <div class="form-group">
-                    <label for="exampleFormControlSelect2">Default select</label>
+                    <label for="exampleFormControlSelect2">Pilih Jenis Kelamin</label>
                     <select class="form-control" name="kel" id="kel">
                       @foreach($kelamins as $role)
                       <option value="{{$role->id_kel}}">{{$role->JenisKelamin}}</option>

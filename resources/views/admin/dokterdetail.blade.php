@@ -97,6 +97,46 @@ src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLN
     confirmButtonText: 'Iya'
   })
 </script>
+@elseif(session()->get('message')=='Gagal6')
+<script type="text/javascript">
+  swal
+  ({
+    title: 'Gagal',
+    text: 'Coba Ulangi lagi',
+    type: 'error',
+    confirmButtonText: 'Iya'
+  })
+</script>
+@elseif(session()->get('message')=='Berhasil3')
+<script type="text/javascript">
+  swal
+  ({
+    title: 'Berhasil',
+    text: 'Berhasil tambah pendidikan',
+    type: 'success',
+    confirmButtonText: 'Iya'
+  })
+</script>
+@elseif(session()->get('message')=='Berhasil4')
+<script type="text/javascript">
+  swal
+  ({
+    title: 'Berhasil',
+    text: 'Berhasil ubah pendidikan',
+    type: 'success',
+    confirmButtonText: 'Iya'
+  })
+</script>
+@elseif(session()->get('message')=='Gagal7')
+<script type="text/javascript">
+  swal
+  ({
+    title: 'Gagal',
+    text: 'Coba Ulangi lagi',
+    type: 'error',
+    confirmButtonText: 'Iya'
+  })
+</script>
 @endif
 @endif
 <div class="col-md-12 grid-margin stretch-card">
@@ -200,10 +240,9 @@ src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLN
             @endif
           </div>
           <div class="col-2">
-            <form method="post" action="{{url('/')}}">
-              {{ csrf_field() }}
-              <button type="submit" class="btn btn-info btn-rounded btn-fw"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>Ubah</button>
-              </form>
+              <a href="{{url('/pendidikandok/'.$a->id_dokter)}}">
+                <button type="submit" class="btn btn-info btn-rounded btn-fw"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>Ubah</button>
+              </a>
           </div>
           <div class="col-2">
               <form method="post" action="{{url('/hapusdok')}}">
@@ -243,7 +282,7 @@ src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLN
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <form class="forms-sample" method="post" action="{{url('/tambahakun')}}">
+      <form class="forms-sample" method="post" action="{{url('/tambahdok')}}">
         <div class="modal-body">
           <div class="form-group row">
             <label class="col-sm-3 col-form-label">Strata</label>
@@ -257,9 +296,20 @@ src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLN
             </div>
           </div>
           <div class="form-group row">
+            <label class="col-sm-3 col-form-label">Pendidikan</label>
+            <div class="col-sm-9">
+              <select class="form-control" name="pendidikan">
+                <option selected="true" disabled="disabled">Choose</option>  
+                @foreach($pendidikan as $a)
+                <option value="{{$a->id_pendidikan}}">{{$a->nama_pendidikan}}</option>
+                @endforeach
+              </select>
+            </div>
+          </div>          
+          <div class="form-group row">
             <label class="col-sm-3 col-form-label">Univ</label>
             <div class="col-sm-9">
-              <select class="form-control" name="strata">
+              <select class="form-control" name="univ">
                 <option selected="true" disabled="disabled">Choose</option>  
                 @foreach($univ as $a)
                 <option value="{{$a->id_univ}}">{{$a->nama_univ}}</option>
@@ -270,7 +320,7 @@ src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLN
           <div class="form-group row">
             <label class="col-sm-3 col-form-label">Spesialis</label>
             <div class="col-sm-9">
-              <select class="form-control" id="spesial" name="strata">
+              <select class="form-control" id="spesial" name="spesial">
                 <option selected="true" disabled="disabled">Choose</option>    
                 @foreach($spesialis as $a)
                 <option value="{{$a->id_spesialis}}">{{$a->nama_spesialis}}</option>
@@ -280,6 +330,7 @@ src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLN
           </div>
         </div>
         {{ csrf_field() }}
+        <input type="hidden" name="id" value="{{$personal->id}}">
         <div class="modal-footer">
           <button type="button" class="btn btn-danger" data-dismiss="modal">Batal</button>
           <button type="submit" class="btn btn-primary" >Tambah</button>

@@ -156,11 +156,11 @@ class MyControll extends Controller
       update(['id_user'=>$request->id_user,'id_jk'=>$request->kel,'alamat'=>$request->alamat,'berat'=>$request->berat,'tinggi'=>$request->tinggi,'tanggal'=>$request->tanggal,'kontak'=>$request->kontak,'status'=>0]);
       if($hasil)
       {
-        return redirect()->route('detail',$request->id_user)->with('message','Berhasil');
+        return redirect()->route('detail',$request->id_user)->with('message','Berhasil2');
       }
       else
       {
-        return redirect()->route('detail')->with('message','Gagal');
+        return redirect()->route('detail')->with('message','Gagal2');
       }
     }
     else
@@ -202,7 +202,8 @@ class MyControll extends Controller
     $univ = Db::table('univ')->get();
     $spesialis = Db::table('spesialis')->get();
     // dd($strata);
-    return view('admin.dokterdetail',compact('spesialis','univ','data','personal','detail','strata'));
+    $pendidikan = Db::table('pendidikan')->get();
+    return view('admin.dokterdetail',compact('pendidikan','spesialis','univ','data','personal','detail','strata'));
   }
   public function hapusdok(Request $request)
   {
@@ -269,5 +270,67 @@ class MyControll extends Controller
     {
      return redirect()->route('dokterdetail',$kembali->id_user)->with('message','Gagal4'); 
     }
+  }
+  public function tambahdok(Request $request)
+  {
+    // dd($request->id);
+    $data = new Dokter;
+    $data->id_user = $request->id;
+    $data->id_strata = $request->strata;
+    $data->id_univ = $request->univ;
+    $data->id_pendidikan = $request->pendidikan;
+    $data->id_spesialis = $request->spesial;
+    $data->status = 0;
+    if($data->save())
+    {
+      return redirect()->route('dokterdetail',$request->id)->with('message','Berhasil3'); 
+    }
+    else
+    {
+      return redirect()->route('dokterdetail',$request->id)->with('message','Gagal6'); 
+    }
+  }
+  public function pendidikandok($id)
+  {
+    $detail =Dokter::where('id_dokter','=',$id)->first();
+    $strata =Db::table('strata')->get();
+    $univ = Db::table('univ')->get();
+    $spesialis = Db::table('spesialis')->get();
+    $pendidikan = Db::table('pendidikan')->get();
+    return view('admin.pendidikandok',compact('id','detail','strata','univ','spesialis','pendidikan'));
+  }
+  public function getdok(Request $request,$id)
+  {
+    $data = $request->id;
+    $hasil = Dokter::where('id_dokter','=',$data)->first();
+    return json_encode($hasil);    
+  }
+  public function editdok(Request $request)
+  {
+    $hasil = Dokter::where('id_dokter','=',$request->id)->
+      update(['id_user'=>$request->id_user,'id_strata'=>$request->strata,'id_pendidikan'=>$request->pendidikan,'id_univ'=>$request->univ,'id_spesialis'=>$request->spesialis,'status'=>0]);
+    if($hasil)
+    {
+      return redirect()->route('dokterdetail',$request->id_user)->with('message','Berhasil4'); 
+    }
+    else
+    {
+      return redirect()->route('dokterdetail',$request->id_user)->with('message','Gagal7'); 
+    }
+  }
+  public function pasien()
+  {
+    $data = DB::table('users')->leftJoin('role_user','users.id','role_user.user_id')->leftJoin('roles','role_id','roles.id')->where('name','=','pasien')->leftjoin('detail','detail.id_user','users.id')->select('users.id','detail.tanggal','id_det','name_user')->get();
+    // dd($data);
+    return view ('admin.pasien',compact('data'));
+  }
+  public function detailpasien($id)
+  {
+    $data = DB::table('dokter')->where('id_user','=',$id)->leftJoin('strata','strata.id_strata','dokter.id_strata')->leftjoin('spesialis','spesialis.id_spesialis','dokter.id_spesialis')->leftjoin('univ','univ.id_univ','dokter.id_univ')->get();
+    // dd($data);
+    $personal =User::where('id','=',$id)->first();    
+    $detail =Detail::where('id_user','=',$id)->first();
+    // dd($detail);
+    return view('admin.detailpasien',compact('personal','detail'));
   }
 }
