@@ -7,6 +7,7 @@ use Auth;
 use App\Detail;
 use App\User;
 use App\Rolenya;
+use App\Dokter;
 use Illuminate\Http\Request;
 
 class MyControll extends Controller
@@ -45,7 +46,6 @@ class MyControll extends Controller
     $pasien = DB::table('users')->leftJoin('role_user','users.id','role_user.user_id')->leftJoin('roles','role_id','roles.id')->where('name','=','pasien')->select('users.*','roles.name')->count();
     $admin = DB::table('users')->leftJoin('role_user','users.id','role_user.user_id')->leftJoin('roles','role_id','roles.id')->where('name','=','admin')->select('users.*','roles.name')->count();
 
-    // dd($data);
    return view ('admin.home',compact('dokter','pasien','admin'));
  }
  public function akun()
@@ -150,7 +150,7 @@ class MyControll extends Controller
   }
   public function isidetail(Request $request)
   {
-    if($request->id)
+    if($request->id) 
     {
       $hasil = Detail::where('id_user','=',$request->id)->
       update(['id_user'=>$request->id_user,'id_jk'=>$request->kel,'alamat'=>$request->alamat,'berat'=>$request->berat,'tinggi'=>$request->tinggi,'tanggal'=>$request->tanggal,'kontak'=>$request->kontak,'status'=>0]);
@@ -182,6 +182,92 @@ class MyControll extends Controller
       {
         return redirect()->route('detail')->with('message','Gagal');
       }
+    }
+  }
+  public function dokter()
+  {
+    $data = DB::table('users')->leftJoin('role_user','users.id','role_user.user_id')->leftJoin('roles','role_id','roles.id')->where('name','=','dokter')->leftjoin('detail','detail.id_user','users.id')->leftJoin('dokter','users.id','dokter.id_user')->leftJoin('strata','strata.id_strata','dokter.id_strata')->leftjoin('spesialis','spesialis.id_spesialis','dokter.id_spesialis')->where('dokter.status','=',1)->select('users.id','detail.tanggal','users.name_user','strata.nama_strata','spesialis.nama_spesialis','detail.id_det')->get();
+    $data1 = DB::table('users')->leftJoin('role_user','users.id','role_user.user_id')->leftJoin('roles','role_id','roles.id')->where('name','=','dokter')->leftjoin('detail','detail.id_user','users.id')->leftJoin('dokter','users.id','dokter.id_user')->leftJoin('strata','strata.id_strata','dokter.id_strata')->leftjoin('spesialis','spesialis.id_spesialis','dokter.id_spesialis')->where('dokter.id_dokter','=',null)->select('users.id','detail.tanggal','users.name_user','strata.nama_strata','spesialis.nama_spesialis','detail.id_det')->get();
+    // dd($data1);
+    return view('admin.dokter',compact('data','data1'));
+  }
+  public function dokterdetail($id)
+  {
+    $data = DB::table('dokter')->where('id_user','=',$id)->leftJoin('strata','strata.id_strata','dokter.id_strata')->leftjoin('spesialis','spesialis.id_spesialis','dokter.id_spesialis')->leftjoin('univ','univ.id_univ','dokter.id_univ')->get();
+    // dd($data);
+    $personal =User::where('id','=',$id)->first();    
+    $detail =Detail::where('id_user','=',$id)->first();
+    // dd($data);
+    $strata =Db::table('strata')->get();
+    $univ = Db::table('univ')->get();
+    $spesialis = Db::table('spesialis')->get();
+    // dd($strata);
+    return view('admin.dokterdetail',compact('spesialis','univ','data','personal','detail','strata'));
+  }
+  public function hapusdok(Request $request)
+  {
+    $cek =Db::table('dokter')->where('id_dokter','=',$request->hapus)->where('status','=','0')->first();
+    $kembali = Db::table('dokter')->where('id_dokter','=',$request->hapus)->first();
+    $halo = DB::table('dokter')->where('id_user','=',$kembali->id_user)->where('status','=',1)->count();
+    // dd($halo);
+    if($cek)
+    {
+      if($halo==1)
+      {
+        $data = Db::table('dokter')->where('id_dokter','=',$request->hapus)->where('status','=','0')->delete();
+        // dd($kembali);
+        if($data)
+        {
+          return redirect()->route('dokterdetail',$kembali->id_user)->with('message','Berhasil');      
+        }
+        else
+        {
+          return redirect()->route('dokterdetail',$kembali->id_user)->with('message','Gagal');
+        }
+      }
+      else
+      {
+        return redirect()->route('dokterdetail',$kembali->id_user)->with('message','Gagal2');   
+      }
+    }
+    else
+    {
+      return redirect()->route('dokterdetail',$kembali->id_user)->with('message','Gagal1');
+    }  
+  }
+  public function aktifdok(Request $request)
+  {
+    $kembali = Db::table('dokter')->where('id_dokter','=',$request->cek)->first();
+    $halo = DB::table('dokter')->where('id_user','=',$kembali->id_user)->where('status','=',1)->count();
+    // dd($halo);
+    if($halo==1)
+    {
+      return redirect()->route('dokterdetail',$kembali->id_user)->with('message','Gagal5');
+    }
+    else
+    {
+      $aktif = Db::table('dokter')->where('id_dokter','=',$request->cek)->update(['status'=>1]);
+      if($aktif)
+      {
+       return redirect()->route('dokterdetail',$kembali->id_user)->with('message','Berhasil1'); 
+      }
+      else
+      {
+      return redirect()->route('dokterdetail',$kembali->id_user)->with('message','Gagal3'); 
+      }
+    }
+  }
+  public function nondok(Request $request)
+  {
+    $kembali = Db::table('dokter')->where('id_dokter','=',$request->cek)->first();
+    $non = Db::table('dokter')->where('id_dokter','=',$request->cek)->update(['status'=>0]);
+    if($non)
+    {
+      return redirect()->route('dokterdetail',$kembali->id_user)->with('message','Berhasil2'); 
+    }
+    else
+    {
+     return redirect()->route('dokterdetail',$kembali->id_user)->with('message','Gagal4'); 
     }
   }
 }

@@ -24,6 +24,11 @@ Route::group(['middleware' => 'admin'], function () {
 	Route::get('/get/{id}','MyControll@getajax')->name('test');
 	Route::get('/detail/{id}','MyControll@detail')->name('detail');
 	Route::post('/isidetail','MyControll@isidetail');
+	Route::get('dokter','MyControll@dokter');
+	Route::get('/dokterdetail/{id}','MyControll@dokterdetail')->name('dokterdetail');
+	Route::post('hapusdok','MyControll@hapusdok');
+	Route::post('aktifdok','MyControll@aktifdok');
+	Route::post('nondok','MyControll@nondok');
 });
 Route::group(['middleware' => 'dokter'], function () {
 	Route::get('/rumah','MyControll@rumah')->name('rumah');

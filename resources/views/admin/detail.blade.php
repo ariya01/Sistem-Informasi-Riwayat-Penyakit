@@ -82,7 +82,7 @@ src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLN
                   </div>
                   <div class="form-group">
                     <label for="exampleFormControlSelect2">Default select</label>
-                    <select class="form-control" name="kel">
+                    <select class="form-control" name="kel" id="kel">
                       @foreach($kelamins as $role)
                       <option value="{{$role->id_kel}}">{{$role->JenisKelamin}}</option>
                       @endforeach
@@ -117,6 +117,7 @@ src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLN
                 $("#tinggi").val(JSON.parse(data).tinggi);
                 $("#kontak").val(JSON.parse(data).kontak);
                 $("#lahir").val(JSON.parse(data).tanggal);
+                $("#kel").val(JSON.parse(data).id_jk);
               },
               error:function(data){
                 console.log('data belum ada');
