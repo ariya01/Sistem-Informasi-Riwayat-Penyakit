@@ -11,7 +11,7 @@ use App\Models\Role;
 |
 */
 
-Route::get('/','MyControll@login')->name('welcome');
+Route::get('/','MyControll@login')->name('welcome')->name('login');
 Route::post('/signin','MyControll@signin');
 Route::get('hak','MyControll@hak')->name('hak');
 Route::get('/logout','MyControll@logout');

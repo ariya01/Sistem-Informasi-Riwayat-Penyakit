@@ -16,6 +16,10 @@ class CreateRiwayatsTable extends Migration
         Schema::create('riwayat', function (Blueprint $table) {
             $table->increments('id_riwayat');
             $table->unsignedInteger('id_waktunya');
+            $table->string('S');
+            $table->string('P');
+            $table->string('O');
+            $table->string('K');
             $table->timestamps();
 
             $table->foreign('id_waktunya')
