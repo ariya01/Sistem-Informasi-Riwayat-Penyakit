@@ -80,17 +80,7 @@
               </div>
             </div>
           </li>
-          <li class="nav-item"><a class="nav-link" href="{{url('home')}}"><i id="icon1" style="margin-right: 5%;" class="fa fa-home icon-md" aria-hidden="true"></i><span  class="menu-title">Dashboard</span></a></li>
-          <li class="nav-item @yield('tombol1')"><a class="nav-link" href="{{url('dokter')}}">
-            <i id="icon2" style="margin-right: 7%;" class="fa fa-user-md icon-md"></i>
-            <span class="menu-title">Dokter</span></a></li>
-          <li class="nav-item @yield('tombol')"><a class="nav-link" href="{{url('pasien')}}">
-            <i id="icon" style="margin-right: 5%; " class="fa fa-wheelchair icon-md"></i>
-            <span class="menu-title">Pasien</span></a></li>
-          <li class="nav-item"><a class="nav-link" href="{{url('rumahsakit')}}"><i id="icon3" style="margin-right: 7%;""  class="fa fa-hospital-o icon-md"></i><span  class="menu-title">Rumah Sakit</span></a></li>
-           <li class="nav-item "><a class="nav-link" href="{{url('obat')}}"><i id="icon4" style="margin-right: 5%;" class="fa fa-medkit icon-md"></i><span class="menu-title">Obat</span></a></li>
-           <li class="nav-item"><a class="nav-link" href="{{url('penyakit')}}"><i id="icon5" style="margin-right: 5%;" class="fa fa-heartbeat icon-md"></i><span class="menu-title">Penyakit</span></a></li>
-            <li class="nav-item"><a class="nav-link" href="{{url('akun')}}"><i id="icon6" style="margin-right: 7%;" class="fa fa-user-o icon-md"></i><span class="menu-title">Akun</span></a></li>
+          <li class="nav-item @yield('tombol')"><a class="nav-link" href="{{url('rumah')}}"><i id="icon1" style="margin-right: 5%;" class="fa fa-home icon-md" aria-hidden="true"></i><span  class="menu-title">Data Diri</span></a></li>
         </ul>
       </nav>
       <div class="main-panel">

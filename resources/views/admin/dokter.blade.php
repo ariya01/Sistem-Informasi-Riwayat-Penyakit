@@ -18,19 +18,25 @@ src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLN
 <table id="myTable" class="table table-bordered">
   <thead>
     <tr>
-      <th width="15%;">Nama</th>
-      <th>Umur</th>
+      <th>KTP</th>
+      <th>Nama</th>
+      <th>Umur</th><!-- 
       <th>Pendidikan Terakhir</th>
-      <th>Spesialisasi</th>
-      <th>Detail</th>
-      <th>Pendidikan</th>
-      <th class="text-center">Bantuan</th>
+      <th>Spesialisasi</th> -->
+      <!-- <th>Detail</th> -->
+      <!-- <th>Pendidikan</th> -->
+      <!-- <th class="text-center">Bantuan</th> -->
     </tr>
   </thead>
   <tbody>
      @foreach($data as $a)
     <tr >
-      <td>{{$a->name_user}}</td>
+      <td>{{$a->ktp}}</td>
+      <td>
+        <a href="{{url('dokterdetail/'.$a->id)}}">
+        {{$a->name_user}}
+        </a>
+      </td>
       <td><?php
       if($a->tanggal!=null)
       {
@@ -41,9 +47,9 @@ src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLN
       else 
        echo "-";
        ?>
-       </td>
+       </td><!-- 
       <td>{{$a->nama_strata}}</td>
-      <td>
+      <td>x
         @if($a->nama_spesialis)
         {{$a->nama_spesialis}}
         @else
@@ -59,53 +65,15 @@ src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLN
       </td>
       <td>
         <label class="badge badge-info">Sudah</label>
-      </td>
-      <td>
+      </td> -->
+  <!--     <td>
         @if($a->id_det==null)
         <a href="{{url('/detail/'.$a->id)}}"><button type="button" id="idnya" class="btn btn-warning btn-rounded btn-fw xyz"><i class="fa fa-id-card" aria-hidden="true"></i>Isi</button></a>
         @else
         <a href="{{url('/detail/'.$a->id)}}"><button type="button" id="idnya" class="btn btn-primary btn-rounded btn-fw xyz"><i class="fa fa-id-card" aria-hidden="true"></i></i>Ubah</button></a>
         @endif
         <a href="{{url('/dokterdetail/'.$a->id)}}"><button type="button" id="idnya" class="btn btn-primary btn-rounded btn-fw xyz"><i class="fa fa-graduation-cap" aria-hidden="true"></i>Ubah</button></a>
-      </td> 
-    </tr>
-    @endforeach
-    @foreach($data1 as $a)
-    <tr >
-      <td>{{$a->name_user}}</td>
-      <td><?php
-      if($a->tanggal!=null)
-      {
-        $lahir = new DateTime($a->tanggal);
-        $sekarang = new DateTime('now');
-        echo $sekarang->diff($lahir)->y;  
-      }
-      else 
-       echo "-";
-       ?>
-       </td>
-      <td>-</td>
-      <td>
-        -
-      </td>
-      <td>
-         @if($a->id_det==null)
-        <label class="badge badge-warning">Belum Terisi</label>
-        @else
-        <label class="badge badge-info">Sudah</label>
-        @endif
-      </td>
-      <td>
-        <label class="badge badge-warning">Belum Terisi</label>
-      </td>
-      <td>
-        @if($a->id_det==null)
-        <a href="{{url('/detail/'.$a->id)}}"><button type="button" id="idnya" class="btn btn-warning btn-rounded btn-fw xyz"><i class="fa fa-id-card" aria-hidden="true"></i>Isi</button></a>
-        @else
-        <a href="{{url('/detail/'.$a->id)}}"><button type="button" id="idnya" class="btn btn-primary btn-rounded btn-fw xyz"><i class="fa fa-id-card" aria-hidden="true"></i></i>Ubah</button></a>
-        @endif
-        <a href="{{url('/dokterdetail/'.$a->id)}}"><button type="button" id="idnya" class="btn btn-warning btn-rounded btn-fw xyz"><i class="fa fa-graduation-cap" aria-hidden="true"></i>Isi</button></a>
-      </td> 
+      </td>  -->
     </tr>
     @endforeach
   </tbody>
@@ -116,5 +84,9 @@ src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLN
   $(document).ready( function () {
     $('#myTable').DataTable();
   } );
+</script>
+<script type="text/javascript">
+   $('#icon2').removeClass('icon-md');
+   $('#icon2').addClass('icon-lg');
 </script>
 @endsection

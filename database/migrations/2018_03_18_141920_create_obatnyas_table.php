@@ -16,11 +16,11 @@ class CreateObatnyasTable extends Migration
         Schema::create('obatnya', function (Blueprint $table) {
             $table->increments('id_obatnya');
             $table->unsignedInteger('id_obat');
-            $table->unsignedInteger('id_riwayat');
+            $table->unsignedInteger('id_user');
             $table->timestamps();
-
-             $table->foreign('id_riwayat')
-            ->references('id_riwayat')->on('riwayat')
+            
+            $table->foreign('id_user')
+            ->references('id')->on('users')
             ->onDelete('cascade')->onUpdate('cascade');
 
             $table->foreign('id_obat')

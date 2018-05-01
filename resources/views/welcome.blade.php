@@ -6,18 +6,24 @@
   <title>SI Riwayat Penyakit</title>
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
-
-  
-      <link rel="stylesheet" href="login.css">
-
-  
+    <link rel="stylesheet" href="login.css"> 
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <style type="text/css">
+        .hehe
+        {
+            background-color: #4DB9D6;
+        }
+        .hehe:hover
+        {
+            background-color: #4DB9D6;
+        }
+        body, html {
+            height: 100%;
+        }
+    </style>
 </head>
-
 <body>
   <form  class="form-login" method="post" action="{{url('signin')}}">
-    <label class="inputGroup inputGroup1" style="margin-bottom: 10% ; margin-top: 10%; font-family: verdana; text-align: center; font-size: 20px;">
-        SISTEM INFORMASI RIWAYAT PENYAKIT
-    </label> 
     <div class="svgContainer">
         <div>
             <svg class="mySVG" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 200 200">
@@ -111,7 +117,7 @@
     
     <div class="inputGroup inputGroup1">
         <label for="email1">Email</label>
-        <input type="text" name="email" id="email" class="email" maxlength="256"/>
+        <input type="text" autocomplete="off" name="email" id="email" class="email" maxlength="256"/>
         <p class="helper helper1">email@domain.com</p>
         <span class="indicator"></span>
     </div>
@@ -123,19 +129,46 @@
     <div class="inputGroup inputGroup3" >
         <!-- <button id="login" type="submit">Log in</button> -->
     <input type="hidden" name="_token" value="{!! csrf_token() !!}">
-              <button class="btn btn-theme btn-block" href="index.html" type="submit"><i class="fa fa-lock"></i> SIGN IN</button>
+              <button disabled="true" class="btn hehe btn-theme btn-block" href="index.html" type="submit"><i class="fa fa-lock"></i>Masuk</button>
     </div>  
 </form>
   <script src='https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.3/TweenMax.min.js'></script>
 <!-- <script src='http://s3-us-west-2.amazonaws.com/s.cdpn.io/16327/MorphSVGPlugin.min.js?r=182'></script> -->
-
-  
-
     <script  src="login.js"></script>
-
-
-
-
 </body>
 
+<script type="text/javascript">
+  $('#email').on('keyup', function () {
+    if ($('#email').val() == "") 
+    {
+      $('button').prop('disabled', true);
+      $('button').addClass('hehe');
+    } 
+    else
+    {
+     $('button').prop('disabled', false);
+     $('button').removeClass('hehe');
+    } 
+  });
+</script>
+<script type="text/javascript">
+    window.onload = maxWindow;
+
+    function maxWindow() {
+        window.moveTo(0, 0);
+
+
+        if (document.all) {
+            top.window.resizeTo(screen.availWidth, screen.availHeight);
+        }
+
+        else if (document.layers || document.getElementById) {
+            if (top.window.outerHeight < screen.availHeight || top.window.outerWidth < screen.availWidth) {
+                top.window.outerHeight = screen.availHeight;
+                top.window.outerWidth = screen.availWidth;
+            }
+        }
+    }
+
+</script> 
 </html>

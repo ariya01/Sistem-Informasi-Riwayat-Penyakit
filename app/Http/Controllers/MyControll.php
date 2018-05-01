@@ -28,7 +28,7 @@ class MyControll extends Controller
       }
       elseif ($user == 'pasien') 
       {
-        return 'under contruction';
+        return redirect()->route('griya');
       }
       elseif ($user == 'dokter') 
       {
@@ -45,8 +45,10 @@ class MyControll extends Controller
     $dokter = DB::table('users')->leftJoin('role_user','users.id','role_user.user_id')->leftJoin('roles','role_id','roles.id')->where('name','=','dokter')->select('users.*','roles.name')->count();
     $pasien = DB::table('users')->leftJoin('role_user','users.id','role_user.user_id')->leftJoin('roles','role_id','roles.id')->where('name','=','pasien')->select('users.*','roles.name')->count();
     $admin = DB::table('users')->leftJoin('role_user','users.id','role_user.user_id')->leftJoin('roles','role_id','roles.id')->where('name','=','admin')->select('users.*','roles.name')->count();
-
-   return view ('admin.home',compact('dokter','pasien','admin'));
+    $obat = DB::table('obat')->count();
+    $rs = DB::table('rs')->count();
+    $penyakit = DB::table('penyakit')->count();
+   return view ('admin.home',compact('dokter','pasien','admin','penyakit','rs','obat'));
  }
  public function akun()
  {
@@ -64,7 +66,7 @@ class MyControll extends Controller
   }
   public function rumah()
   {
-    return view('dokter.master');
+    return view('dokter.home');
   } 
   public function hak()
   {
@@ -90,7 +92,7 @@ class MyControll extends Controller
     $role->save(); 
     if($role && $user)
       {
-        return redirect()->route('akun')->with('message','Berhasil');
+        return redirect()->route('akun')->with('message','Berhasil')->with('data',$request->nama);
       }
       else
       {
@@ -100,10 +102,12 @@ class MyControll extends Controller
   }
   public function hapusakun(Request $request)
   {
+    $nama = DB::table('users')->where('id','=',$request->id_user)->first();
+    // dd($nama);
     $User =User::destroy($request->id_user);
     if($User)
     {
-      return redirect()->route('akun')->with('message','Berhasil1');
+      return redirect()->route('akun')->with('message','Berhasil1')->with('data',$nama->name_user);
     }
     else
     {
@@ -132,7 +136,7 @@ class MyControll extends Controller
       $role->role_id = $request->role;
       if($data->save() && $role->save())
       {
-       return redirect()->route('akun')->with('message','Berhasil2');
+       return redirect()->route('akun')->with('message','Berhasil2')->with('data',$request->nama1);
       }
     }
   }
@@ -186,18 +190,17 @@ class MyControll extends Controller
   }
   public function dokter()
   {
-    $data = DB::table('users')->leftJoin('role_user','users.id','role_user.user_id')->leftJoin('roles','role_id','roles.id')->where('name','=','dokter')->leftjoin('detail','detail.id_user','users.id')->leftJoin('dokter','users.id','dokter.id_user')->leftJoin('strata','strata.id_strata','dokter.id_strata')->leftjoin('spesialis','spesialis.id_spesialis','dokter.id_spesialis')->where('dokter.status','=',1)->select('users.id','detail.tanggal','users.name_user','strata.nama_strata','spesialis.nama_spesialis','detail.id_det')->get();
-    $data1 = DB::table('users')->leftJoin('role_user','users.id','role_user.user_id')->leftJoin('roles','role_id','roles.id')->where('name','=','dokter')->leftjoin('detail','detail.id_user','users.id')->leftJoin('dokter','users.id','dokter.id_user')->leftJoin('strata','strata.id_strata','dokter.id_strata')->leftjoin('spesialis','spesialis.id_spesialis','dokter.id_spesialis')->where('dokter.id_dokter','=',null)->select('users.id','detail.tanggal','users.name_user','strata.nama_strata','spesialis.nama_spesialis','detail.id_det')->get();
-    // dd($data1);
-    return view('admin.dokter',compact('data','data1'));
+    $data = DB::table('users')->leftJoin('role_user','users.id','role_user.user_id')->leftJoin('roles','role_id','roles.id')->where('name','=','dokter')->leftjoin('detail','detail.id_user','users.id')->leftJoin('dokter','users.id','dokter.id_user')->leftJoin('strata','strata.id_strata','dokter.id_strata')->leftjoin('spesialis','spesialis.id_spesialis','dokter.id_spesialis')->select('users.id','detail.tanggal','users.name_user','strata.nama_strata','spesialis.nama_spesialis','detail.id_det','detail.ktp')->get();
+    // dd($data);
+    return view('admin.dokter',compact('data'));
   }
   public function dokterdetail($id)
   {
     $data = DB::table('dokter')->where('id_user','=',$id)->leftJoin('strata','strata.id_strata','dokter.id_strata')->leftjoin('spesialis','spesialis.id_spesialis','dokter.id_spesialis')->leftjoin('univ','univ.id_univ','dokter.id_univ')->get();
     // dd($data);
-    $personal =User::where('id','=',$id)->first();    
+    $personal =User::where('users.id','=',$id)->leftJoin('role_user','users.id','role_user.user_id')->leftJoin('roles','role_id','roles.id')->select('users.id','roles.name','users.name_user')->first();    
     $detail =Detail::where('id_user','=',$id)->first();
-    // dd($data);
+    // dd($personal);
     $strata =Db::table('strata')->get();
     $univ = Db::table('univ')->get();
     $spesialis = Db::table('spesialis')->get();
@@ -320,7 +323,7 @@ class MyControll extends Controller
   }
   public function pasien()
   {
-    $data = DB::table('users')->leftJoin('role_user','users.id','role_user.user_id')->leftJoin('roles','role_id','roles.id')->where('name','=','pasien')->leftjoin('detail','detail.id_user','users.id')->select('users.id','detail.tanggal','id_det','name_user')->get();
+    $data = DB::table('users')->leftJoin('role_user','users.id','role_user.user_id')->leftJoin('roles','role_id','roles.id')->where('name','=','pasien')->leftjoin('detail','detail.id_user','users.id')->select('users.id','detail.tanggal','id_det','name_user','ktp')->get();
     // dd($data);
     return view ('admin.pasien',compact('data'));
   }
@@ -328,9 +331,190 @@ class MyControll extends Controller
   {
     $data = DB::table('dokter')->where('id_user','=',$id)->leftJoin('strata','strata.id_strata','dokter.id_strata')->leftjoin('spesialis','spesialis.id_spesialis','dokter.id_spesialis')->leftjoin('univ','univ.id_univ','dokter.id_univ')->get();
     // dd($data);
-    $personal =User::where('id','=',$id)->first();    
+    $personal =User::where('users.id','=',$id)->leftJoin('role_user','users.id','role_user.user_id')->leftJoin('roles','role_user.role_id','roles.id')->select('users.id','users.name_user','roles.display_name')->first();    
     $detail =Detail::where('id_user','=',$id)->first();
-    // dd($detail);
+    // dd($personal);
     return view('admin.detailpasien',compact('personal','detail'));
+  }
+  public function rumahsakit()
+  {
+    $data = DB::table('rs')->get();
+    return view('admin.rumahsakit',compact('data'));
+  }
+  public function obat()
+  {
+    $data = DB::table('obat')->get();
+    return view('admin.obat',compact('data')); 
+  }
+  public function penyakit()
+  {
+    $data = DB::table('penyakit')->get();
+    return view('admin.penyakit',compact('data')); 
+  }
+  public function riwayatpenyakit($id)
+  {
+    $penyakit = DB::table('penyakitnya')->leftjoin('penyakit','penyakit.id_penyakit','penyakitnya.id_penyakit')->where('id_user','=',$id)->get();
+     $personal =User::where('id','=',$id)->first();  
+    return view('admin.riwayatpenyakit',compact('penyakit','personal'));
+  }
+  public function detailnya($id)
+  {
+    $detail =Detail::where('id_user','=',$id)->first();
+    $personal =User::where('id','=',$id)->first();  
+    return view('admin.detailnya',compact('detail','personal'));
+  }
+  public function alergi($id)
+  {
+    $personal =User::where('id','=',$id)->first();  
+    $alergi = DB::table('alerginya')->leftjoin('alergi','alergi.id_alergi','alerginya.id_alergi')->where('id_user','=',$id)->get();
+    // dd($alergi);
+    return view('admin.alergi',compact('personal','alergi'));
+  }
+  public function keluarga($id)
+  {
+    $personal =User::where('id','=',$id)->first();
+    return view ('admin.keluarga',compact('personal'));
+  }
+  public function tambahrs(Request $request)
+  {
+    $data=DB::table('rs')->insert(['nama_rumah'=>$request->nama,'alamat_rumah'=>$request->alamat,'keterangan_rumah'=>$request-> keterangan]);
+    if ($data)
+    {
+      return redirect()->route('rumahsakit')->with('message','Berhasil')->with('data',$request->nama);
+    }
+    else
+    {
+      return redirect()->route('rumahsakit')->with('message','Gagal');
+    }
+  }
+  public function hapusrs(Request $request)
+  {
+    $nama = DB::table('rs')->where('id_rumah','=',$request->id_rs)->first();
+    // dd($nama);
+    $data = DB::table('rs')->where('id_rumah','=',$request->id_rs)->delete();
+    if ($data)
+    {
+      return redirect()->route('rumahsakit')->with('message','Berhasil1')->with('data',$nama->nama_rumah);
+    }
+    else
+    {
+      return redirect()->route('rumahsakit')->with('message','Gagal');
+    }
+  }
+  public function editrs(Request $request)
+  {
+    // dd($request->id_user);
+    $data=DB::table('rs')->where('id_rumah','=',$request->id_user)->update(['nama_rumah'=>$request->nama,'alamat_rumah'=>$request->alamat,'keterangan_rumah'=>$request-> keterangan]);
+     if ($data)
+    {
+     return redirect()->route('rumahsakit')->with('message','Berhasil2')->with('data',$request->nama);
+    }
+    else
+    {
+      return redirect()->route('rumahsakit')->with('message','Gagal');
+    }
+  }
+  public function hapusobt(Request $request)
+  {
+    $nama = DB::table('obat')->where('id_obat','=',$request->id_rs)->first();
+    // dd($nama);
+    $data = DB::table('obat')->where('id_obat','=',$request->id_rs)->delete();
+    if ($data)
+    {
+      return redirect()->route('obat')->with('message','Berhasil')->with('data',$nama->nama_obat);
+    }
+    else
+    {
+      return redirect()->route('rumahsakit')->with('message','Gagal');
+    }
+  }
+  public function tambahobt(Request $request)
+  {
+     $data=DB::table('obat')->insert(['nama_obat'=>$request->nama,'ket_obat'=>$request->ket]);
+    if ($data)
+    {
+      return redirect()->route('obat')->with('message','Berhasil1')->with('data',$request->nama);
+    }
+    else
+    {
+      return redirect()->route('obat')->with('message','Gagal');
+    }
+  }
+  public function editobt(Request $request)
+  {
+    // dd($request->id_user);
+   $data=DB::table('obat')->where('id_obat','=',$request->id_user)->update(['nama_obat'=>$request->nama,'ket_obat'=>$request->ket]);
+    if ($data)
+    {
+     return redirect()->route('obat')->with('message','Berhasil2')->with('data',$request->nama);
+    }
+    else
+    {
+      return redirect()->route('obat')->with('message','Gagal');
+    }
+  }
+  public function tambahpenyakit(Request $request)
+  {
+    $data = DB::table('penyakit')->insert(['nama_penyakit'=>$request->nama,'keterangan_penyakit'=>$request->ket]);
+    if ($data)
+    {
+     return redirect()->route('penyakit')->with('message','Berhasil')->with('data',$request->nama);
+    }
+    else
+    {
+      return redirect()->route('penyakit')->with('message','Gagal');
+    }
+  }
+  public function hapuspenyakit(Request $request)
+  {
+    $nama = DB::table('penyakit')->where('id_penyakit','=',$request->id_rs)->first();
+    // dd($nama);
+    $data = DB::table('penyakit')->where('id_penyakit','=',$request->id_rs)->delete();
+    if ($data)
+    {
+      return redirect()->route('penyakit')->with('message','Berhasil1')->with('data',$nama->nama_penyakit);
+    }
+    else
+    {
+      return redirect()->route('penyakit')->with('message','Gagal');
+    }
+  }
+  public function editpenyakit(Request $request)
+  {
+    $data=DB::table('penyakit')->where('id_penyakit','=',$request->id_user)->update(['nama_penyakit'=>$request->nama,'keterangan_penyakit'=>$request->ket]);
+    if ($data)
+    {
+     return redirect()->route('penyakit')->with('message','Berhasil2')->with('data',$request->nama);
+    }
+    else
+    {
+      return redirect()->route('penyakit')->with('message','Gagal');
+    }
+  }
+  public function dokternya($id)
+  {
+    $detail =Detail::where('id_user','=',$id)->first();
+    $personal =User::where('id','=',$id)->first();  
+    return view('admin.dokternya',compact('detail','personal'));   
+  }
+  public function pendidikan($id)
+  {
+    $penyakit = DB::table('dokter')->where('id_user','=',$id)->leftjoin('strata','strata.id_strata','dokter.id_strata')->leftjoin('univ','univ.id_univ','dokter.id_univ')->leftjoin('pendidikan','pendidikan.id_pendidikan','dokter.id_pendidikan')->leftJoin('spesialis','spesialis.id_spesialis','dokter.id_spesialis')->get();
+    // dd($penyakit);
+    $personal =User::where('id','=',$id)->first();  
+    return view('admin.pendidikannya',compact('penyakit','personal')); 
+  }
+  public function pasiendokter()
+  {
+    $data = DB::table('users')->leftJoin('role_user','users.id','role_user.user_id')->leftJoin('roles','role_id','roles.id')->where('name','=','pasien')->leftjoin('detail','detail.id_user','users.id')->select('users.id','detail.tanggal','id_det','name_user','ktp')->get();
+    return view('dokter.pasien',compact('data'));
+  }
+  public function identitas()
+  {
+    $id = Auth::user()->id;
+    $personal =User::where('users.id','=',$id)->leftJoin('role_user','users.id','role_user.user_id')->leftJoin('roles','role_user.role_id','roles.id')->select('users.id','users.name_user','roles.display_name')->first();    
+    $detail =Detail::where('id_user','=',$id)->first();
+    // dd($personal);
+    return view('pasien.identitas',compact('personal','detail'));
   }
 }

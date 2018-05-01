@@ -62,6 +62,6 @@ class Kernel extends HttpKernel
         'ability' => \Zizaco\Entrust\Middleware\EntrustAbility::class,
         'admin' => \App\Http\Middleware\admin::class,
         'dokter' => \App\Http\Middleware\dokter::class,
-        'pasein' => \App\Http\Middleware\pasien::class,
+        'pasien' => \App\Http\Middleware\pasien::class,
     ];
 }

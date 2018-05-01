@@ -13801,7 +13801,7 @@ input:focus {
           margin-right: 0;
           margin-left: 1.25rem; }
       .sidebar .nav .nav-item .nav-link i {
-        color: #404852; }
+        color: white; }
         .sidebar .nav .nav-item .nav-link i.menu-arrow {
           margin-left: auto;
           margin-right: 0; }
@@ -13814,7 +13814,7 @@ input:focus {
             vertical-align: middle;
             color: rgba(74, 73, 73, 0.5); }
       .sidebar .nav .nav-item .nav-link .menu-title {
-        color: inherit;
+        color: white;
         display: inline-block;
         font-size: 0.875rem;
         line-height: 1;
@@ -13861,13 +13861,22 @@ input:focus {
         font-size: 1rem;
         margin-left: auto; }
     .sidebar .nav .nav-item.active > .nav-link {
-      color: #1991EB; }
-      .sidebar .nav .nav-item.active > .nav-link .menu-title,
+      color: #1991EB; 
+      background: white;}
+      .sidebar .nav .nav-item.active > .nav-link .menu-title
+      {
+        color: #024038;
+        font-size: 20px;
+        font-weight: 20;
+      }
       .sidebar .nav .nav-item.active > .nav-link i {
-        color: inherit; }
+        color: #024038; }
     .sidebar .nav:not(.sub-menu) > .nav-item:hover:not(.nav-profile) > .nav-link {
       background: #f1f6ff;
       color: #4a4949; }
+       .sidebar .nav:not(.sub-menu) > .nav-item:hover:not(.nav-profile) > .nav-link i,
+       .sidebar .nav:not(.sub-menu) > .nav-item:hover:not(.nav-profile) > .nav-link .menu-title {
+      color: #024038; }
     .sidebar .nav.sub-menu {
       margin-bottom: 0;
       padding: 0 0 0 3.25rem; }

@@ -17,6 +17,8 @@ class CreateDetailsTable extends Migration
             $table->increments('id_det');
             $table->unsignedInteger('id_user');
             $table->unsignedInteger('id_jk');
+            $table->string('ktp');
+            $table->string('golongan');
             $table->string('alamat');
             $table->integer('berat');
             $table->integer('tinggi');

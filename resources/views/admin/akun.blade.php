@@ -23,6 +23,58 @@ src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLN
   cursor: not-allowed;
 }
 </style>
+<style type="text/css">
+  #loaderSvgWrapper{
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #fff;
+  z-index: 99;
+}
+#preLoader{
+  position: absolute;
+  top: 50%;
+  left: 45%;
+}
+path{
+  fill: #024038;
+  stroke: #f00;
+}
+#T1{
+  animation: visible 2s ease .2s infinite;
+}
+#T2{
+  animation: visible 2s ease .4s infinite;
+}
+#T3{
+  animation: visible 2s ease .6s infinite;
+}
+#T4{
+  animation: visible 2s ease .8s infinite;
+}
+#T5{
+  animation: visible 2s ease 1s infinite;
+}
+#T6{
+  animation: visible 2s ease 1.2s infinite;
+}
+@keyframes visible {
+  0%{
+    opacity: 1;
+    stroke-opacity: 1;
+  }
+  50%{
+    opacity: 0;
+    stroke-opacity: 0;
+  }
+  100%{
+    opacity: 1;
+    stroke-opacity: 1;
+  }
+}  
+</style>
 @endsection
 @section('content')
 
@@ -42,7 +94,7 @@ src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLN
   swal
   ({
     title: 'Berhasil',
-    text: 'Akun berhasil terdaftar',
+    text: '{{session('data')}} berhasil terdaftar',
     type: 'success',
     confirmButtonText: 'Iya'
   })
@@ -52,7 +104,7 @@ src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLN
   swal
   ({
     title: 'Berhasil',
-    text: 'Akun berhasil terubah',
+    text: '{{session('data')}} berhasil terubah',
     type: 'success',
     confirmButtonText: 'Iya'
   })
@@ -62,12 +114,12 @@ src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLN
   swal
   ({
     title: 'Berhasil',
-    text: 'Akun berhasil terhapus',
+    text: '{{session('data')}} berhasil terhapus',
     type: 'success',
     confirmButtonText: 'Iya'
   })
 </script>
-@elseif(session()->get('message')=='Berhasil')
+@elseif(session()->get('message')=='Gagal')
 <script type="text/javascript">
   swal
   ({
@@ -89,7 +141,16 @@ src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLN
 </script>
 @endif
 @endif
-
+<div id="loaderSvgWrapper">
+            <svg xmlns:svg="http://www.w3.org/2000/svg" viewbox="0 0 100 100" id="preLoader" width="100px" height="100px">
+                <path style="stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter" d="m 58.26475,43.628481 15.7247,-27.287018 -31.4936,0.02553 z" id="T1"/>
+                <path style="stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter" d="m 58.26475,43.628481 31.4936,-0.02553 -15.7689,-27.261492 z" id="T2"/>
+                <path style="stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter" d="M 58.26475,43.628481 74.03365,70.88997 89.75835,43.602954 Z" id="T3"/>
+                <path style="stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter" d="M 58.26475,43.628481 42.54006,70.915503 74.03365,70.889973 Z" id="T4"/>
+                <path style="stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter" d="m 58.26475,43.628481 -31.49359,0.02553 15.7689,27.261491 z" id="T5"/>
+                <path style="stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter" d="M 58.26475,43.628481 42.49585,16.366995 26.77116,43.654011 Z" id="T6"/>
+            </svg>
+        </div>
 <div class="row purchace-popup">
   <div class="col-12">
     <span class="d-flex alifn-items-center">
@@ -97,7 +158,7 @@ src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLN
     </span>
   </div>
 </div>
-<button data-toggle="modal" data-target="#exampleModalCenter" style="margin-bottom: 2%;" type="button" class="btn btn-primary btn-rounded btn-fw"><i class="fa fa-plus" aria-hidden="true"></i> Tambah</button>
+<button data-toggle="modal" data-target="#exampleModalCenter" style="margin-bottom: 2%;" type="button" class="btn btn-primary btn-rounded btn-sm"><i class="fa fa-plus" aria-hidden="true"></i></button>
 <div class="row purchace-popup">
   <div class="col-12">
     <span class="d-flex alifn-items-center">
@@ -105,27 +166,25 @@ src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLN
     </span>
   </div>
 </div>
-<table id="myTable" class="table table-bordered">
+<table class="hover" id="myTable" class="table table-bordered">
   <thead>
     <tr>
+      <th style="width: 10%;"></th>
       <th>Nama</th>
       <th>Email</th>
       <th>Role</th>
-      <th>Perintah</th>
-      <th>Detail</th>
-      <th>Bantuan</th>
+      <!-- <th>Perintah</th> -->
+      <!-- <th>Detail</th> -->
+      <!-- <th>Bantuan</th> -->
     </tr>
   </thead>
   <tbody>
     @foreach($data as $a)
     <tr >
-      <td>{{$a->name_user}}</td>
-      <td>{{$a->email}}</td>
-      <td>{{$a->name}}</td>
       <td>
         <div class="row">
           <div>
-            <button type="button" data-toggle="modal" value="{{$a->id}}" id="idnya" data-target="#exampleModalCenter1" class="btn btn-primary btn-rounded btn-fw xyz"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>Ubah</button>
+            <button type="button" data-toggle="modal" value="{{$a->id}}" id="idnya" data-target="#exampleModalCenter1" class="btn btn-primary btn-rounded xyz btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i><!-- Ubah --></button>
           </div>
           <div>
             <!-- <button type="button" id="getajax" onclick="myFunction()" class="btn btn-primary btn-rounded btn-fw"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>Ubah</button> -->
@@ -134,31 +193,34 @@ src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLN
               <input type="hidden" name="id_user" value="{{$a->id}}">
               {{ csrf_field() }}
               <div class="tooltip-wrapper disabled" data-title="Kamu tidak bisa menghapus dirmu sendiri">
-                <button id="hapus" type="submit" class="btn btn-danger btn-rounded btn-fw" disabled><i class="fa fa-times" aria-hidden="true"></i>Hapus</button>
+                <button id="hapus" type="submit" class="btn btn-danger btn-rounded btn-sm" disabled><i class="fa fa-times" aria-hidden="true"></i><!-- Hapus --></button>
               </div>
               @else
               <input type="hidden" name="id_user" value="{{$a->id}}">
               {{ csrf_field() }}
-              <button type="submit" onclick="myFunction()" class="btn btn-danger btn-rounded btn-fw"><i class="fa fa-times" aria-hidden="true"></i>Hapus</button>
+              <button type="submit" onclick="myFunction()" class="btn btn-danger btn-rounded btn-sm"><i class="fa fa-times" aria-hidden="true"></i><!-- Hapus --></button>
               @endif
             </form>
           </div>
         </div>
       </td>
-       <td>
+      <td>{{$a->name_user}}</td>
+      <td>{{$a->email}}</td>
+      <td>{{$a->name}}</td>
+       <!-- <td>
         @if($a->id_det==null)
         <label class="badge badge-warning">Belum Terisi</label>
         @else
         <label class="badge badge-info">Sudah</label>
         @endif
-      </td>
-      <td>
+      </td> -->
+      <!-- <td>
         @if($a->id_det==null)
         <a href="{{url('/detail/'.$a->id)}}"><button type="button" id="idnya" class="btn btn-primary btn-rounded btn-fw xyz"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>Isi</button></a>
         @else
         <a href="{{url('/detail/'.$a->id)}}"><button type="button" id="idnya" class="btn btn-primary btn-rounded btn-fw xyz"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>Ubah</button></a>
         @endif
-      </td>
+      </td> -->
     </tr>
     @endforeach
   </tbody>
@@ -213,7 +275,7 @@ src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLN
         {{ csrf_field() }}
         <div class="modal-footer">
           <button type="button" class="btn btn-danger" data-dismiss="modal">Batal</button>
-          <button type="submit" class="btn btn-primary" >Tambah</button>
+          <button type="submit" class="btn btn-primary" >Edit</button>
         </div>
       </form>
     </div>
@@ -340,17 +402,29 @@ $(function() {
     var form = event.target.form;
     swal({
       title: 'Hapus Akun',
-      text: 'Apa Kamu Yakin Menghapus Akun',
+      text: 'Apa Kamu Yakin Menghapus ? ',
       type: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, delete it!'
+      confirmButtonText: 'Ya Hapus!',
+      cancelButtonText: 'Batal'
     }).then((result) => {
       if (result.value) {
         form.submit(); 
       }
     })
   }
+</script>
+<script type="text/javascript">
+   $('#icon6').removeClass('icon-md');
+   $('#icon6').addClass('icon-lg');
+</script>
+<script type="text/javascript">
+  $(window).on('load', function(){
+                $('#loaderSvgWrapper').fadeOut(500);
+                $('#preloader').delay(350).fadeOut('slow');
+                $('body').delay(350).css({'overflow':'visible'});
+            });
 </script>
 @endsection
