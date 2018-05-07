@@ -75,10 +75,6 @@ path{
 </div>
 <div class="col-md-12 grid-margin stretch-card">
   <div class="card">
-    <a href="{{url('detailpasien/'.$personal->id)}}">
-      <i class="fa fa-arrow-left" style="margin-left: 2%; margin-top: 1%" aria-hidden="true"></i>
-      <span style="font-size: 80%;"> Kembali ke Detail Pasien </span>
-    </a>
     <div class="row">
       <div class="col-md-5">
         <div class="container" style="margin-top: 5%;">
@@ -90,8 +86,7 @@ path{
               <div class="row purchace-popup">
                 <div class="col-12">
                   <span class="d-flex alifn-items-center">
-                    <a href="{{url('/detailnya/'.$personal->id)}}">
-
+                    <a href="#">
                       <p style="color: black;" class="h4"><b>Detail Pasien</b></p>
                     </a>
                   </span>

@@ -151,14 +151,14 @@ path{
                 <path style="stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter" d="M 58.26475,43.628481 42.49585,16.366995 26.77116,43.654011 Z" id="T6"/>
             </svg>
         </div>
-<div class="row purchace-popup">
+<!-- <div class="row purchace-popup">
   <div class="col-12">
     <span class="d-flex alifn-items-center">
       <p class="h4"><b>Tambah Akun</b></p>
     </span>
   </div>
-</div>
-<button data-toggle="modal" data-target="#exampleModalCenter" style="margin-bottom: 2%;" type="button" class="btn btn-primary btn-rounded btn-sm"><i class="fa fa-plus" aria-hidden="true"></i></button>
+</div> -->
+<!-- <button data-toggle="modal" data-target="#exampleModalCenter" style="margin-bottom: 2%;" type="button" class="btn btn-primary btn-rounded btn-sm"><i class="fa fa-plus" aria-hidden="true"></i></button> -->
 <div class="row purchace-popup">
   <div class="col-12">
     <span class="d-flex alifn-items-center">
@@ -169,7 +169,7 @@ path{
 <table class="hover" id="myTable" class="table table-bordered">
   <thead>
     <tr>
-      <th style="width: 10%;"></th>
+      <th style="width: 5%;"></th>
       <th>Nama</th>
       <th>Email</th>
       <th>Role</th>
@@ -182,9 +182,12 @@ path{
     @foreach($data as $a)
     <tr >
       <td>
-        <div class="row">
-          <div>
-            <button type="button" data-toggle="modal" value="{{$a->id}}" id="idnya" data-target="#exampleModalCenter1" class="btn btn-primary btn-rounded xyz btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i><!-- Ubah --></button>
+        <div class="row" style="margin-left: 5%;">
+          <div style="margin-right: 20%;">
+            <!-- <button type="button" data-toggle="modal" value="{{$a->id}}" id="idnya" data-target="#exampleModalCenter1" class="btn btn-primary btn-rounded xyz btn-sm"> -->
+            <a href="{{url('editakun/'.$a->id)}}"> 
+            <i style="color: green;" class="fa fa-pencil-square-o" aria-hidden="true"></i><!-- Ubah --><!-- </button> -->
+            </a>
           </div>
           <div>
             <!-- <button type="button" id="getajax" onclick="myFunction()" class="btn btn-primary btn-rounded btn-fw"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>Ubah</button> -->
@@ -193,12 +196,14 @@ path{
               <input type="hidden" name="id_user" value="{{$a->id}}">
               {{ csrf_field() }}
               <div class="tooltip-wrapper disabled" data-title="Kamu tidak bisa menghapus dirmu sendiri">
-                <button id="hapus" type="submit" class="btn btn-danger btn-rounded btn-sm" disabled><i class="fa fa-times" aria-hidden="true"></i><!-- Hapus --></button>
+                <!-- <button id="hapus" type="submit" class="btn btn-danger btn-rounded btn-sm" disabled><i class="fa fa-times" aria-hidden="true"></i></button> -->
+                <a><i style="color: grey;" pointer-events: none;" class="fa fa-times" aria-hidden="true"></i></a>
               </div>
               @else
               <input type="hidden" name="id_user" value="{{$a->id}}">
               {{ csrf_field() }}
-              <button type="submit" onclick="myFunction()" class="btn btn-danger btn-rounded btn-sm"><i class="fa fa-times" aria-hidden="true"></i><!-- Hapus --></button>
+              <!-- <button type="submit" onclick="myFunction()" class="btn btn-danger btn-rounded btn-sm"><i class="fa fa-times" aria-hidden="true"></i></button> -->
+              <a href="{{'deleteakun/'.$a->id}}" onclick="myFunction(event);"><i style="color: red;" class="fa fa-times" aria-hidden="true"></i></a>
               @endif
             </form>
           </div>
@@ -225,6 +230,10 @@ path{
     @endforeach
   </tbody>
 </table>
+ <a href="{{url('editakun/'.$angka)}}">
+    <i class="fa fa-plus" style="margin-left: 2%; margin-top: 1%" aria-hidden="true"></i>
+    <span style="font-size: 80%;">Tambah akun</span>
+    </a>
 <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
@@ -396,10 +405,10 @@ $(function() {
 });
 </script>
 <script type="text/javascript">
-  function myFunction()
+  function myFunction(event)
   {
     event.preventDefault(); // prevent form submit
-    var form = event.target.form;
+    var href = event.currentTarget.getAttribute('href');
     swal({
       title: 'Hapus Akun',
       text: 'Apa Kamu Yakin Menghapus ? ',
@@ -411,7 +420,7 @@ $(function() {
       cancelButtonText: 'Batal'
     }).then((result) => {
       if (result.value) {
-        form.submit(); 
+        window.location = href; 
       }
     })
   }

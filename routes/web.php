@@ -53,6 +53,14 @@ Route::group(['middleware' => 'admin'], function () {
 	Route::post('hapuspenyakit',"MyControll@hapuspenyakit");
 	Route::get('dokternya/{id}','MyControll@dokternya');
 	Route::get('pendidikan/{id}','MyControll@pendidikan');
+	Route::get('editakun/{id}','MyControll@editakun');
+	Route::get('ajax1/{id}','MyControll@ajax1');
+	Route::get('deleteakun/{id}','MyControll@deleteakun');
+	Route::post('editnya','MyControll@editnya');
+	Route::get('editpenyakitnya/{id}','MyControll@editpenyakitnya');
+	Route::get('ajax2/{id}','MyControll@ajax2');
+	Route::post('editpenyakitku','MyControll@editpenyakitku');
+	Route::get('deletepenyakit/{id}','MyControll@deletepenyakit');
 });
 Route::group(['middleware' => 'dokter'], function () {
 	Route::get('/rumah','MyControll@rumah')->name('rumah');

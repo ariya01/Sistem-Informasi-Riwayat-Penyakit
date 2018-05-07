@@ -55,9 +55,11 @@ class MyControll extends Controller
 
     $data = DB::table('users')->leftJoin('role_user','users.id','role_user.user_id')->leftJoin('roles','role_id','roles.id')->leftJoin('detail','users.id','id_user')->select('users.*','roles.name','detail.id_det')->get();
     // dd($data);
+    $terakhir = DB::table('users')->orderBy('id', 'desc')->first();
+    $angka= $terakhir->id+1;
     $role =DB::table('roles')->get();
     $role1 =DB::table('roles')->get();
-    return view('admin.akun',compact('data','role','role1'));
+    return view('admin.akun',compact('data','role','role1','angka'));
   }
   public function logout()
   {
@@ -349,7 +351,10 @@ class MyControll extends Controller
   public function penyakit()
   {
     $data = DB::table('penyakit')->get();
-    return view('admin.penyakit',compact('data')); 
+    $terakhir = DB::table('penyakit')->orderBy('id_penyakit', 'desc')->first();
+    $angka= $terakhir->id_penyakit+1;
+    // dd($angka);
+    return view('admin.penyakit',compact('data','angka')); 
   }
   public function riwayatpenyakit($id)
   {
@@ -516,5 +521,143 @@ class MyControll extends Controller
     $detail =Detail::where('id_user','=',$id)->first();
     // dd($personal);
     return view('pasien.identitas',compact('personal','detail'));
+  }
+  public function editakun($id)
+  {
+    $kelamins =DB::table('roles')->get();
+    $data = User::where('id','=',$id)->first();
+    // dd($data);
+    return view('admin.editakun',compact('kelamins','data','id'));
+  }
+  public function ajax1(Request $request,$id)
+  {
+    $personal =User::where('users.id','=',$id)->leftJoin('role_user','users.id','role_user.user_id')->leftJoin('roles','role_user.role_id','roles.id')->select('users.id','users.name_user','roles.id as role','users.email')->first();    
+    return json_encode($personal);   
+  }
+  public function deleteakun($id)
+  {
+    $nama = DB::table('users')->where('id','=',$id)->first();
+    $personal = User::destroy($id);
+    if($personal)
+    {
+      return redirect()->route('akun')->with('message','Berhasil1')->with('data',$nama->name_user);
+    }
+    else
+    {
+      return redirect()->route('akun')->with('message','Gagal2');
+    }
+  }
+  public function editnya(Request $request)
+  {
+    // dd($request->id_user);
+    if($request->id_user==null)
+    {
+      if (User::where('email', '=', $request->email)->exists())
+      {
+        return redirect()->route('akun')->with('message','Gagal');
+      }
+      else
+      {
+      $user = new User;
+      $user->name_user = $request->nama;
+      $user->email = $request->email;
+      $user->password = bcrypt($request->password);
+      $user->save();
+      $data = User::where('email',$request->email)->firstOrFail();
+      $role = new Rolenya;
+      $role->user_id = $data->id;
+      $role->role_id = $request->role;
+      $role->save(); 
+      if($role && $user)
+        {
+          return redirect()->route('akun')->with('message','Berhasil')->with('data',$request->nama);
+        }
+        else
+        {
+          return redirect()->route('akun')->with('message','Gagal1');
+        }
+      }
+    }
+    else
+    {
+      $sendiri = DB::table('users')->where('id','=',$request->id_user)->first();
+      // dd($sendiri->email,$request->email);
+
+      if (User::where('email', '=', $request->email)->exists() && $sendiri->email!=$request->email)
+      {
+        return redirect()->route('akun')->with('message','Gagal');
+      }
+      else
+      {
+        $data = User::find($request->id_user);
+        $data->name_user = $request->nama;
+        $data->email = $request->email;
+        $data->password = bcrypt($request->password);
+        $data->save();
+        $role = Rolenya::where('user_id','=',$request->id_user)->firstOrFail()->delete();
+      // $role->delete();
+      // dd($role);
+        $role = new Rolenya;
+        $role->user_id = $request->id_user;
+        $role->role_id = $request->role;
+        if($data->save() && $role->save())
+        {
+         return redirect()->route('akun')->with('message','Berhasil2')->with('data',$request->nama);
+        }
+      }
+    }
+  }
+  public function editpenyakitnya($id)
+  {
+    $kelamins =DB::table('roles')->get();
+    $data = Db::table('penyakit')->where('id_penyakit','=',$id)->first();
+    return view('admin.editpenyakit',compact('kelamins','data','id'));
+  }
+  public function ajax2(Request $request,$id)
+  {
+    $personal =DB::table('penyakit')->where('id_penyakit','=',$id)->first();
+    // dd($personal);    
+    return json_encode($personal);   
+  }
+  public function editpenyakitku(Request $request)
+  {
+    // dd($request->ket);
+    if($request->id_penyakit==null)
+    {
+      $data = DB::table('penyakit')->insert(['nama_penyakit'=>$request->nama,'keterangan_penyakit'=>$request->ket]);
+      if ($data)
+      {
+        return redirect()->route('penyakit')->with('message','Berhasil')->with('data',$request->nama);
+      }
+      else
+      {
+        return redirect()->route('penyakit')->with('message','Gagal');
+      }
+    }
+    else
+    {
+      $data=DB::table('penyakit')->where('id_penyakit','=',$request->id_penyakit)->update(['nama_penyakit'=>$request->nama,'keterangan_penyakit'=>$request->ket]);
+      if ($data)
+      {
+       return redirect()->route('penyakit')->with('message','Berhasil2')->with('data',$request->nama);
+     }
+     else
+     {
+      return redirect()->route('penyakit')->with('message','Gagal');
+      }
+    }
+  }
+  public function deletepenyakit($id)
+  {
+    $nama = DB::table('penyakit')->where('id_penyakit','=',$id)->first();
+    $data = DB::table('penyakit')->where('id_penyakit','=',$id)->delete();
+    if ($data)
+    {
+      return redirect()->route('penyakit')->with('message','Berhasil1')->with('data',$nama->nama_penyakit);
+    }
+    else
+    {
+      return redirect()->route('penyakit')->with('message','Gagal');
+    }
   }
 }
