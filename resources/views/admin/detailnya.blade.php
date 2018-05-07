@@ -143,6 +143,13 @@ path{
           <div class="col-12">
             <span class="d-flex alifn-items-center">           
               <p class="h4"><b>Data Pribadi Pasien</b></p>
+               @if ($personal->alamat != null)
+               <a href="{{url('detail/'.$personal->id)}}" style="margin-left: 50%; color: blue;"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+              </a>
+              @else
+              <a href="{{url('detail/'.$personal->id)}}" style="margin-left: 50%; color: blue;"><i class="fa fa-plus" aria-hidden="true"></i>
+              </a>
+              @endif
             </span>
           </div>
         </div>

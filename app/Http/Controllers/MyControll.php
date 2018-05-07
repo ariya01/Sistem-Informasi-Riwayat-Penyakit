@@ -152,27 +152,34 @@ class MyControll extends Controller
   {
     $kelamins =DB::table('kelamins')->get();
     $data = Detail::where('id_user','=',$id)->first();
+    // dd($id);
     return view('admin.detail',compact('kelamins','data','id'));
   }
   public function isidetail(Request $request)
   {
+    // dd($request->id);
     if($request->id) 
     {
+      // dd("asu");
       $hasil = Detail::where('id_user','=',$request->id)->
-      update(['id_user'=>$request->id_user,'id_jk'=>$request->kel,'alamat'=>$request->alamat,'berat'=>$request->berat,'tinggi'=>$request->tinggi,'tanggal'=>$request->tanggal,'kontak'=>$request->kontak,'status'=>0]);
+      update(['id_user'=>$request->id_user,'ktp'=>$request->ktp,'golongan'=>$request->gol,'id_jk'=>$request->kel,'alamat'=>$request->alamat,'berat'=>$request->berat,'tinggi'=>$request->tinggi,'tanggal'=>$request->tanggal,'kontak'=>$request->kontak,'status'=>0]);
+      $nama = User::where('id','=',$request->id)->first();
       if($hasil)
       {
-        return redirect()->route('detail',$request->id_user)->with('message','Berhasil2');
+        return redirect()->route('dokternya',$request->id_user)->with('message','Berhasil')->with('data',$nama->name_user);
       }
       else
       {
-        return redirect()->route('detail')->with('message','Gagal2');
+        return redirect()->route('dokternya',$request->id_user)->with('message','Gagal');
       }
     }
     else
     {
+      // dd($request->id);
       $data = new Detail;
       $data->id_user = $request->id_user;
+      $data->ktp = $request->ktp;
+      $data->golongan = $request->gol;
       $data->id_jk = $request->kel;
       $data->alamat =$request->alamat;
       $data->berat =$request->berat;
@@ -182,11 +189,11 @@ class MyControll extends Controller
       $data->status =0;
       if($data->save())
       {
-        return redirect()->route('detail',$request->id_user)->with('message','Berhasil');
+        return redirect()->route('dokternya',$request->id_user)->with('message','Berhasil1');
       }
       else
       {
-        return redirect()->route('detail')->with('message','Gagal');
+        return redirect()->route('dokternya',$request->id_user)->with('message','Gagal');
       }
     }
   }
@@ -500,6 +507,7 @@ class MyControll extends Controller
   {
     $detail =Detail::where('id_user','=',$id)->first();
     $personal =User::where('id','=',$id)->first();  
+    // dd($detail);
     return view('admin.dokternya',compact('detail','personal'));   
   }
   public function pendidikan($id)
@@ -659,5 +667,18 @@ class MyControll extends Controller
     {
       return redirect()->route('penyakit')->with('message','Gagal');
     }
+  }
+  public function care($id)
+  {
+    $nama = DB::table('users')->where('id','=',$id)->first();
+    $personal = DB::table('riwayat')->where('dokter','=',$id)->leftjoin('users','riwayat.pasien','users.id')->get();
+    // dd($nama);
+    return view('admin.care',compact('personal','id','nama'));
+  }
+  public function editpendidikan($id)
+  {
+    $data = db::table('dokter')->where('id_dokter','=',$id)->first();
+    // dd($data);
+    return view ('admin.editpendidikan',compact('data'));   
   }
 }

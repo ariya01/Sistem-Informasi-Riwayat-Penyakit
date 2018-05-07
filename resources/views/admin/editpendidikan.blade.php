@@ -1,7 +1,6 @@
 @extends('admin.master')
 @section('css')
-<script
-src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <script src="https://unpkg.com/promise-polyfill@7.1.0/dist/promise.min.js"></script>
 <script src="https://unpkg.com/sweetalert2@7.18.0/dist/sweetalert2.all.js"></script>
 <style type="text/css">
@@ -113,96 +112,29 @@ path{
   <div
   class="card">
   <div class="card-body">
-    <a href="{{url('dokternya/'.$id)}}">
-      <i class="fa fa-arrow-left" style="margin-left: 2%; margin-top: 1%" aria-hidden="true"></i>
-      <span style="font-size: 80%;"> Kembali ke Detail Dokter </span>
-    </a>
-    <h4 style="margin-top: 5%;" class="card-title">Detail Akun</h4>
-    <form class="forms-sample" method="post" action="{{url('isidetail')}} ">
+    <h4 class="card-title">Pendidikan</h4>
+    <form class="forms-sample" method="post" action="{{url('editpenyakitku')}} ">
       <div class="form-group">
-        <label for="exampleInputPassword1">Alamat</label>
+        <label for="exampleInputPassword1">Nama Penyakit</label>
         <div class="input-group">
           <div class="input-group-prepend">
           </div>
-          <input type="text" class="form-control" name="alamat" id="alamat" placeholder="Contoh: Perumahan Dosen">
-          <div class="input-group-append">
-          </div>
-        </div>
-      </div>
-      <div class="form-group">
-        <label for="exampleInputPassword1">KTP</label>
-        <div class="input-group">
-          <div class="input-group-prepend">
-          </div>
-          <input type="text" class="form-control" name="ktp" id="ktp" placeholder="5365XXXXXXXXX">
-          <div class="input-group-append">
-          </div>
-        </div>
-      </div>
-      <div class="form-group">
-        <label for="exampleInputPassword1">Berat</label>
-        <div class="input-group">
-          <div class="input-group-prepend">
-          </div>
-          <input type="number" class="form-control" name="berat" id="berat" placeholder="Contoh: 60" >
+          <input type="text" class="form-control" name="nama" id="nama" placeholder="Demam Berdarah">
           <div class="input-group-append bg-primary border-primary">
-            <span class="input-group-text  bg-transparent text-white">Kg</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="form-group">
-        <label for="exampleInputPassword1">Tinggi</label>
-        <div class="input-group">
-          <div class="input-group-prepend">
-          </div>
-          <input type="number" class="form-control" name="tinggi" id="tinggi" placeholder="Contoh: 150">
-          <div class="input-group-append bg-primary border-primary">
-            <span class="input-group-text  bg-transparent text-white">cm</span>
           </div>
         </div>
       </div>
       <div class="form-group">
-        <label for="exampleFormControlSelect2">Pilih Jenis Kelamin</label>
-        <select class="form-control" name="gol" id="gol">
-          <option value="A">A</option>
-          <option value="AB">AB</option>
-          <option value="B">B</option>
-          <option value="O">O</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label for="exampleInputPassword1">Tanggal</label>
+        <label for="exampleInputPassword1">Keterangan Penyakit</label>
         <div class="input-group">
           <div class="input-group-prepend">
           </div>
-          <input type="date" class="form-control" name="tanggal" id="lahir" >
+          <input type="text" class="form-control" name="ket" id="penyakit" placeholder="Penyakit ini penyakit yang di sebabkan oleh nyamuk aides aigepti" >
           <div class="input-group-append">
           </div>
         </div>
       </div>
-      <div class="form-group">
-        <label for="exampleInputPassword1" >Kontak</label>
-        <div class="input-group">
-          <div class="input-group-prepend">
-          </div>
-          <input type="text" class="form-control" name="kontak" id="kontak" placeholder="Contoh: 089XXXXXXXXX">
-          <div class="input-group-append">
-          </div>
-        </div>
-      </div>
-      <div class="form-group">
-        <label for="exampleFormControlSelect2">Pilih Jenis Kelamin</label>
-        <select class="form-control" name="kel" id="kel">
-          @foreach($kelamins as $role)
-          <option value="{{$role->id_kel}}">{{$role->JenisKelamin}}</option>
-          @endforeach
-        </select>
-      </div>
-      <input type="hidden" name="id_user" value="{{$id}}">
-      @if ($data!=null)
-      <input type="hidden" name="id" value="{{$id}}">
-      @endif
+      <input type="hidden" id="id_pendidikan" name="id_pendidikan">
       {{ csrf_field() }}
       <button type="submit" class="btn btn-primary">Kirim</button>
       <button type="reset" class="btn btn-light">Reset</button>
@@ -210,9 +142,8 @@ path{
   </div>
 </div>
 </div>
-<input type="hidden" name="id_user" value="{{$id}}">
 @if ($data!=null)
-<input type="hidden" name="id" id="id" value="{{$data->id_user}}">
+<input type="hidden" name="id" id="id" value="{{$data->id_pendidikan}}">
 @endif
 @endsection
 @section('js')
@@ -223,18 +154,13 @@ path{
             {
               $.ajax({    
                 type: 'get',
-                url: '/get/'+bla,
+                url: '/ajax2/'+bla,
                 datatype: 'JSON',
                 success:function(data){
                   console.log(JSON.parse(data));
-                  $("#alamat").val(JSON.parse(data).alamat);
-                  $("#berat").val(JSON.parse(data).berat);
-                  $("#tinggi").val(JSON.parse(data).tinggi);
-                  $("#kontak").val(JSON.parse(data).kontak);
-                  $("#lahir").val(JSON.parse(data).tanggal);
-                  $("#kel").val(JSON.parse(data).id_jk);
-                  $("#gol").val(JSON.parse(data).golongan);
-                  $("#ktp").val(JSON.parse(data).ktp);
+                  $("#nama").val(JSON.parse(data).nama_penyakit);
+                  $("#penyakit").val(JSON.parse(data).keterangan_penyakit);
+                  $('#id_penyakit').val(JSON.parse(data).id_penyakit);
                 },
                 error:function(data){
                   console.log('data belum ada');

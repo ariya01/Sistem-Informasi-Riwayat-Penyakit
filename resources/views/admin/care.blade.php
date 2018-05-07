@@ -76,13 +76,13 @@ path{
 </div>
 <div class="col-md-12 grid-margin stretch-card">
   <div class="card">
-    <a href="{{url('dokterdetail/'.$personal->id)}}">
+    <a href="{{url('dokterdetail/'.$id)}}">
       <i class="fa fa-arrow-left" style="margin-left: 2%; margin-top: 1%" aria-hidden="true"></i>
       <span style="font-size: 80%;"> Kembali ke Detail Dokter </span>
     </a>
     <div class="col-12">
       <img height="200" class="rounded-circle mx-auto d-block" src="{{asset('images/profile/page.jpg')}}"> 
-      <p class="text-center" style="margin-top: 2%;"><b>{{$personal->name_user}}</b></p>
+      <p class="text-center" style="margin-top: 2%;"><b>{{$nama->name_user}}</b></p>
       <div class="row">
         <div class="col-md-5">
           <div class="container" style="margin-top: 5%;">
@@ -91,28 +91,28 @@ path{
                 <div class="row purchace-popup">
                   <div class="col-12">
                     <span class="d-flex alifn-items-center">
-                      <a href="{{url('/dokternya/'.$personal->id)}}">
+                      <a href="{{url('/dokternya/'.$id)}}">
 
                         <p style="color: black; font-weight: 10;" class="h4"><b>Detail Dokter</b></p>
                       </a>
                     </span>
                   </div>
                 </div>
-                <div class="row purchace-popup">
+<!--                 <div class="row purchace-popup">
                   <div class="col-12">
                     <span class="d-flex alifn-items-center">
-                      <a href="{{url('/pendidikan/'.$personal->id)}}">
+                      <a href="{{url('/pendidikan/'.$id)}}">
 
-                        <p style="color: black;" class="h4"><b>Pendidikan Dokter</b></p>
+                        <p style="color: black;font-weight: 10;" class="h4"><b>Pendidikan Dokter</b></p>
                       </a>
                     </span>
                   </div>
-                </div>
+                </div> -->
                 <div class="row purchace-popup">
                   <div class="col-12">
                     <span class="d-flex alifn-items-center">
-                      <a href="{{url('/care/'.$personal->id)}}">  
-                        <p style="color: black; font-weight: 10;" class="h4"><b>Pasien</b></p>
+                      <a href="{{url('/alergi/'.$id)}}">  
+                        <p style="color: black; " class="h4"><b>Pasien</b></p>
                       </a>
                     </span>
                   </div>
@@ -125,44 +125,27 @@ path{
           <table id="myTable" class="table table-bordered">
             <thead>
               <tr>
-                <th width="10%;"></th>
-                <th> Strata</th>
-                <th> Pendidikan</th>
-                <th> Universitas</th>
-                <th> Spesialis</th>
+                <th> Nama Pasien</th>
+                <th> Subjective</th>
+                <th> Asesment</th>
+                <th> Obejektif</th>
+                <th> Plan</th>
+                <td> Waktu</td>
               </tr>
             </thead>
             <tbody>
-             @foreach($penyakit as $a)
-             <tr >
-              <td>
-                <div class="row" style="margin-left: 5%;">
-                <div style="margin-right: 20%;">
-          <a href="{{url('editpendidikan/'.$a->id_dokter)}}"> 
-            <i style="color: green;" class="fa fa-pencil-square-o" aria-hidden="true"></i>
-          </a>
-        </div>
-        <div>
-          <a href="" onclick="myFunction(event);"><i style="color: red;" class="fa fa-times" aria-hidden="true"></i></a>
-        </div>
-      </div</td>
-              <td>{{$a->nama_strata}}</td>
-              <td>{{$a->nama_pendidikan}}</td>
-              <td>{{$a->nama_univ}}</td>
-              <td>@if($a->nama_spesialis)
-                  {{$a->nama_spesialis}}
-                  @else
-                  -
-                  @endif 
-                  </td>
+             @foreach($personal as $a)
+             <tr>
+              <td>{{$a->name_user}}</td>
+              <td>{{$a->S}}</td>
+              <td>{{$a->A}}</td>
+              <td>{{$a->O}}</td>
+              <td>{{$a->P}}</td>
+              <td>{{$a->created_at}}</td>
             </tr>
             @endforeach
           </tbody>
         </table>
-         <a href="{{url('')}}">
-    <i class="fa fa-plus" style="margin-left: 2%; margin-top: 1%" aria-hidden="true"></i>
-    <span style="font-size: 80%;">Pendidikan</span>
-    </a>
       </div>
     </div>
   </div>

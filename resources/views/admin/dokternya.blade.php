@@ -63,6 +63,37 @@ path{
 </style>
 @endsection
 @section('content')
+@if(session()->get('message')=='Berhasil')
+<script type="text/javascript">
+  swal
+  ({
+    title: 'Berhasil',
+    text: '{{session('data')}} berhasil berubah',
+    type: 'success',
+    confirmButtonText: 'Iya'
+  })
+</script>
+@elseif(session()->get('message')=='Berhasil1')
+<script type="text/javascript">
+  swal
+  ({
+    title: 'Berhasil',
+    text: '{{session('data')}} berhasil ditambah',
+    type: 'success',
+    confirmButtonText: 'Iya'
+  })
+</script>
+@elseif(session()->get('message')=='Gagal')
+<script type="text/javascript">
+  swal
+  ({
+    title: 'Error',
+    text: 'Coba Lagi',
+    type: 'error',
+    confirmButtonText: 'Iya'
+  })
+</script>
+@endif
 <div id="loaderSvgWrapper">
   <svg xmlns:svg="http://www.w3.org/2000/svg" viewbox="0 0 100 100" id="preLoader" width="100px" height="100px">
     <path style="stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter" d="m 58.26475,43.628481 15.7247,-27.287018 -31.4936,0.02553 z" id="T1"/>
@@ -97,7 +128,7 @@ path{
                   </span>
                 </div>
               </div>
-              <div class="row purchace-popup">
+<!--               <div class="row purchace-popup">
                 <div class="col-12">
                   <span class="d-flex alifn-items-center">
                     <a href="{{url('/pendidikan/'.$personal->id)}}">
@@ -106,11 +137,11 @@ path{
                     </a>
                   </span>
                 </div>
-              </div>
+              </div> -->
               <div class="row purchace-popup">
                 <div class="col-12">
                   <span class="d-flex alifn-items-center">
-                    <a href="{{url('/alergi/'.$personal->id)}}">  
+                    <a href="{{url('/care/'.$personal->id)}}">  
                       <p style="color: black; font-weight: 10;" class="h4"><b>Pasien</b></p>
                     </a>
                   </span>
@@ -125,6 +156,9 @@ path{
           <div class="col-12">
             <span class="d-flex alifn-items-center">           
               <p class="h4"><b>Data Pribadi Dokter</b></p>
+             
+              <a href="{{url('detail/'.$personal->id)}}" style="margin-left: 50%; color: blue;"><i class="fa fa-plus" aria-hidden="true"></i>
+              </a>
             </span>
           </div>
         </div>

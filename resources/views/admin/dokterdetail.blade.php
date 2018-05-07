@@ -39,7 +39,7 @@ src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLN
           </span>
         </div>
       </div>
-      <div class="row purchace-popup">
+<!--       <div class="row purchace-popup">
         <div class="col-12">
           <span class="d-flex alifn-items-center">
             <a href="{{url('/pendidikan/'.$personal->id)}}">
@@ -48,11 +48,11 @@ src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLN
             </a>
           </span>
         </div>
-      </div>
+      </div> -->
       <div class="row purchace-popup">
         <div class="col-12">
           <span class="d-flex alifn-items-center">
-            <a href="{{url('/alergi/'.$personal->id)}}">  
+            <a href="{{url('/care/'.$personal->id)}}">  
             <p style="color: black;" class="h4"><b>Pasien</b></p>
             </a>
           </span>
