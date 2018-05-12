@@ -91,7 +91,7 @@ path{
       </div>
     </div>
   </div>
-  <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 grid-margin stretch-card">
+<!--   <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 grid-margin stretch-card">
     <div class="card card-statistics">
       <div class="card-body">
         <div class="clearfix">
@@ -107,7 +107,7 @@ path{
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
   <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 grid-margin stretch-card">
     <div class="card card-statistics">
       <div class="card-body">
@@ -125,7 +125,7 @@ path{
       </div>
     </div>
   </div>
-  <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 grid-margin stretch-card">
+<!--   <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 grid-margin stretch-card">
     <div class="card card-statistics">
       <div class="card-body">
         <div class="clearfix">
@@ -141,7 +141,7 @@ path{
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
   <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 grid-margin stretch-card">
     <div class="card card-statistics">
       <div class="card-body">
@@ -207,5 +207,82 @@ path{
     $('#preloader').delay(350).fadeOut('slow');
     $('body').delay(350).css({'overflow':'visible'});
   });
+</script>
+<script type="text/javascript">
+ var Years = new Array();
+ var jumlah = new Array();
+ $.ajax({    
+                type: 'get',
+                url: '/ajax10/',
+                datatype: 'JSON',
+                success:function(data){
+                  // console.log(JSON.parse(data));
+                  var data=$.parseJSON(data);
+jQuery.each(data, function(index, value){
+            // console.log(value.periksa);
+            jumlah.push(value.periksa);
+            Years.push(value.tahun);
+        }); 
+                }
+              }); 
+
+ console.log(Years);
+</script>
+<script type="text/javascript">
+  (function($) {
+  'use strict';
+  $(function() {
+    if ($('#dashoard-area-chart').length) {
+      var lineChartCanvas = $("#dashoard-area-chart").get(0).getContext("2d");
+      var data = {
+        labels: Years,
+        datasets: [{
+            label: 'Jumlah Pemeriksaan',
+            data: jumlah,
+            backgroundColor: 'rgba(25, 145 ,235, 0.7)',
+            borderColor: [
+              'rgba(25, 145 ,235, 1)'
+            ],
+            borderWidth: 3,
+            fill: true
+          },
+        ]
+      };
+      var options = {
+        scales: {
+          yAxes: [{
+            ticks: {
+              beginAtZero: true
+            },
+            gridLines: {
+              display: true
+            }
+          }],
+          xAxes: [{
+            ticks: {
+              beginAtZero: true
+            },
+            gridLines: {
+              display: false
+            }
+          }]
+        },
+        legend: {
+          display: false
+        },
+        elements: {
+          point: {
+            radius: 3
+          }
+        }
+      };
+      var lineChart = new Chart(lineChartCanvas, {
+        type: 'line',
+        data: data,
+        options: options
+      });
+    }
+  });
+})(jQuery);
 </script>
 @endsection

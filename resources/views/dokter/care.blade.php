@@ -148,7 +148,7 @@ path{
                 <th> Object</th>
                 <th> Asessement</th>
                 <th> Plan</th>
-                <th> Waktu </th>
+                <!-- <th> Waktu </th> -->
               </tr>
             </thead>
             <tbody>
@@ -170,8 +170,8 @@ path{
               <td>{{$a->O}}</td>
               <td>{{$a->A}}</td>
               <td>{{$a->P}}</td>
-              <td>{{$a->created_at}}</td>
-            </tr>
+<!--               <td>{{$a->created_at}}</td>
+ -->            </tr>
             @endforeach
           </tbody>
         </table>

@@ -69,6 +69,12 @@ class MyControll extends Controller
     $penyakit = DB::table('penyakit')->count();
    return view ('admin.home',compact('dokter','pasien','admin','penyakit','rs','obat'));
  }
+ public function ajax10()
+ {
+  $personal =DB::table('riwayat')->groupBy('tahun')->select(DB::raw('tahun,count(*) as periksa'))->get();
+    // dd($personal);    
+    return json_encode($personal);
+ }
  public function akun()
  {
 
@@ -1151,7 +1157,10 @@ class MyControll extends Controller
     // $nama = Db::table('riwayat')->where('id_riwayat','=',$request->id_riwayat)->first();
     if($request->id_riwayat==null)
     {
-      $data = DB::table('riwayat')->insert(['pasien'=>$request->id_user,'dokter'=>Auth::id(),'S'=>$request->subyek,'created_at'=>Carbon::now(),'O'=>$request->objek,'A'=>$request->asssesmen,'P'=>$request->plan]);
+      $now =Carbon::now();
+      $tahun = $now->year;
+      // dd($tahun);
+      $data = DB::table('riwayat')->insert(['pasien'=>$request->id_user,'dokter'=>Auth::id(),'S'=>$request->subyek,'created_at'=>Carbon::now(),'O'=>$request->objek,'A'=>$request->asssesmen,'P'=>$request->plan,'tahun'=>$tahun]);
       if ($data)
       {
         return redirect()->route('kembali',$request->id_user)->with('message','Berhasil1');
@@ -1163,7 +1172,10 @@ class MyControll extends Controller
     }
     else
     {
-      $data=DB::table('riwayat')->where('id_riwayat','=',$request->id_riwayat)->update(['pasien'=>$request->id_user,'dokter'=>Auth::id(),'S'=>$request->subyek,'created_at'=>Carbon::now(),'O'=>$request->objek,'A'=>$request->asssesmen,'P'=>$request->plan]);
+      $now =Carbon::now();
+      $tahun = $now->year;
+      // dd($tahun);
+      $data=DB::table('riwayat')->where('id_riwayat','=',$request->id_riwayat)->update(['pasien'=>$request->id_user,'dokter'=>Auth::id(),'S'=>$request->subyek,'created_at'=>Carbon::now(),'O'=>$request->objek,'A'=>$request->asssesmen,'P'=>$request->plan,'tahun'=>$tahun]);
       if ($data)
       {
        return redirect()->route('kembali',$request->id_user)->with('message','Berhasil2');
