@@ -238,7 +238,7 @@ path{
     event.preventDefault(); // prevent form submit
     var href = event.currentTarget.getAttribute('href');
     swal({
-      title: 'Hapus Akun',
+      title: 'Hapus Obat',
       text: 'Apa Kamu Yakin Menghapus ? ',
       type: 'warning',
       showCancelButton: true,

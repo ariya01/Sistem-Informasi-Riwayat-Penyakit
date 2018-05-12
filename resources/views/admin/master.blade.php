@@ -53,7 +53,7 @@
           <li class="nav-item @yield('tombol')"><a class="nav-link" href="{{url('pasien')}}">
             <i id="icon" style="margin-right: 5%; " class="fa fa-wheelchair icon-md"></i>
             <span class="menu-title">Pasien</span></a></li>
-          <li class="nav-item @yield('tombol2')"><a class="nav-link" href="{{url('rumahsakit')}}"><i id="icon3" style="margin-right: 7%;""  class="fa fa-hospital-o icon-md"></i><span  class="menu-title">Rumah Sakit</span></a></li>
+          <!-- <li class="nav-item @yield('tombol2')"><a class="nav-link" href="{{url('rumahsakit')}}"><i id="icon3" style="margin-right: 7%;""  class="fa fa-hospital-o icon-md"></i><span  class="menu-title">Rumah Sakit</span></a></li> -->
            <li class="nav-item @yield('tombol3')"><a class="nav-link" href="{{url('obat')}}"><i id="icon4" style="margin-right: 5%;" class="fa fa-medkit icon-md"></i><span class="menu-title">Obat</span></a></li>
            <li class="nav-item @yield('tombol4')"><a class="nav-link" href="{{url('penyakit')}}"><i id="icon5" style="margin-right: 5%;" class="fa fa-heartbeat icon-md"></i><span class="menu-title">Penyakit</span></a></li>
             <li class="nav-item @yield('tombol5')"><a class="nav-link" href="{{url('akun')}}"><i id="icon6" style="margin-right: 7%;" class="fa fa-user-o icon-md"></i><span class="menu-title">Akun</span></a></li>

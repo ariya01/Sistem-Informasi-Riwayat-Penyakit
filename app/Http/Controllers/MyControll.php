@@ -876,7 +876,7 @@ class MyControll extends Controller
       $data = DB::table('rs')->insert(['nama_rumah'=>$request->nama,'alamat_rumah'=>$request->alamat,'keterangan_rumah'=>$request->ket]);
       if ($data)
       {
-        return redirect()->route('rumahsakit')->with('message','Berhasil1')->with('data',$request->nama);
+        return redirect()->route('rumahsakit')->with('message','Berhasil')->with('data',$request->nama);
       }
       else
       {

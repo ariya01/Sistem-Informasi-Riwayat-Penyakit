@@ -96,7 +96,7 @@ path{
   swal
   ({
     title: 'Berhasil',
-    text: 'Berhasil Mengedit Rumah Sakit {{session('data')}}',
+    text: 'Berhasil Mengubah Rumah Sakit {{session('data')}}',
     type: 'success',
     confirmButtonText: 'Iya'
   })
@@ -123,7 +123,7 @@ path{
 <table id="myTable" class="table table-bordered">
   <thead>
     <tr>
-      <th width="10%;"></th>
+      <th width="6%;"></th>
       <th>Nama Rumah Sakit</th>
       <th>Alamat</th>
       <th>Keterangan</th>
@@ -273,7 +273,7 @@ path{
     event.preventDefault(); // prevent form submit
     var href = event.currentTarget.getAttribute('href');
     swal({
-      title: 'Hapus Akun',
+      title: 'Hapus Rumah Sakit',
       text: 'Apa Kamu Yakin Menghapus ? ',
       type: 'warning',
       showCancelButton: true,
