@@ -920,7 +920,7 @@ class MyControll extends Controller
       }
     }
   }
-    public function ajax5(Request $request,$id)
+  public function ajax5(Request $request,$id)
   {
     $personal =DB::table('penyakitnya')->where('id_penyakitnya','=',$id)->first();
     // dd($personal);    
@@ -946,4 +946,52 @@ class MyControll extends Controller
       return redirect()->route('penyakitnya',$id_user)->with('message','Gagal');
     }
   } 
+  public function ajax6(Request $request,$id)
+  {
+    $personal =DB::table('alerginya')->where('id_alerginya','=',$id)->first();
+    // dd($personal);    
+    return json_encode($personal);   
+  }
+    public function hapusri1($id_alergi,$id_user)
+  {
+    $nama = DB::table('alerginya')->where('id_alerginya','=',$id_alergi)->leftjoin('alergi','alerginya.id_alergi','alergi.id_alergi')->first();
+    $data = DB::table('alerginya')->where('id_alerginya','=',$id_alergi)->delete();
+    if ($data)
+    {
+      return redirect()->route('alergi',$id_user)->with('message','Berhasil1')->with('data',$nama->nama_alergi);
+    }
+    else
+    {
+      return redirect()->route('alergi',$id_user)->with('message','Gagal');
+    }
+  }
+  public function kirim1(Request $request)
+  {
+    // dd($request->id_alerginya);
+    if($request->id_alerginya==null)
+    {
+      $data = DB::table('alerginya')->insert(['id_alerginya'=>$request->id_alerginya,'id_alergi'=>$request->alergi,'id_user'=>$request->id_user]);
+      if ($data)
+      {
+        return redirect()->route('alergi',$request->id_user)->with('message','Berhasil1')->with('data',$request->nama);
+      }
+      else
+      {
+        return redirect()->route('alergi',$request->id_user)->with('message','Gagal');
+      }
+    }
+    else
+    {
+      // dd('hai');  
+      $data=DB::table('alerginya')->where('id_alerginya','=',$request->id_alerginya)->update(['id_alergi'=>$request->id_alergi]);
+      if ($data)
+      {
+       return redirect()->route('alergi',$request->id_user)->with('message','Berhasil2')->with('data',$request->nama);
+     }
+     else
+     {
+      return redirect()->route('alergi',$request->id_user)->with('message','Gagal');
+      }
+    }
+  }
 }

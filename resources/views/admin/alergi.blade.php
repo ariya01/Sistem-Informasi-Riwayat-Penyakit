@@ -74,6 +74,49 @@ path{
     <path style="stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter" d="M 58.26475,43.628481 42.49585,16.366995 26.77116,43.654011 Z" id="T6"/>
   </svg>
 </div>
+@if(session()->has('message'))
+@if(session()->get('message')=='Gagal')
+<script type="text/javascript">
+  swal
+  ({
+    title: 'Gagal',
+    text: 'Coba lagi',
+    type: 'error',
+    confirmButtonText: 'Iya'
+  })
+</script>
+@elseif(session()->get('message')=='Berhasil')
+<script type="text/javascript">
+  swal
+  ({
+    title: 'Berhasil',
+    text: 'Berhasil Menghapus {{session('data')}}',
+    type: 'success',
+    confirmButtonText: 'Iya'
+  })
+</script>
+@elseif(session()->get('message')=='Berhasil1')
+<script type="text/javascript">
+  swal
+  ({
+    title: 'Berhasil',
+    text: 'Berhasil Mendaftarkan {{session('data')}}',
+    type: 'success',
+    confirmButtonText: 'Iya'
+  })
+</script>
+@elseif(session()->get('message')=='Berhasil2')
+<script type="text/javascript">
+  swal
+  ({
+    title: 'Berhasil',
+    text: 'Berhasil Mengubah {{session('data')}}',
+    type: 'success',
+    confirmButtonText: 'Iya'
+  })
+</script>
+@endif
+@endif
 <div class="col-md-12 grid-margin stretch-card">
   <div class="card">
     <a href="{{url('detailpasien/'.$personal->id)}}">
@@ -154,12 +197,12 @@ path{
                     <td>
         <div class="row" style="margin-left: 5%;">
         <div style="margin-right: 20%;">
-          <a href="{{url('editpenyakitnya1/'.$a->id_alerginya.'/'.$personal->id)}}"> 
+          <a href="{{url('editalerginya/'.$a->id_alerginya.'/'.$personal->id)}}"> 
             <i style="color: green;" class="fa fa-pencil-square-o" aria-hidden="true"></i>
           </a>
         </div>
         <div> 
-          <a href="{{url('deleteobat/'.$a->id_alerginya)}}" onclick="myFunction(event);"><i style="color: red;" class="fa fa-times" aria-hidden="true"></i></a>
+          <a href="{{url('hapusri1/'.$a->id_alerginya.'/'.$personal->id)}}" onclick="myFunction(event);"><i style="color: red;" class="fa fa-times" aria-hidden="true"></i></a>
         </div>
       </div>
       </td>
@@ -179,6 +222,27 @@ path{
 </div>
 @endsection
 @section('js')
+<script type="text/javascript">
+  function myFunction(event)
+  {
+    event.preventDefault(); // prevent form submit
+    var href = event.currentTarget.getAttribute('href');
+    swal({
+      title: 'Hapus Akun',
+      text: 'Apa Kamu Yakin Menghapus ? ',
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Ya Hapus!',
+      cancelButtonText: 'Batal'
+    }).then((result) => {
+      if (result.value) {
+        window.location = href; 
+      }
+    })
+  }
+</script>
 <script type="text/javascript">
   $(document).ready( function () {
     $('#myTable').DataTable();

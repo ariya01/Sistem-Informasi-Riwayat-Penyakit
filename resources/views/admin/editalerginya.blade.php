@@ -115,16 +115,16 @@ path{
   class="card">
   <div class="card-body">
     <h4 class="card-title">Riwayat Penyakit</h4>
-    <form class="forms-sample" method="post" action="{{url('kirim')}} ">
+    <form class="forms-sample" method="post" action="{{url('kirim1')}} ">
       <div class="form-group">
         <label for="exampleFormControlSelect2">Penyakit</label>
-        <select class="form-control" name="penyakit" id="penyakit">
+        <select class="form-control" name="id_alergi" id="alergi">
           @foreach($penyakit as $role)
           <option value="{{$role->id_alergi}}">{{$role->nama_alergi}}</option>
           @endforeach
         </select>
       </div>
-      <div class="form-group">
+<!--       <div class="form-group">
         <label for="exampleInputPassword1">Tanggal Sakit</label>
         <div class="input-group">
           <div class="input-group-prepend">
@@ -133,8 +133,8 @@ path{
           <div class="input-group-append">
           </div>
         </div>
-      </div>
-      <input type="hidden" id="id_penyakitnya" name="id_penyakitnya">
+      </div> -->
+      <input type="hidden" id="id_alerginya" name="id_alerginya">
       <input type="hidden" name="id_user" id="id_user" value="{{$id_user}}">
       {{ csrf_field() }}
       <button type="submit" class="btn btn-primary">Kirim</button>
@@ -144,7 +144,7 @@ path{
 </div>
 </div>
 @if ($data!=null)
-<input type="hidden" name="id" id="id" value="{{$data->id_penyakitnya}}">
+<input type="hidden" name="id" id="id" value="{{$data->id_alerginya}}">
 @endif
 @endsection
 @section('js')
@@ -155,13 +155,13 @@ path{
             {
               $.ajax({    
                 type: 'get',
-                url: '/ajax5/'+bla,
+                url: '/ajax6/'+bla,
                 datatype: 'JSON',
                 success:function(data){
                   console.log(JSON.parse(data));
-                  $("#penyakit").val(JSON.parse(data).id_penyakit);
+                  $("#penyakit").val(JSON.parse(data).id_alergi);
                   // $("#tanggal").val(JSON.parse(data).created_at);
-                  $("#id_penyakitnya").val(JSON.parse(data).id_penyakitnya);
+                  $("#id_alerginya").val(JSON.parse(data).id_alerginya);
                 },
                 error:function(data){
                   console.log('data belum ada');
@@ -185,7 +185,7 @@ path{
             
             $(document).ready(function(){
   // Initialize select2
-  $("#penyakit").select2();
+  $("#alergi").select2();
 
 });
           </script>

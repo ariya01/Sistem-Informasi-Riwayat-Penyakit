@@ -15,7 +15,7 @@ Route::get('/','MyControll@login')->name('welcome')->name('login');
 Route::post('/signin','MyControll@signin');
 Route::get('hak','MyControll@hak')->name('hak');
 Route::get('/logout','MyControll@logout');
-Route::group(['middleware' => 'admin'], function () {
+Route::group(['middleware' => 'auth','admin'], function () {
 	Route::get('/home','MyControll@home')->name('home');
 	Route::get('/akun','MyControll@akun')->name('akun');
 	Route::post('/tambahakun','MyControll@tambahakun');
@@ -40,7 +40,7 @@ Route::group(['middleware' => 'admin'], function () {
 	Route::get('penyakit','MyControll@penyakit')->name('penyakit');
 	Route::get('penyakitnya/{id}','MyControll@riwayatpenyakit')->name('penyakitnya');
 	Route::get('detailnya/{id}','MyControll@detailnya')->name('detailnya');
-	Route::get('alergi/{id}','MyControll@alergi');
+	Route::get('alergi/{id}','MyControll@alergi')->name('alergi');
 	Route::get('keluarga/{id}','MyControll@keluarga');
 	Route::post('tambahrs','MyControll@tambahrs');
 	Route::post('hapusrs','MyControll@hapusrs');
@@ -79,14 +79,21 @@ Route::group(['middleware' => 'admin'], function () {
 	Route::get('ajax5/{id}','MyControll@ajax5');
 	Route::get("/editalerginya/{id_alergi}/{id_user}",'MyControll@editalerginya');
 	Route::get('hapusri/{id_penyakit}/{id_user}','MyControll@hapusri');
+	Route::get('ajax6/{id}','MyControll@ajax6');
+	Route::get('hapusri1/{id_alergi}/{id_user}','MyControll@hapusri1');
+	Route::post('kirim1','MyControll@kirim1');
 });
-Route::group(['middleware' => 'dokter'], function () {
+Route::group(['middleware' =>'auth', 'dokter'], function () {
 	Route::get('/rumah','MyControll@rumah')->name('rumah');
 	Route::get('/pasiendokter','MyControll@pasiendokter')->name('pasiendokter');
 });
-Route::group(['middleware' => 'pasien'],function(){
+Route::group(['middleware' => 'auth', 'pasien'],function(){
 	Route::get('identitas','MyControll@identitas')->name('griya');
 });
 Route::get('/generate',function(){
 	return bcrypt('1');
 });
+
+Auth::routes();
+
+// Route::get('/home', 'HomeController@index')->name('home');
