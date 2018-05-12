@@ -15,7 +15,7 @@ Route::get('/','MyControll@login')->name('welcome')->name('login');
 Route::post('/signin','MyControll@signin');
 Route::get('hak','MyControll@hak')->name('hak');
 Route::get('/logout','MyControll@logout');
-Route::group(['middleware' => 'auth','admin'], function () {
+Route::group(['middleware' => 'admin'], function () {
 	Route::get('/home','MyControll@home')->name('home');
 	Route::get('/akun','MyControll@akun')->name('akun');
 	Route::post('/tambahakun','MyControll@tambahakun');
@@ -89,11 +89,21 @@ Route::group(['middleware' => 'auth','admin'], function () {
 	Route::post('kirim3','MyControll@kirim3');
 	Route::get('deletehehe/{id}','MyControll@deletehehe');
 });
-Route::group(['middleware' =>'auth', 'dokter'], function () {
-	Route::get('/rumah','MyControll@rumah')->name('rumah');
-	Route::get('/pasiendokter','MyControll@pasiendokter')->name('pasiendokter');
+Route::group(['middleware' =>'dokter'], function () {
+	// Route::get('/rumah','MyControll@rumah')->name('rumah');
+	Route::get('/rumah','MyControll@pasiendokter')->name('rumah');
+	Route::get('isi/{id}','MyControll@isi');
+	Route::get('hehe/{id}','MyControll@hehe');
+	Route::get('lihat/{id}','MyControll@lihat');
+	Route::get('lihat1/{id}','MyControll@lihat1');
+	Route::get('lihat2/{id}','MyControll@lihat2')->name('kembali');
+	Route::get('ubah1/{id_pemeriksaan}/{id_user}','MyControll@ubah1');
+	Route::get('ajax9/{id}','MyControll@ajax9');
+	Route::post('kirim4','MyControll@kirim4');
+	Route::get('deletekok/{id_riwayat}/{id_user}','MyControll@deletekok');
+
 });
-Route::group(['middleware' => 'auth', 'pasien'],function(){
+Route::group(['middleware' => 'pasien'],function(){
 	Route::get('identitas','MyControll@identitas')->name('griya');
 });
 Route::get('/generate',function(){

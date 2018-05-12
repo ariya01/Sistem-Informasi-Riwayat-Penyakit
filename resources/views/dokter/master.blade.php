@@ -80,8 +80,7 @@
               </div>
             </div>
           </li>
-          <li class="nav-item @yield('tombol')"><a class="nav-link" href="{{url('rumah')}}"><i id="icon1" style="margin-right: 5%;" class="fa fa-home icon-md" aria-hidden="true"></i><span  class="menu-title">Dashboard</span></a></li>
-          <li class="nav-item"><a class="nav-link" href="{{url('pasiendokter')}}">
+          <li class="nav-item @yield('tombol')"><a class="nav-link" href="{{url('rumah')}}">
             <i id="icon" style="margin-right: 7%;" class="fa fa-wheelchair icon-md"></i>
             <span class="menu-title">Pasien</span></a></li>
         </ul>

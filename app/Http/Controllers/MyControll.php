@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-use Carbon;
+use Carbon\carbon;
 use DB;
 use Auth;
 use App\Detail;
@@ -1085,6 +1085,108 @@ class MyControll extends Controller
     else
     {
       return redirect()->route('ubah')->with('message','Gagal');
+    }
+  }
+   public function isi($id)
+  {
+    $data = DB::table('dokter')->where('id_user','=',$id)->leftJoin('strata','strata.id_strata','dokter.id_strata')->leftjoin('spesialis','spesialis.id_spesialis','dokter.id_spesialis')->leftjoin('univ','univ.id_univ','dokter.id_univ')->get();
+    // dd($data);
+    $personal =User::where('users.id','=',$id)->leftJoin('role_user','users.id','role_user.user_id')->leftJoin('roles','role_user.role_id','roles.id')->select('users.id','users.name_user','roles.display_name')->first();    
+    $detail =Detail::where('id_user','=',$id)->first();
+    // dd($personal);
+    return view('dokter.hehe',compact('personal','detail'));
+  }
+    public function hehe($id)
+  {
+    $detail =Detail::where('id_user','=',$id)->first();
+    $personal =User::where('id','=',$id)->first();  
+    return view('dokter.detail',compact('detail','personal'));
+  }
+    public function lihat($id)
+  {
+    $penyakit = DB::table('penyakitnya')->leftjoin('penyakit','penyakit.id_penyakit','penyakitnya.id_penyakit')->where('id_user','=',$id)->select("penyakitnya.id_penyakitnya","penyakitnya.id_penyakit","penyakitnya.id_user","penyakitnya.created_at","penyakit.nama_penyakit")->get();
+     $personal =User::where('id','=',$id)->first();
+    return view('dokter.lihat',compact('penyakit','personal','angka'));
+  }
+  public function lihat1($id)
+  {
+    $personal =User::where('id','=',$id)->first();  
+    $alergi = DB::table('alerginya')->leftjoin('alergi','alergi.id_alergi','alerginya.id_alergi')->where('id_user','=',$id)->get();
+    return view('dokter.alergi',compact('personal','alergi','angka'));
+  }
+    public function lihat2($id)
+  {
+    // $penyakit = DB::table('penyakitnya')->leftjoin('penyakit','penyakit.id_penyakit','penyakitnya.id_penyakit')->where('id_user','=',$id)->get();
+     // $personal =User::where('id','=',$id)->first();  
+    $personal = DB::table('riwayat')->where('pasien','=',$id)->get();
+    // dd($personal);
+    $nama = DB::table('users')->where('id','=',$id)->first();
+    // dd($nama);
+    $terakhir = DB::table('riwayat')->orderBy('id_riwayat', 'desc')->first();
+    if($terakhir==null)
+    {
+      $angka=1;
+    }
+    else
+    {
+      $angka= $terakhir->id_riwayat+1;  
+    }
+    return view('dokter.care',compact('nama','personal','id','angka'));
+  }
+    public function ubah1($id_riwayat,$id_user)
+  {
+    $data = Db::table('riwayat')->where('id_riwayat','=',$id_riwayat)->first();
+    // dd($data);
+    // $penyakit = Db::table('')->get();
+    return view('dokter.editalergi',compact('penyakit','data','id_user'));
+  } 
+   public function ajax9(Request $request,$id)
+  {
+    $personal =DB::table('riwayat')->where('id_riwayat','=',$id)->first();
+    // dd($personal);    
+    return json_encode($personal);   
+  }
+  public function kirim4(Request $request)
+  {
+    // $nama = Db::table('riwayat')->where('id_riwayat','=',$request->id_riwayat)->first();
+    if($request->id_riwayat==null)
+    {
+      $data = DB::table('riwayat')->insert(['pasien'=>$request->id_user,'dokter'=>Auth::id(),'S'=>$request->subyek,'created_at'=>Carbon::now(),'O'=>$request->objek,'A'=>$request->asssesmen,'P'=>$request->plan]);
+      if ($data)
+      {
+        return redirect()->route('kembali',$request->id_user)->with('message','Berhasil1');
+      }
+      else
+      {
+        return redirect()->route('kembali',$request->id_user)->with('message','Gagal');
+      }
+    }
+    else
+    {
+      $data=DB::table('riwayat')->where('id_riwayat','=',$request->id_riwayat)->update(['pasien'=>$request->id_user,'dokter'=>Auth::id(),'S'=>$request->subyek,'created_at'=>Carbon::now(),'O'=>$request->objek,'A'=>$request->asssesmen,'P'=>$request->plan]);
+      if ($data)
+      {
+       return redirect()->route('kembali',$request->id_user)->with('message','Berhasil2');
+     }
+     else
+     {
+      return redirect()->route('kembali',$request->id_user)->with('message','Gagal');
+      }
+    }
+  }
+  public function deletekok($id_riwayat,$id_user)
+  {
+    // $id = DB::table('riwayat')->where('id_riwayat','=',$id)->first();
+    // dd($id->pasien);
+    // $hai = $id->pasien;
+    $data = DB::table('riwayat')->where('id_riwayat','=',$id_riwayat)->delete();
+    if ($data)
+    {
+     return redirect()->route('kembali',$id_user)->with('message','Berhasil');
+    }
+    else
+    {
+      return redirect()->route('kembali',$id_user)->with('message','Gagal');
     }
   }
 }
