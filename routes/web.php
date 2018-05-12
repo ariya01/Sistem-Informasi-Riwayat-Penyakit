@@ -83,6 +83,11 @@ Route::group(['middleware' => 'auth','admin'], function () {
 	Route::get('hapusri1/{id_alergi}/{id_user}','MyControll@hapusri1');
 	Route::post('kirim1','MyControll@kirim1');
 	Route::get('ajax7/{id}','MyControll@ajax7');
+	Route::get('alergiku','MyControll@alergiku')->name('ubah');
+	Route::get('ubah/{id}','MyControll@ubah');
+	Route::get('ajax8/{id}','MyControll@ajax8');
+	Route::post('kirim3','MyControll@kirim3');
+	Route::get('deletehehe/{id}','MyControll@deletehehe');
 });
 Route::group(['middleware' =>'auth', 'dokter'], function () {
 	Route::get('/rumah','MyControll@rumah')->name('rumah');

@@ -1021,4 +1021,70 @@ class MyControll extends Controller
     // dd($personal);    
     return json_encode($personal);   
   }
+  public function alergiku()
+  {
+    $data = DB::table('alergi')->get();
+    $terakhir = DB::table('alergi')->orderBy('id_alergi', 'desc')->first();
+    if($terakhir==null)
+    {
+      $angka=1;
+    }
+    else
+    {
+      $angka= $terakhir->id_alergi+1;  
+    }
+    return view('admin.alerginya',compact('data','angka'));
+  }
+  public function ubah($id)
+  {
+    $data = Db::table('alergi')->where('id_alergi','=',$id)->first();
+    return view('admin.ubahalergi',compact('kelamins','data','id'));
+  }
+  public function ajax8(Request $request,$id)
+  {
+    $personal =DB::table('alergi')->where('id_alergi','=',$id)->first();
+    // dd($personal);    
+    return json_encode($personal);   
+  }
+  public function kirim3(Request $request)
+  {
+    // dd($request->id_alergi);
+    if($request->id_alergi==null)
+    {
+      $data = DB::table('alergi')->insert(['nama_alergi'=>$request->nama,'keterangan'=>$request->ket]);
+      if ($data)
+      {
+        return redirect()->route('ubah')->with('message','Berhasil1')->with('data',$request->nama);
+      }
+      else
+      {
+        return redirect()->route('ubah')->with('message','Gagal');
+      }
+    }
+    else
+    {
+      $data=DB::table('alergi')->where('id_alergi','=',$request->id_alergi)->update(['nama_alergi'=>$request->nama,'keterangan'=>$request->ket]);
+      if ($data)
+      {
+       return redirect()->route('ubah')->with('message','Berhasil2')->with('data',$request->nama);
+     }
+     else
+     {
+      return redirect()->route('ubah')->with('message','Gagal');
+      }
+    }
+  }
+  public function deletehehe($id)
+  {
+    $nama = DB::table('alergi')->where('id_alergi','=',$id)->first();
+    $data = DB::table('alergi')->where('id_alergi','=',$id)->delete();
+    if ($data)
+    {
+      return redirect()->route('ubah')->with('message','Berhasil')->with('data',$nama->nama_alergi);
+    }
+    else
+    {
+      return redirect()->route('ubah')->with('message','Gagal');
+    }
+  }
 }
