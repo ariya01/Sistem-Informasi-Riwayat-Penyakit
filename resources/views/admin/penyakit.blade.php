@@ -174,7 +174,7 @@ path{
 </table>
  <a href="{{url('editpenyakitnya/'.$angka)}}">
     <i class="fa fa-plus" style="margin-left: 2%; margin-top: 1%" aria-hidden="true"></i>
-    <span style="font-size: 80%;">Tambah akun</span>
+    <span style="font-size: 80%;">Tambah Penyakit</span>
     </a>
 <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">

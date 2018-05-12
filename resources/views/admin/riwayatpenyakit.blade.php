@@ -214,11 +214,12 @@ path{
         </table>
         <a href="{{url('editpenyakitnya1/'.$angka.'/'.$personal->id)}}">
     <i class="fa fa-plus" style="margin-left: 2%; margin-top: 1%" aria-hidden="true"></i>
-    <span style="font-size: 80%;">Tambah akun</span>
+    <span style="font-size: 80%;">Tambah Penyakit</span>
     </a>
       </div>
     </div>
   </div>
+</div>
 </div>
 @endsection
 @section('js')
@@ -244,7 +245,7 @@ path{
     event.preventDefault(); // prevent form submit
     var href = event.currentTarget.getAttribute('href');
     swal({
-      title: 'Hapus Akun',
+      title: 'Hapus Riwayat',
       text: 'Apa Kamu Yakin Menghapus ? ',
       type: 'warning',
       showCancelButton: true,

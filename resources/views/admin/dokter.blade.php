@@ -31,7 +31,11 @@ src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLN
   <tbody>
      @foreach($data as $a)
     <tr >
-      <td>{{$a->ktp}}</td>
+      <td>@if ($a->ktp!=null)
+        {{$a->ktp}}
+        @else
+        Belum di isi
+        @endif</td>
       <td>
         <a href="{{url('dokterdetail/'.$a->id)}}">
         {{$a->name_user}}

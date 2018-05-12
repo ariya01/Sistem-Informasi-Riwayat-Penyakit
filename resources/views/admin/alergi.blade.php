@@ -85,7 +85,7 @@ path{
     confirmButtonText: 'Iya'
   })
 </script>
-@elseif(session()->get('message')=='Berhasil')
+@elseif(session()->get('message')=='Berhasil1')
 <script type="text/javascript">
   swal
   ({
@@ -95,7 +95,7 @@ path{
     confirmButtonText: 'Iya'
   })
 </script>
-@elseif(session()->get('message')=='Berhasil1')
+@elseif(session()->get('message')=='Berhasil')
 <script type="text/javascript">
   swal
   ({
@@ -213,7 +213,7 @@ path{
         </table>
         <a href="{{url('editalerginya/'.$angka.'/'.$personal->id)}}">
     <i class="fa fa-plus" style="margin-left: 2%; margin-top: 1%" aria-hidden="true"></i>
-    <span style="font-size: 80%;">Tambah akun</span>
+    <span style="font-size: 80%;">Tambah Alergi</span>
     </a>
       </div>
     </div>
@@ -228,7 +228,7 @@ path{
     event.preventDefault(); // prevent form submit
     var href = event.currentTarget.getAttribute('href');
     swal({
-      title: 'Hapus Akun',
+      title: 'Hapus Alergi',
       text: 'Apa Kamu Yakin Menghapus ? ',
       type: 'warning',
       showCancelButton: true,

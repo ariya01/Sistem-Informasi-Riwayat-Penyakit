@@ -93,7 +93,12 @@ path{
       <td>
         <div class="profile-image"> <img style="border-radius: 50%;" src="{{asset('images/profile/page.jpg')}}" alt="image"/> <span class="online-status online"></span> </div>
       </td>
-      <td>{{$a->ktp}}</td>
+      <td>@if ($a->ktp!=null)
+        {{$a->ktp}}
+        @else
+        Belum di isi
+        @endif
+      </td>
       <td><a href="{{url('/detailpasien/'.$a->id)}}">{{$a->name_user}}</a></td>
       <!-- <td>RSUD Magetan</td> -->
     </tr>

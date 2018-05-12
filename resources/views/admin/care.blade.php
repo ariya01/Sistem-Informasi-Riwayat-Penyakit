@@ -130,7 +130,7 @@ path{
                 <th> Asesment</th>
                 <th> Obejektif</th>
                 <th> Plan</th>
-                <td> Waktu</td>
+                <!-- <td> Waktu</td> -->
               </tr>
             </thead>
             <tbody>
@@ -141,7 +141,7 @@ path{
               <td>{{$a->A}}</td>
               <td>{{$a->O}}</td>
               <td>{{$a->P}}</td>
-              <td>{{$a->created_at}}</td>
+              <!-- <td>{{$a->created_at}}</td> -->
             </tr>
             @endforeach
           </tbody>

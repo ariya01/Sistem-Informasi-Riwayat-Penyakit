@@ -914,12 +914,13 @@ class MyControll extends Controller
   }
   public function kirim(Request $request)
   {
+    $nama = Db::table('penyakit')->where('id_penyakit','=',$request->penyakit)->first();
     if($request->id_penyakitnya==null)
     {
       $data = DB::table('penyakitnya')->insert(['id_penyakitnya'=>$request->id_penyakitnya,'id_penyakit'=>$request->penyakit,'id_user'=>$request->id_user,'created_at'=>$request->tanggal]);
       if ($data)
       {
-        return redirect()->route('penyakitnya',$request->id_user)->with('message','Berhasil1')->with('data',$request->nama);
+        return redirect()->route('penyakitnya',$request->id_user)->with('message','Berhasil1')->with('data',$nama->nama_penyakit);
       }
       else
       {
@@ -931,7 +932,7 @@ class MyControll extends Controller
       $data=DB::table('penyakitnya')->where('id_penyakitnya','=',$request->id_penyakitnya)->update(['id_penyakit'=>$request->penyakit,'created_at'=>$request->tanggal]);
       if ($data)
       {
-       return redirect()->route('penyakitnya',$request->id_user)->with('message','Berhasil2')->with('data',$request->nama);
+       return redirect()->route('penyakitnya',$request->id_user)->with('message','Berhasil2')->with('data',$nama->nama_penyakit);
      }
      else
      {
@@ -987,12 +988,13 @@ class MyControll extends Controller
   public function kirim1(Request $request)
   {
     // dd($request->id_alerginya);
+    $nama = Db::table('alergi')->where('id_alergi','=',$request->id_alergi)->first();
     if($request->id_alerginya==null)
     {
       $data = DB::table('alerginya')->insert(['id_alergi'=>$request->id_alergi,'id_user'=>$request->id_user]);
       if ($data)
       {
-        return redirect()->route('alergi',$request->id_user)->with('message','Berhasil1')->with('data',$request->nama);
+        return redirect()->route('alergi',$request->id_user)->with('message','Berhasil')->with('data',$nama->nama_alergi);
       }
       else
       {
@@ -1005,7 +1007,7 @@ class MyControll extends Controller
       $data=DB::table('alerginya')->where('id_alerginya','=',$request->id_alerginya)->update(['id_alergi'=>$request->id_alergi]);
       if ($data)
       {
-       return redirect()->route('alergi',$request->id_user)->with('message','Berhasil2')->with('data',$request->nama);
+       return redirect()->route('alergi',$request->id_user)->with('message','Berhasil2')->with('data',$nama->nama_alergi);
      }
      else
      {

@@ -1,4 +1,7 @@
 @extends('admin.master')
+@section('tombol')
+active
+@endsection
 @section('css')
 <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <script src="https://unpkg.com/promise-polyfill@7.1.0/dist/promise.min.js"></script>
@@ -113,6 +116,10 @@ path{
 <div class="col-12">
   <div
   class="card">
+   <a href="{{url('penyakitnya/'.$id_user)}}">
+      <i class="fa fa-arrow-left" style="margin-left: 2%; margin-top: 1%" aria-hidden="true"></i>
+      <span style="font-size: 80%;"> Kembali ke Riwayat Penyakit </span>
+    </a>
   <div class="card-body">
     <h4 class="card-title">Riwayat Penyakit</h4>
     <form class="forms-sample" method="post" action="{{url('kirim')}} ">
@@ -189,5 +196,9 @@ path{
 
 });
           </script>
+          <script type="text/javascript">
+ $('#icon').removeClass('icon-md');
+ $('#icon').addClass('icon-lg');
+</script>
           <!-- <script src="{{asset('node_modules/jquery/dist/jquery.min.js')}}"></script> -->
           @endsection

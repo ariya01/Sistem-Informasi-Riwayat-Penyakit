@@ -113,6 +113,10 @@ path{
 <div class="col-12">
   <div
   class="card">
+     <a href="{{url('alergi/'.$id_user)}}">
+      <i class="fa fa-arrow-left" style="margin-left: 2%; margin-top: 1%" aria-hidden="true"></i>
+      <span style="font-size: 80%;"> Kembali ke Alergi </span>
+    </a>
   <div class="card-body">
     <h4 class="card-title">Riwayat Penyakit</h4>
     <form class="forms-sample" method="post" action="{{url('kirim1')}} ">
