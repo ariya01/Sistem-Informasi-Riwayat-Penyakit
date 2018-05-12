@@ -15,16 +15,6 @@
             borderWidth: 3,
             fill: true
           },
-          {
-            label: 'Target',
-            data: [1, 6, 1, 6, 1, 2, 8, 9],
-            backgroundColor: 'rgba(255, 99, 132, 0.7)',
-            borderColor: [
-              'rgba(255, 99, 132, 1)'
-            ],
-            borderWidth: 3,
-            fill: true
-          }
         ]
       };
       var options = {

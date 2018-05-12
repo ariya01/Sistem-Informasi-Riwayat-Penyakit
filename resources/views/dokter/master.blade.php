@@ -54,7 +54,7 @@
       </div>
     </nav> -->
     <div class="container-fluid page-body-wrapper">
-      <nav class="sidebar sidebar-offcanvas" style="background-color: #024038;" id="sidebar">
+      <nav class="sidebar sidebar-offcanvas" style="height: 1000px; background-color: #024038;" id="sidebar">
         <ul class="nav">
           <li class="nav-item nav-profile">
             <div class="nav-link">

@@ -9,17 +9,6 @@
     <link rel="stylesheet" href="login.css"> 
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
     <style type="text/css">
-        .hehe
-        {
-            background-color: #4DB9D6;
-        }
-        .hehe:hover
-        {
-            background-color: #4DB9D6;
-        }
-        body, html {
-            height: 100%;
-        }
     </style>
 </head>
 <body>
@@ -142,12 +131,12 @@
     if ($('#email').val() == "") 
     {
       $('button').prop('disabled', true);
-      $('button').addClass('hehe');
+      $('button').css("background-color","");
     } 
     else
     {
      $('button').prop('disabled', false);
-     $('button').removeClass('hehe');
+     $('button').css("background-color","#217093");
     } 
   });
 </script>

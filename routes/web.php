@@ -88,6 +88,7 @@ Route::group(['middleware' => 'admin'], function () {
 	Route::get('ajax8/{id}','MyControll@ajax8');
 	Route::post('kirim3','MyControll@kirim3');
 	Route::get('deletehehe/{id}','MyControll@deletehehe');
+	Route::get('ajax10','MyControll@ajax10');
 });
 Route::group(['middleware' =>'dokter'], function () {
 	// Route::get('/rumah','MyControll@rumah')->name('rumah');
@@ -101,7 +102,6 @@ Route::group(['middleware' =>'dokter'], function () {
 	Route::get('ajax9/{id}','MyControll@ajax9');
 	Route::post('kirim4','MyControll@kirim4');
 	Route::get('deletekok/{id_riwayat}/{id_user}','MyControll@deletekok');
-
 });
 Route::group(['middleware' => 'pasien'],function(){
 	Route::get('identitas','MyControll@identitas')->name('griya');
