@@ -131,7 +131,7 @@ path{
 <table id="myTable" class="table table-bordered">
   <thead>
     <tr>
-      <th width="10%"></th>
+      <th width="6%"></th>
       <th width="30%;">Nama Penyakit</th>
       <th>Keterangan</th>
       <!-- <th width="30%;" class="text-center">Bantuan</th> -->

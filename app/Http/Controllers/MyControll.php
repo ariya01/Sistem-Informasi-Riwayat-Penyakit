@@ -672,13 +672,13 @@ class MyControll extends Controller
   }
   public function ajax2(Request $request,$id)
   {
-    $personal =DB::table('penyakit')->where('id_penyakit','=',$id)->first();
+    $personal =DB::table('users')->where('users.id','=',$id)->leftJoin('role_user','users.id','role_user.user_id')->first();
     // dd($personal);    
     return json_encode($personal);   
   }
   public function editpenyakitku(Request $request)
   {
-    // dd($request->ket);
+    // dd($request->id_penyakit);
     if($request->id_penyakit==null)
     {
       $data = DB::table('penyakit')->insert(['nama_penyakit'=>$request->nama,'keterangan_penyakit'=>$request->ket]);
@@ -824,7 +824,7 @@ class MyControll extends Controller
     $data = DB::table('obat')->where('id_obat','=',$id)->delete();
     if ($data)
     {
-      return redirect()->route('obat')->with('message','Berhasil1')->with('data',$nama->nama_obat);
+      return redirect()->route('obat')->with('message','Berhasil')->with('data',$nama->nama_obat);
     }
     else
     {
@@ -1012,5 +1012,11 @@ class MyControll extends Controller
       return redirect()->route('alergi',$request->id_user)->with('message','Gagal');
       }
     }
+  }
+   public function ajax7(Request $request,$id)
+  {
+    $personal =DB::table('penyakit')->where('id_penyakit','=',$id)->first();
+    // dd($personal);    
+    return json_encode($personal);   
   }
 }

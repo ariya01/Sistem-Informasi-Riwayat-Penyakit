@@ -1,4 +1,7 @@
 @extends('admin.master')
+@section('tombol5')
+active
+@endsection
 @section('css')
 <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <script src="https://unpkg.com/promise-polyfill@7.1.0/dist/promise.min.js"></script>
@@ -109,8 +112,11 @@ path{
 </script>
 @endif
 <div class="col-12">
-  <div
-  class="card">
+  <div class="card">
+    <a href="{{url('akun')}}">
+      <i class="fa fa-arrow-left" style="margin-left: 2%; margin-top: 1%" aria-hidden="true"></i>
+      <span style="font-size: 80%;"> Kembali Akun </span>
+    </a>
   <div class="card-body">
     <h4 class="card-title">Akun</h4>
     <form class="forms-sample" method="post" action="{{url('editnya')}} ">
@@ -190,7 +196,7 @@ path{
                   console.log(JSON.parse(data));
                   $("#nama").val(JSON.parse(data).name_user);
                   $("#email").val(JSON.parse(data).email);
-                  $("#role").val(JSON.parse(data).role);
+                  $("#role").val(JSON.parse(data).role_id);
                   $('#id_user').val(JSON.parse(data).id);
                 },
                 error:function(data){
@@ -246,6 +252,10 @@ path{
       $('#message1').html('Not Matching').css('color', 'white');
     } 
   });
-</script
+</script>
+<script type="text/javascript">
+   $('#icon6').removeClass('icon-md');
+   $('#icon6').addClass('icon-lg');
+</script>
           <!-- <script src="{{asset('node_modules/jquery/dist/jquery.min.js')}}"></script> -->
           @endsection

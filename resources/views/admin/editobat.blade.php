@@ -1,4 +1,7 @@
 @extends('admin.master')
+@section('tombol3')
+active
+@endsection
 @section('css')
 <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <script src="https://unpkg.com/promise-polyfill@7.1.0/dist/promise.min.js"></script>
@@ -109,8 +112,11 @@ path{
 </script>
 @endif
 <div class="col-12">
-  <div
-  class="card">
+  <div  class="card">
+        <a href="{{url('obat')}}">
+      <i class="fa fa-arrow-left" style="margin-left: 2%; margin-top: 1%" aria-hidden="true"></i>
+      <span style="font-size: 80%;"> Kembali Obat </span>
+    </a>
   <div class="card-body">
     <h4 class="card-title">Obat</h4>
     <form class="forms-sample" method="post" action="{{url('editobatnya')}} ">
@@ -180,5 +186,9 @@ path{
               $('body').delay(350).css({'overflow':'visible'});
             });
           </script>
+          <script type="text/javascript">
+   $('#icon4').removeClass('icon-md');
+   $('#icon4').addClass('icon-lg');
+</script>
           <!-- <script src="{{asset('node_modules/jquery/dist/jquery.min.js')}}"></script> -->
           @endsection

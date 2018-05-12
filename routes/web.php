@@ -82,6 +82,7 @@ Route::group(['middleware' => 'auth','admin'], function () {
 	Route::get('ajax6/{id}','MyControll@ajax6');
 	Route::get('hapusri1/{id_alergi}/{id_user}','MyControll@hapusri1');
 	Route::post('kirim1','MyControll@kirim1');
+	Route::get('ajax7/{id}','MyControll@ajax7');
 });
 Route::group(['middleware' =>'auth', 'dokter'], function () {
 	Route::get('/rumah','MyControll@rumah')->name('rumah');
