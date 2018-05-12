@@ -129,7 +129,7 @@ path{
                               <div class="row purchace-popup">
                 <div class="col-12">
                   <span class="d-flex alifn-items-center">
-                    <a href="#">
+                    <a href="{{url('/pemeriksaan/'.$personal->id)}}">
                       <p style="color: black; font-weight: 10;" class="h4"><b>Riwayat Pemeriksaan</b></p>
                     </a>
                   </span>
@@ -143,17 +143,35 @@ path{
           <table id="myTable" class="table table-bordered">
             <thead>
               <tr>
+                <th></th>
                 <th>Alergi</th>
               </tr>
             </thead>
             <tbody>
              @foreach($alergi as $a)
              <tr >
+
+                    <td>
+        <div class="row" style="margin-left: 5%;">
+        <div style="margin-right: 20%;">
+          <a href="{{url('editpenyakitnya1/'.$a->id_alerginya.'/'.$personal->id)}}"> 
+            <i style="color: green;" class="fa fa-pencil-square-o" aria-hidden="true"></i>
+          </a>
+        </div>
+        <div> 
+          <a href="{{url('deleteobat/'.$a->id_alerginya)}}" onclick="myFunction(event);"><i style="color: red;" class="fa fa-times" aria-hidden="true"></i></a>
+        </div>
+      </div>
+      </td>
               <td>{{$a->nama_alergi}}</td>
             </tr>
             @endforeach
           </tbody>
         </table>
+        <a href="{{url('editalerginya/'.$angka.'/'.$personal->id)}}">
+    <i class="fa fa-plus" style="margin-left: 2%; margin-top: 1%" aria-hidden="true"></i>
+    <span style="font-size: 80%;">Tambah akun</span>
+    </a>
       </div>
     </div>
 </div>

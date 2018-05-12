@@ -116,14 +116,6 @@ path{
 <div class="row purchace-popup">
   <div class="col-12">
     <span class="d-flex alifn-items-center">
-      <p class="h4"><b>Tambah Obat</b></p>
-    </span>
-  </div>
-</div>
-<button data-toggle="modal" data-target="#exampleModalCenter" style="margin-bottom: 2%;" type="button" class="btn btn-primary btn-rounded btn-sm"><i class="fa fa-plus" aria-hidden="true"></i></button>
-<div class="row purchace-popup">
-  <div class="col-12">
-    <span class="d-flex alifn-items-center">
       <p class="h4"><b>Daftar Obat</b></p>
     </span>
   </div>
@@ -141,34 +133,27 @@ path{
      @foreach($data as $a)
     <tr >
       <td>
-        <div class="row">
-        <div>
-          <button type="button" data-toggle="modal" value="{{$a->id_obat}}" id="idnya" data-target="#exampleModalCenter1" class="btn btn-primary btn-rounded xyz btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i><!-- Ubah --></button>
+        <div class="row" style="margin-left: 5%;">
+        <div style="margin-right: 20%;">
+          <a href="{{url('editobat/'.$a->id_obat)}}"> 
+            <i style="color: green;" class="fa fa-pencil-square-o" aria-hidden="true"></i>
+          </a>
         </div>
-        <div>
-          <!-- <button type="button" id="getajax" onclick="myFunction()" class="btn btn-primary btn-rounded btn-fw"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>Ubah</button> -->
-          <form method="post" action="{{url('/hapusobt')}}">
-            <input type="hidden" name="id_rs" value="{{$a->id_obat}}">
-            {{ csrf_field() }}
-            <button type="submit" onclick="myFunction()" class="btn btn-danger btn-rounded btn-sm"><i class="fa fa-times" aria-hidden="true"></i><!-- Hapus --></button>
-          </form>
+        <div> 
+          <a href="{{url('deleteobat/'.$a->id_obat)}}" onclick="myFunction(event);"><i style="color: red;" class="fa fa-times" aria-hidden="true"></i></a>
         </div>
       </div>
       </td>
       <td>{{$a->nama_obat}}</td>
       <td>{{$a->ket_obat}}</td>
-     <!--  <td>
-        @if($a->ket_obat)
-        <a ><button type="button" id="idnya" class="btn btn-warning btn-rounded btn-fw xyz"><i class="fa fa-id-card" aria-hidden="true"></i>Isi</button></a>
-        @else
-        <a ><button type="button" id="idnya" class="btn btn-primary btn-rounded btn-fw xyz"><i class="fa fa-id-card" aria-hidden="true"></i></i>Ubah</button></a>
-        @endif
-        <a ><button type="button" id="idnya" class="btn btn-primary btn-rounded btn-fw xyz"><i class="fa fa-eye" aria-hidden="true"></i>Lihat</button></a>
-      </td>  -->
     </tr>
     @endforeach
   </tbody>
 </table>
+<a href="{{url('editobat/'.$angka)}}">
+    <i class="fa fa-plus" style="margin-left: 2%; margin-top: 1%" aria-hidden="true"></i>
+    <span style="font-size: 80%;">Tambah akun</span>
+    </a>
 <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
@@ -248,12 +233,12 @@ path{
    $('#icon4').addClass('icon-lg');
 </script>
 <script type="text/javascript">
-  function myFunction()
+  function myFunction(event)
   {
     event.preventDefault(); // prevent form submit
-    var form = event.target.form;
+    var href = event.currentTarget.getAttribute('href');
     swal({
-      title: 'Hapus Obat',
+      title: 'Hapus Akun',
       text: 'Apa Kamu Yakin Menghapus ? ',
       type: 'warning',
       showCancelButton: true,
@@ -263,7 +248,7 @@ path{
       cancelButtonText: 'Batal'
     }).then((result) => {
       if (result.value) {
-        form.submit(); 
+        window.location = href; 
       }
     })
   }

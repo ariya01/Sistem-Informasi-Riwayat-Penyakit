@@ -38,8 +38,8 @@ Route::group(['middleware' => 'admin'], function () {
 	Route::get('rumahsakit','MyControll@rumahsakit')->name("rumahsakit");
 	Route::get('/obat','MyControll@obat')->name('obat');
 	Route::get('penyakit','MyControll@penyakit')->name('penyakit');
-	Route::get('penyakitnya/{id}','MyControll@riwayatpenyakit');
-	Route::get('detailnya/{id}','MyControll@detailnya');
+	Route::get('penyakitnya/{id}','MyControll@riwayatpenyakit')->name('penyakitnya');
+	Route::get('detailnya/{id}','MyControll@detailnya')->name('detailnya');
 	Route::get('alergi/{id}','MyControll@alergi');
 	Route::get('keluarga/{id}','MyControll@keluarga');
 	Route::post('tambahrs','MyControll@tambahrs');
@@ -63,6 +63,22 @@ Route::group(['middleware' => 'admin'], function () {
 	Route::get('deletepenyakit/{id}','MyControll@deletepenyakit');
 	Route::get('care/{id}','MyControll@care');
 	Route::get('editpendidikan/{id}','MyControll@editpendidikan');
+	Route::get('detail1/{id}','MyControll@detail1');
+	Route::post('/isidetail1','MyControll@isidetail1');
+	Route::get('/editobat/{id}','MyControll@editobat');
+	Route::get('ajax3/{id}','MyControll@ajax3');
+	Route::post('editobatnya','MyControll@editobatnya');
+	Route::get('deleteobat/{id}','MyControll@deleteobat');
+	Route::get('editrumah/{id}','MyControll@editrumah');
+	Route::get('ajax4/{id}','MyControll@ajax4');
+	Route::get('deleterumah/{id}','MyControll@deleterumah');
+	Route::post('rumahsakitnya','MyControll@rumahsakitnya');
+	Route::get('pemeriksaan/{id}','MyControll@pemeriksaan');
+	Route::get('editpenyakitnya1/{id_riwayat}/{id_user}','MyControll@editpenyakitnya1');
+	Route::post('kirim','MyControll@kirim');
+	Route::get('ajax5/{id}','MyControll@ajax5');
+	Route::get("/editalerginya/{id_alergi}/{id_user}",'MyControll@editalerginya');
+	Route::get('hapusri/{id_penyakit}/{id_user}','MyControll@hapusri');
 });
 Route::group(['middleware' => 'dokter'], function () {
 	Route::get('/rumah','MyControll@rumah')->name('rumah');

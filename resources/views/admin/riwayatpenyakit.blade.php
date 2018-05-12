@@ -74,6 +74,49 @@ path{
     <path style="stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter" d="M 58.26475,43.628481 42.49585,16.366995 26.77116,43.654011 Z" id="T6"/>
   </svg>
 </div>
+@if(session()->has('message'))
+@if(session()->get('message')=='Gagal')
+<script type="text/javascript">
+  swal
+  ({
+    title: 'Gagal',
+    text: 'Coba lagi',
+    type: 'error',
+    confirmButtonText: 'Iya'
+  })
+</script>
+@elseif(session()->get('message')=='Berhasil')
+<script type="text/javascript">
+  swal
+  ({
+    title: 'Berhasil',
+    text: 'Berhasil Menghapus {{session('data')}}',
+    type: 'success',
+    confirmButtonText: 'Iya'
+  })
+</script>
+@elseif(session()->get('message')=='Berhasil1')
+<script type="text/javascript">
+  swal
+  ({
+    title: 'Berhasil',
+    text: 'Berhasil Mendaftarkan {{session('data')}}',
+    type: 'success',
+    confirmButtonText: 'Iya'
+  })
+</script>
+@elseif(session()->get('message')=='Berhasil2')
+<script type="text/javascript">
+  swal
+  ({
+    title: 'Berhasil',
+    text: 'Berhasil Mengubah {{session('data')}}',
+    type: 'success',
+    confirmButtonText: 'Iya'
+  })
+</script>
+@endif
+@endif
 <div class="col-md-12 grid-margin stretch-card">
   <div class="card">
     <a href="{{url('detailpasien/'.$personal->id)}}">
@@ -126,10 +169,10 @@ path{
                     </span>
                   </div>
                 </div>
-                              <div class="row purchace-popup">
+                <div class="row purchace-popup">
                 <div class="col-12">
                   <span class="d-flex alifn-items-center">
-                    <a href="#">
+                    <a href="{{url('/pemeriksaan/'.$personal->id)}}">
                       <p style="color: black; font-weight: 10;" class="h4"><b>Riwayat Pemeriksaan</b></p>
                     </a>
                   </span>
@@ -143,21 +186,36 @@ path{
           <table id="myTable" class="table table-bordered">
             <thead>
               <tr>
+                <th></th>
                 <th> Riwayat Penyakit</th>
                 <th> Tanggal Sakit</th>
-                <th> Rumah Sakit yang Melayani</th>
               </tr>
             </thead>
             <tbody>
              @foreach($penyakit as $a)
              <tr >
+                    <td>
+        <div class="row" style="margin-left: 5%;">
+        <div style="margin-right: 20%;">
+          <a href="{{url('editpenyakitnya1/'.$a->id_penyakitnya.'/'.$personal->id)}}"> 
+            <i style="color: green;" class="fa fa-pencil-square-o" aria-hidden="true"></i>
+          </a>
+        </div>
+        <div> 
+          <a href="{{url('hapusri/'.$a->id_penyakitnya.'/'.$personal->id)}}" onclick="myFunction(event);"><i style="color: red;" class="fa fa-times" aria-hidden="true"></i></a>
+        </div>
+      </div>
+      </td>
               <td>{{$a->nama_penyakit}}</td>
-              <td>11 April 2014</td>
-              <td>RSUD Dr Soetomo Surabaya</td>
+              <td>{{$a->created_at}}</td>
             </tr>
             @endforeach
           </tbody>
         </table>
+        <a href="{{url('editpenyakitnya1/'.$angka.'/'.$personal->id)}}">
+    <i class="fa fa-plus" style="margin-left: 2%; margin-top: 1%" aria-hidden="true"></i>
+    <span style="font-size: 80%;">Tambah akun</span>
+    </a>
       </div>
     </div>
   </div>
@@ -179,5 +237,26 @@ path{
     $('#preloader').delay(350).fadeOut('slow');
     $('body').delay(350).css({'overflow':'visible'});
   });
+</script>
+<script type="text/javascript">
+  function myFunction(event)
+  {
+    event.preventDefault(); // prevent form submit
+    var href = event.currentTarget.getAttribute('href');
+    swal({
+      title: 'Hapus Akun',
+      text: 'Apa Kamu Yakin Menghapus ? ',
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Ya Hapus!',
+      cancelButtonText: 'Batal'
+    }).then((result) => {
+      if (result.value) {
+        window.location = href; 
+      }
+    })
+  }
 </script>
 @endsection

@@ -9,52 +9,18 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="{{asset('css/style.css')}}">
   <link rel="shortcut icon" href="{{asset('images/favicon.png')}}" />
-  <style type="text/css"> 
-  </style>
   @yield('css')
+  <style type="text/css">
+    body, html {
+    height: 100%;
+}
+  </style>
 </head>
 <body>
   <div class="container-scroller">
-<!--     <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
-      <div class="text-center navbar-brand-wrapper d-flex align-items-top justify-content-center">
-        <a class="navbar-brand brand-logo" href="index.html"><img src="{{asset('images/logo.svg')}}" alt="logo"/></a>
-        <a class="navbar-brand brand-logo-mini" href="index.html"><img src="{{asset('images/logo-mini.svg')}}" alt="logo"/></a>
-      </div>
-      <div class="navbar-menu-wrapper d-flex align-items-center">
-        <ul class="navbar-nav navbar-nav-right">
-          <li class="nav-item dropdown">
-            <a class="nav-link count-indicator dropdown-toggle" id="messageDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
-              <img class="img-xs rounded-circle" src="{{asset('images/profile/1.png')}}" alt="">
-            </a>
-            <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="messageDropdown">
-              <div class="dropdown-divider"></div>
-              <a href="{{url('detail/'.Auth::user()->id)}}" class="dropdown-item preview-item">
-                <div class="preview-thumbnail">
-                  <i style="color: black; " class="fa fa-cog icon-lg"></i>
-                </div>
-                <div class="preview-item-content flex-grow">
-                  <h6 class="preview-subject ellipsis font-weight-medium">Setting
-                  </h6>
-                </div>
-              </a>
-              <a href="{{url('logout')}}" class="dropdown-item preview-item">
-                <div class="preview-thumbnail">
-                  <i style="color: black; " class="fa fa-sign-out icon-lg"></i>
-                </div>
-                <div class="preview-item-content flex-grow">
-                  <h6 class="preview-subject ellipsis font-weight-medium">Log Out
-                  </h6>
-                </div>
-              </a>
-            </div>
-        </ul>
-        <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
-          <span class="icon-menu"></span>
-        </button>
-      </div>
-    </nav> -->
+   
     <div class="container-fluid page-body-wrapper">
-      <nav class="sidebar sidebar-offcanvas" style="background-color: #024038;" id="sidebar">
+      <nav class="sidebar sidebar-offcanvas" style="height: 1000px; background-color: #024038;" id="sidebar">
         <ul class="nav">
           <li class="nav-item nav-profile">
             <div class="nav-link">

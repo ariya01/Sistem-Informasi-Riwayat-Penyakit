@@ -116,14 +116,6 @@ path{
 <div class="row purchace-popup">
   <div class="col-12">
     <span class="d-flex alifn-items-center">
-      <p class="h4"><b>Tambah Rumah Sakit</b></p>
-    </span>
-  </div>
-</div>
-<button data-toggle="modal" data-target="#exampleModalCenter" style="margin-bottom: 2%;" type="button" class="btn btn-primary btn-rounded btn-sm"><i class="fa fa-plus" aria-hidden="true"></i></button>
-<div class="row purchace-popup">
-  <div class="col-12">
-    <span class="d-flex alifn-items-center">
       <p class="h4"><b>Daftar Rumah Sakit</b></p>
     </span>
   </div>
@@ -141,21 +133,18 @@ path{
   <tbody>
    @foreach($data as $a)
    <tr >
-    <td>
-      <div class="row">
-        <div>
-          <button type="button" data-toggle="modal" value="{{$a->id_rumah}}" id="idnya" data-target="#exampleModalCenter1" class="btn btn-primary btn-rounded xyz btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i><!-- Ubah --></button>
+     <td>
+        <div class="row" style="margin-left: 5%;">
+        <div style="margin-right: 20%;">
+          <a href="{{url('editrumah/'.$a->id_rumah)}}"> 
+            <i style="color: green;" class="fa fa-pencil-square-o" aria-hidden="true"></i>
+          </a>
         </div>
-        <div>
-          <!-- <button type="button" id="getajax" onclick="myFunction()" class="btn btn-primary btn-rounded btn-fw"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>Ubah</button> -->
-          <form method="post" action="{{url('/hapusrs')}}">
-            <input type="hidden" name="id_rs" value="{{$a->id_rumah}}">
-            {{ csrf_field() }}
-            <button type="submit" onclick="myFunction()" class="btn btn-danger btn-rounded btn-sm"><i class="fa fa-times" aria-hidden="true"></i><!-- Hapus --></button>
-          </form>
+        <div> 
+          <a href="{{url('deleterumah/'.$a->id_rumah)}}" onclick="myFunction(event);"><i style="color: red;" class="fa fa-times" aria-hidden="true"></i></a>
         </div>
       </div>
-    </td>
+      </td>
     <td>{{$a->nama_rumah}}</td>
     <td>{{$a->alamat_rumah}}</td>
     <td>{{$a->keterangan_rumah}}</td>
@@ -171,6 +160,10 @@ path{
     @endforeach
   </tbody>
 </table>
+<a href="{{url('editrumah/'.$angka)}}">
+    <i class="fa fa-plus" style="margin-left: 2%; margin-top: 1%" aria-hidden="true"></i>
+    <span style="font-size: 80%;">Tambah akun</span>
+    </a>
 <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
@@ -275,12 +268,12 @@ path{
   });
 </script>
 <script type="text/javascript">
-  function myFunction()
+  function myFunction(event)
   {
     event.preventDefault(); // prevent form submit
-    var form = event.target.form;
+    var href = event.currentTarget.getAttribute('href');
     swal({
-      title: 'Hapus Rumah Sakit',
+      title: 'Hapus Akun',
       text: 'Apa Kamu Yakin Menghapus ? ',
       type: 'warning',
       showCancelButton: true,
@@ -290,7 +283,7 @@ path{
       cancelButtonText: 'Batal'
     }).then((result) => {
       if (result.value) {
-        form.submit(); 
+        window.location = href; 
       }
     })
   }

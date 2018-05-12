@@ -73,6 +73,37 @@ path{
     <path style="stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter" d="M 58.26475,43.628481 42.49585,16.366995 26.77116,43.654011 Z" id="T6"/>
   </svg>
 </div>
+@if(session()->get('message')=='Berhasil')
+<script type="text/javascript">
+  swal
+  ({
+    title: 'Berhasil',
+    text: '{{session('data')}} berhasil berubah',
+    type: 'success',
+    confirmButtonText: 'Iya'
+  })
+</script>
+@elseif(session()->get('message')=='Berhasil1')
+<script type="text/javascript">
+  swal
+  ({
+    title: 'Berhasil',
+    text: '{{session('data')}} berhasil ditambah',
+    type: 'success',
+    confirmButtonText: 'Iya'
+  })
+</script>
+@elseif(session()->get('message')=='Gagal')
+<script type="text/javascript">
+  swal
+  ({
+    title: 'Error',
+    text: 'Coba Lagi',
+    type: 'error',
+    confirmButtonText: 'Iya'
+  })
+</script>
+@endif
 <div class="col-md-12 grid-margin stretch-card">
   <div class="card">
     <a href="{{url('detailpasien/'.$personal->id)}}">
@@ -128,7 +159,7 @@ path{
               <div class="row purchace-popup">
                 <div class="col-12">
                   <span class="d-flex alifn-items-center">
-                    <a href="#">
+                    <a href="{{url('/pemeriksaan/'.$personal->id)}}">
                       <p style="color: black; font-weight: 10;" class="h4"><b>Riwayat Pemeriksaan</b></p>
                     </a>
                   </span>
@@ -143,13 +174,8 @@ path{
           <div class="col-12">
             <span class="d-flex alifn-items-center">           
               <p class="h4"><b>Data Pribadi Pasien</b></p>
-               @if ($personal->alamat != null)
-               <a href="{{url('detail/'.$personal->id)}}" style="margin-left: 50%; color: blue;"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+               <a href="{{url('detail1/'.$personal->id)}}" style="margin-left: 50%; color: blue;"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
               </a>
-              @else
-              <a href="{{url('detail/'.$personal->id)}}" style="margin-left: 50%; color: blue;"><i class="fa fa-plus" aria-hidden="true"></i>
-              </a>
-              @endif
             </span>
           </div>
         </div>

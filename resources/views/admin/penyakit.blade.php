@@ -140,7 +140,8 @@ path{
   <tbody>
      @foreach($data as $a)
     <tr >
-      <td>        <div class="row" style="margin-left: 5%;">
+      <td>        
+        <div class="row" style="margin-left: 5%;">
         <div style="margin-right: 20%;">
           <!-- <button type="button" data-toggle="modal" value="{{$a->id_penyakit}}" id="idnya" data-target="#exampleModalCenter1" class="btn btn-primary btn-rounded xyz btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button> -->
           <a href="{{url('editpenyakitnya/'.$a->id_penyakit)}}"> 

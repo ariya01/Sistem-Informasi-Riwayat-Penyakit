@@ -13951,7 +13951,7 @@ input:focus {
 /* Navbar */
 .navbar {
   font-family: "Poppins", sans-serif;
-  background: linear-gradient(88deg, #318be3, #04befe);
+  background: #024038;
   transition: background 0.25s ease;
   -webkit-transition: background 0.25s ease;
   -moz-transition: background 0.25s ease;
@@ -13961,11 +13961,11 @@ input:focus {
     -webkit-transition: width 0.25s ease, background 0.25s ease;
     -moz-transition: width 0.25s ease, background 0.25s ease;
     -ms-transition: width 0.25s ease, background 0.25s ease;
-    background: #ffffff;
+    background: #024038;
     width: 255px;
     height: 58px; }
     .navbar .navbar-brand-wrapper .navbar-brand {
-      color: #ffffff;
+      color: red;
       font-size: 1.5rem;
       line-height: 48px;
       margin-right: 0;

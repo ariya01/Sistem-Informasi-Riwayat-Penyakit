@@ -136,12 +136,15 @@ path{
       <div class="row purchace-popup">
         <div class="col-12">
           <span class="d-flex alifn-items-center">
-            <a href="#">
+            <a href="{{url('/pemeriksaan/'.$personal->id)}}">
             <p style="color: black;" class="h4"><b>Riwayat Pemeriksaan</b></p>
             </a>
           </span>
         </div>
       </div>
+    </div>
+  </div>
+</div>
       <!-- <p class="card-description font-weight-bold">
         Nama Dokter
       </p>
