@@ -989,7 +989,7 @@ class MyControll extends Controller
     // dd($request->id_alerginya);
     if($request->id_alerginya==null)
     {
-      $data = DB::table('alerginya')->insert(['id_alerginya'=>$request->id_alerginya,'id_alergi'=>$request->alergi,'id_user'=>$request->id_user]);
+      $data = DB::table('alerginya')->insert(['id_alergi'=>$request->id_alergi,'id_user'=>$request->id_user]);
       if ($data)
       {
         return redirect()->route('alergi',$request->id_user)->with('message','Berhasil1')->with('data',$request->nama);
