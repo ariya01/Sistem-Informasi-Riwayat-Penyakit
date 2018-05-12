@@ -186,7 +186,7 @@ path{
           <table id="myTable" class="table table-bordered">
             <thead>
               <tr>
-                <th></th>
+                <th width="10%;"></th>
                 <th>Alergi</th>
               </tr>
             </thead>

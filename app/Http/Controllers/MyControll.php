@@ -15,7 +15,26 @@ class MyControll extends Controller
     //
   public function login()
   {
-    return view ('welcome');
+    if (Auth::check())
+    {
+       $user = Auth::user()->roles->first()->name;
+      if ($user == 'admin')
+       {
+        return redirect()->route('home');
+      }
+      elseif ($user == 'pasien') 
+      {
+        return redirect()->route('griya');
+      }
+      elseif ($user == 'dokter') 
+      {
+        return redirect()->route('rumah');
+      }
+    }
+    else
+    {
+      return view ('welcome');
+    }
   }
   public function signin(Request $request)
   {
