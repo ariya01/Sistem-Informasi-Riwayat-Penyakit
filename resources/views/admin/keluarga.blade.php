@@ -151,6 +151,10 @@ path{
             </tr>
           </tbody>
         </table>
+                <a href="{{url('editalerginya/'.$angka.'/'.$personal->id)}}">
+    <i class="fa fa-plus" style="margin-left: 2%; margin-top: 1%" aria-hidden="true"></i>
+    <span style="font-size: 80%;">Tambah akun</span>
+    </a>
       </div>
     </div>
   </div>

@@ -147,7 +147,7 @@ path{
                   </span>
                 </div>
               </div>
-              <div class="row purchace-popup">
+<!--               <div class="row purchace-popup">
                 <div class="col-12">
                   <span class="d-flex alifn-items-center">
                     <a href="{{url('/keluarga/'.$personal->id)}}">
@@ -155,7 +155,7 @@ path{
                     </a>
                   </span>
                 </div>
-              </div>
+              </div> -->
               <div class="row purchace-popup">
                 <div class="col-12">
                   <span class="d-flex alifn-items-center">
