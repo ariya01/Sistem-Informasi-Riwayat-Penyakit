@@ -1,6 +1,6 @@
 @extends('admin.master')
 @section('tombol')
-active
+
 @endsection
 @section('css')
 <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -125,7 +125,7 @@ path{
     <form class="forms-sample" method="post" action="{{url('kirim')}} ">
       <div class="form-group">
         <label for="exampleFormControlSelect2">Penyakit</label>
-        <select class="form-control" name="penyakit" id="penyakit">
+        <select class="form-control" name="penyakit" id="penyakit" required>
           @foreach($penyakit as $role)
           <option value="{{$role->id_penyakit}}">{{$role->nama_penyakit}}</option>
           @endforeach
@@ -136,7 +136,7 @@ path{
         <div class="input-group">
           <div class="input-group-prepend">
           </div>
-          <input type="date" class="form-control" name="tanggal" id="tanggal">
+          <input type="date" class="form-control" name="tanggal" id="tanggal" required>
           <div class="input-group-append">
           </div>
         </div>
@@ -167,7 +167,7 @@ path{
                 success:function(data){
                   console.log(JSON.parse(data));
                   $("#penyakit").val(JSON.parse(data).id_penyakit);
-                  // $("#tanggal").val(JSON.parse(data).created_at);
+                  $("#tanggal").val(JSON.parse(data).created_at);
                   $("#id_penyakitnya").val(JSON.parse(data).id_penyakitnya);
                 },
                 error:function(data){

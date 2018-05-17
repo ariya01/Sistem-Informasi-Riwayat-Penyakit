@@ -17,7 +17,7 @@ class MyControll extends Controller
   {
     if (Auth::check())
     {
-       $user = Auth::user()->roles->first()->name;
+      $user = Auth::user()->roles->first()->name;
       if ($user == 'admin')
        {
         return redirect()->route('home');
@@ -38,25 +38,32 @@ class MyControll extends Controller
   }
   public function signin(Request $request)
   {
-   if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) 
-     {
-       $user = Auth::user()->roles->first()->name;
-       if ($user == 'admin')
+   if ($request->password!=null)
+   {
+     if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) 
        {
-        return redirect()->route('home');
+         $user = Auth::user()->roles->first()->name;
+         if ($user == 'admin')
+         {
+          return redirect()->route('home');
+        }
+        elseif ($user == 'pasien') 
+        {
+          return redirect()->route('griya');
+        }
+        elseif ($user == 'dokter') 
+        {
+          return redirect()->route('rumah');
+        }
       }
-      elseif ($user == 'pasien') 
+      else
       {
-        return redirect()->route('griya');
-      }
-      elseif ($user == 'dokter') 
-      {
-        return redirect()->route('rumah');
-      }
-    }
-    else
-    {
-     return view ('error');
+       return redirect()->route('login')->with('message','Gagal');
+     }
+   }
+   else
+   {
+      return redirect()->route('login')->with('message','Gagal');
    }
  }
  public function home()
@@ -548,6 +555,8 @@ class MyControll extends Controller
   }
   public function editpenyakit(Request $request)
   {
+    $data=DB::table('penyakit')->where('id_penyakit','=',$request->id_user)->first();
+    $dd($data);
     $data=DB::table('penyakit')->where('id_penyakit','=',$request->id_user)->update(['nama_penyakit'=>$request->nama,'keterangan_penyakit'=>$request->ket]);
     if ($data)
     {
@@ -685,6 +694,8 @@ class MyControll extends Controller
   public function editpenyakitku(Request $request)
   {
     // dd($request->id_penyakit);
+    $nama= DB::table('penyakit')->where('id_penyakit','=',$request->id_penyakit)->first();
+    // dd($nama);
     if($request->id_penyakit==null)
     {
       $data = DB::table('penyakit')->insert(['nama_penyakit'=>$request->nama,'keterangan_penyakit'=>$request->ket]);
@@ -702,7 +713,7 @@ class MyControll extends Controller
       $data=DB::table('penyakit')->where('id_penyakit','=',$request->id_penyakit)->update(['nama_penyakit'=>$request->nama,'keterangan_penyakit'=>$request->ket]);
       if ($data)
       {
-       return redirect()->route('penyakit')->with('message','Berhasil2')->with('data',$request->nama);
+       return redirect()->route('penyakit')->with('message','Berhasil2')->with('data',$request->nama)->with('nama',$nama->nama_penyakit);
      }
      else
      {
@@ -799,6 +810,7 @@ class MyControll extends Controller
   }
   public function editobatnya(Request $request)
   {
+    $nama= DB::table('obat')->where('id_obat','=',$request->id_obat)->first();
     if($request->id_obat==null)
     {
       $data = DB::table('obat')->insert(['nama_obat'=>$request->nama,'ket_obat'=>$request->ket]);
@@ -816,7 +828,7 @@ class MyControll extends Controller
       $data=DB::table('obat')->where('id_obat','=',$request->id_obat)->update(['nama_obat'=>$request->nama,'ket_obat'=>$request->ket]);
       if ($data)
       {
-       return redirect()->route('obat')->with('message','Berhasil2')->with('data',$request->nama);
+       return redirect()->route('obat')->with('message','Berhasil2')->with('data',$request->nama)->with('nama',$nama->nama_obat);
      }
      else
      {
@@ -1055,6 +1067,7 @@ class MyControll extends Controller
   public function kirim3(Request $request)
   {
     // dd($request->id_alergi);
+    $nama = db::table('alergi')->where('id_alergi','=',$request->id_alergi)->first();
     if($request->id_alergi==null)
     {
       $data = DB::table('alergi')->insert(['nama_alergi'=>$request->nama,'keterangan'=>$request->ket]);
@@ -1072,7 +1085,7 @@ class MyControll extends Controller
       $data=DB::table('alergi')->where('id_alergi','=',$request->id_alergi)->update(['nama_alergi'=>$request->nama,'keterangan'=>$request->ket]);
       if ($data)
       {
-       return redirect()->route('ubah')->with('message','Berhasil2')->with('data',$request->nama);
+       return redirect()->route('ubah')->with('message','Berhasil2')->with('data',$request->nama)->with('nama',$nama->nama_alergi);
      }
      else
      {
@@ -1200,5 +1213,14 @@ class MyControll extends Controller
     {
       return redirect()->route('kembali',$id_user)->with('message','Gagal');
     }
+  }
+  public function adminhome()
+  {
+    $dokter = DB::table('users')->leftJoin('role_user','users.id','role_user.user_id')->leftJoin('roles','role_id','roles.id')->where('name','=','dokter')->select('users.*','roles.name')->count();
+    $pasien = DB::table('users')->leftJoin('role_user','users.id','role_user.user_id')->leftJoin('roles','role_id','roles.id')->where('name','=','pasien')->select('users.*','roles.name')->count();
+    $admin = DB::table('users')->leftJoin('role_user','users.id','role_user.user_id')->leftJoin('roles','role_id','roles.id')->where('name','=','admin')->select('users.*','roles.name')->count();
+    $obat = DB::table('obat')->count();
+    $penyakit = DB::table('penyakit')->count();
+    return view ('admin2.home',compact('penyakit','dokter','pasien','obat'));
   }
 }

@@ -15,7 +15,7 @@
 </head>
 <body>
   <div class="container-scroller">
-<!--     <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+   <!--  <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
       <div class="text-center navbar-brand-wrapper d-flex align-items-top justify-content-center">
         <a class="navbar-brand brand-logo" href="index.html"><img src="{{asset('images/logo.svg')}}" alt="logo"/></a>
         <a class="navbar-brand brand-logo-mini" href="index.html"><img src="{{asset('images/logo-mini.svg')}}" alt="logo"/></a>
@@ -83,6 +83,7 @@
           <li class="nav-item @yield('tombol')"><a class="nav-link" href="{{url('rumah')}}">
             <i id="icon" style="margin-right: 7%;" class="fa fa-wheelchair icon-md"></i>
             <span class="menu-title">Pasien</span></a></li>
+             <!-- <li class="nav-item @yield('tombol5')"><a class="nav-link" href="{{url('logout')}}"><i id="icon6" style="margin-right: 7%; color: red;" class="fa fa-sign-out icon-md"></i><span style="color: red;" class="menu-title">Log Out</span></a></li> -->
         </ul>
       </nav>
       <div class="main-panel">

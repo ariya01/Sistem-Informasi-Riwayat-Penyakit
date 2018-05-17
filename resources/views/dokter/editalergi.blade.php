@@ -128,7 +128,7 @@ path{
         <div class="input-group">
           <div class="input-group-prepend">
           </div>
-          <input type="text" class="form-control" name="subyek" id="subyek">
+          <input type="text" class="form-control"  name="subyek" id="subyek" maxlength="100">
           <div class="input-group-append bg-primary border-primary">
           </div>
         </div>
@@ -138,7 +138,7 @@ path{
         <div class="input-group">
           <div class="input-group-prepend">
           </div>
-          <input type="text" class="form-control" name="objek" id="objek">
+          <input type="text" class="form-control" name="objek" id="objek" maxlength="100">
           <div class="input-group-append bg-primary border-primary">
           </div>
         </div>
@@ -148,7 +148,7 @@ path{
         <div class="input-group">
           <div class="input-group-prepend">
           </div>
-          <input type="text" class="form-control" name="asssesmen" id="asssesmen" >
+          <input type="text" class="form-control" name="asssesmen" id="asssesmen" maxlength="100">
           <div class="input-group-append bg-primary border-primary">
           </div>
         </div>
@@ -158,7 +158,7 @@ path{
         <div class="input-group">
           <div class="input-group-prepend">
           </div>
-          <input type="text" class="form-control" name="plan" id="plan" >
+          <input type="text" class="form-control" name="plan" id="plan" maxlength="100">
           <div class="input-group-append bg-primary border-primary">
           </div>
         </div>
