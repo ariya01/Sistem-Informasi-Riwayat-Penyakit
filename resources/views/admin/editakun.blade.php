@@ -125,7 +125,7 @@ path{
         <div class="input-group">
           <div class="input-group-prepend">
           </div>
-          <input type="text" class="form-control" name="nama" id="nama" placeholder="Ariya">
+          <input type="text" class="form-control" name="nama" id="nama" placeholder="Ariya" required>
           <div class="input-group-append bg-primary border-primary">
           </div>
         </div>
@@ -135,7 +135,7 @@ path{
         <div class="input-group">
           <div class="input-group-prepend">
           </div>
-          <input type="email" class="form-control" name="email" id="email" placeholder="email@exampel.com" >
+          <input type="email" class="form-control" name="email" id="email" placeholder="email@exampel.com" required>
           <div class="input-group-append">
           </div>
         </div>
@@ -145,7 +145,7 @@ path{
         <div class="input-group">
           <div class="input-group-prepend">
           </div>
-          <input type="password" class="form-control" id="password1" name="password" placeholder="Password">
+          <input type="password" class="form-control" id="password1" name="password" placeholder="Password" required>
           <div class="input-group-append">
           </div>
         </div>
@@ -155,7 +155,7 @@ path{
         <div class="input-group">
           <div class="input-group-prepend">
           </div>
-          <input type="password" class="form-control" id="confirm_password1" placeholder="Password">
+          <input type="password" class="form-control" id="confirm_password1" placeholder="Password" required>
           
           <div class="input-group-append">
           </div>
@@ -164,7 +164,7 @@ path{
       </div>
       <div class="form-group">
         <label for="exampleFormControlSelect2">Role</label>
-        <select class="form-control" name="role" id="role">
+        <select class="form-control" name="role" id="role" required>
           @foreach($kelamins as $role)
           <option value="{{$role->id}}">{{$role->name}}</option>
           @endforeach

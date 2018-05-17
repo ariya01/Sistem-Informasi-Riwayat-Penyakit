@@ -118,11 +118,11 @@ path{
       <span style="font-size: 80%;"> Kembali ke Alergi </span>
     </a>
   <div class="card-body">
-    <h4 class="card-title">Riwayat Penyakit</h4>
+    <h4 class="card-title">Riwayat Alergi</h4>
     <form class="forms-sample" method="post" action="{{url('kirim1')}} ">
       <div class="form-group">
-        <label for="exampleFormControlSelect2">Penyakit</label>
-        <select class="form-control" name="id_alergi" id="alergi">
+        <label for="exampleFormControlSelect2">Alergi</label>
+        <select class="form-control" name="id_alergi" id="alergi" required>
           @foreach($penyakit as $role)
           <option value="{{$role->id_alergi}}">{{$role->nama_alergi}}</option>
           @endforeach
@@ -163,7 +163,7 @@ path{
                 datatype: 'JSON',
                 success:function(data){
                   console.log(JSON.parse(data));
-                  $("#penyakit").val(JSON.parse(data).id_alergi);
+                  $("#alergi").val(JSON.parse(data).id_alergi);
                   // $("#tanggal").val(JSON.parse(data).created_at);
                   $("#id_alerginya").val(JSON.parse(data).id_alerginya);
                 },

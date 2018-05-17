@@ -115,7 +115,7 @@ path{
   <div class="card">
   <a href="{{url('penyakit')}}">
       <i class="fa fa-arrow-left" style="margin-left: 2%; margin-top: 1%" aria-hidden="true"></i>
-      <span style="font-size: 80%;"> Kembali ke Detail Pasien </span>
+      <span style="font-size: 80%;"> Kembali ke Penyakit </span>
     </a>
   <div class="card-body">
     <h4 class="card-title">Penyakit</h4>
@@ -125,7 +125,7 @@ path{
         <div class="input-group">
           <div class="input-group-prepend">
           </div>
-          <input type="text" class="form-control" name="nama" id="nama" placeholder="Demam Berdarah">
+          <input type="text" class="form-control" name="nama" id="nama" placeholder="Demam Berdarah" required>
           <div class="input-group-append bg-primary border-primary">
           </div>
         </div>
@@ -135,7 +135,7 @@ path{
         <div class="input-group">
           <div class="input-group-prepend">
           </div>
-          <input type="text" class="form-control" name="ket" id="penyakit" placeholder="Penyakit ini penyakit yang di sebabkan oleh nyamuk aides aigepti" >
+          <input type="text" class="form-control" name="ket" id="penyakit" placeholder="Penyakit ini penyakit yang di sebabkan oleh nyamuk aides aigepti" required>
           <div class="input-group-append">
           </div>
         </div>

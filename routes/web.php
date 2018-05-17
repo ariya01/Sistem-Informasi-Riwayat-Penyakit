@@ -111,5 +111,5 @@ Route::get('/generate',function(){
 });
 
 Auth::routes();
-
+Route::get('adminhome','MyControll@adminhome');
 // Route::get('/home', 'HomeController@index')->name('home');

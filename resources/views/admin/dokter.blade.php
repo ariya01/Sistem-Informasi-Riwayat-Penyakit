@@ -4,8 +4,11 @@
 src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <script src="https://unpkg.com/promise-polyfill@7.1.0/dist/promise.min.js"></script>
 <script src="https://unpkg.com/sweetalert2@7.18.0/dist/sweetalert2.all.js"></script>
-<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.js"></script>
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.css">
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.16/js/dataTables.semanticui.min.js"></script>
+<script type="text/javascript" charset="utf8" src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.0/semantic.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.0/semantic.min.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/dataTables.semanticui.min.css">
 @endsection
 @section('content')
 <div class="row purchace-popup">
@@ -15,9 +18,11 @@ src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLN
     </span>
   </div>
 </div>
-<table id="myTable" class="table table-bordered">
+
+<table id="myTable" class="ui celled table">
   <thead>
     <tr>
+      <th width="5%;" data-orderable="false"></th>
       <th>KTP</th>
       <th>Nama</th>
       <th>Umur</th><!-- 
@@ -31,6 +36,9 @@ src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLN
   <tbody>
      @foreach($data as $a)
     <tr >
+      <td>
+        <div class="profile-image"> <img style="border-radius: 50%;" src="{{asset('images/profile/page.jpg')}}" alt="image"/> <span class="online-status online"></span> </div>
+      </td>
       <td>@if ($a->ktp!=null)
         {{$a->ktp}}
         @else
@@ -86,7 +94,17 @@ src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLN
 @section('js')
 <script type="text/javascript">
   $(document).ready( function () {
-    $('#myTable').DataTable();
+    $('#myTable').DataTable({ order: [[1, 'asc']],bPaginate: $('#myTable tbody tr').length>10,
+      "oLanguage": {
+        "oPaginate": {
+          "sNext": "Selanjutnya",
+          "sPrevious": "Sebelumnya"
+        },
+        "sInfo": "Menampilkan _START_ hingga _END_ dari _TOTAL_ Baris",
+        "sInfoEmpty": "Showing 0 to 0 of 0 entries",
+        "sLengthMenu": "Tampilan _MENU_ Baris",
+        "sSearch": "Cari"
+      }});
   } );
 </script>
 <script type="text/javascript">

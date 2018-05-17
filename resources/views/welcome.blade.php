@@ -7,9 +7,31 @@
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
     <link rel="stylesheet" href="login.css"> 
+      <link rel="icon" href="{{asset('1.png')}}" type="image/gif" sizes="16x16">
+
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
-    <style type="text/css">
-    </style>
+<style>
+.alert {
+    padding: 20px;
+    background-color: #f44336;
+    color: white;
+}
+
+.closebtn {
+    margin-left: 15px;
+    color: white;
+    font-weight: bold;
+    float: right;
+    font-size: 22px;
+    line-height: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.closebtn:hover {
+    color: black;
+}
+</style>
 </head>
 <body>
   <form  class="form-login" method="post" action="{{url('signin')}}">
@@ -106,20 +128,25 @@
     
     <div class="inputGroup inputGroup1">
         <label for="email1">Email</label>
-        <input type="text" autocomplete="off" name="email" id="email" class="email" maxlength="256"/>
+        <input type="email" name="email" id="email" class="email" maxlength="256" required/>
         <p class="helper helper1">email@domain.com</p>
         <span class="indicator"></span>
     </div>
     <div class="inputGroup inputGroup2">
         <label for="password">Password</label>
-        <input type="password" name="password" id="password" class="password" />
+        <input type="password" name="password" id="password" class="password" required/>
     </div>
     <input type="hidden" name="_token" value="{!! csrf_token() !!}">
     <div class="inputGroup inputGroup3" >
         <!-- <button id="login" type="submit">Log in</button> -->
     <input type="hidden" name="_token" value="{!! csrf_token() !!}">
-              <button disabled="true" class="btn hehe btn-theme btn-block" href="index.html" type="submit"><i class="fa fa-lock"></i>Masuk</button>
-    </div>  
+              <button disabled="true" class="btn hehe btn-theme btn-block" href="index.html" type="submit"><i class="fa fa-lock"></i>LOG IN</button>
+    </div>
+    @if(session()->has('message'))
+<div class="alert">
+  <strong>Success!</strong> Indicates a successful or positive action.
+</div>
+    @endif
 </form>
   <script src='https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.3/TweenMax.min.js'></script>
 <!-- <script src='http://s3-us-west-2.amazonaws.com/s.cdpn.io/16327/MorphSVGPlugin.min.js?r=182'></script> -->
@@ -159,5 +186,8 @@
         }
     }
 
-</script> 
+</script>
+<script src="{{asset('node_modules/popper.js/dist/umd/popper.min.js')}}"></script>
+<script src="{{asset('node_modules/bootstrap/dist/js/bootstrap.min.js')}}"></script>
+
 </html>

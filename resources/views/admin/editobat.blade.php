@@ -125,7 +125,7 @@ path{
         <div class="input-group">
           <div class="input-group-prepend">
           </div>
-          <input type="text" class="form-control" name="nama" id="nama" placeholder="Paracetamol">
+          <input type="text" class="form-control" name="nama" id="nama" placeholder="Paracetamol" required>
           <div class="input-group-append bg-primary border-primary">
           </div>
         </div>
@@ -135,7 +135,7 @@ path{
         <div class="input-group">
           <div class="input-group-prepend">
           </div>
-          <input type="text" class="form-control" name="ket" id="ket" placeholder="obat ini digunakan untuk meredakan panas" >
+          <input type="text" class="form-control" name="ket" id="ket" placeholder="obat ini digunakan untuk meredakan panas" required>
           <div class="input-group-append">
           </div>
         </div>

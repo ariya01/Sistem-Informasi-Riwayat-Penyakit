@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="{{asset('css/style.css')}}">
   <link rel="shortcut icon" href="{{asset('images/favicon.png')}}" />
+  <link rel="icon" href="{{asset('1.png')}}" type="image/gif" sizes="16x16">
   @yield('css')
   <style type="text/css">
     body, html {
@@ -18,7 +19,6 @@
 </head>
 <body>
   <div class="container-scroller">
-   
     <div class="container-fluid page-body-wrapper">
       <nav class="sidebar sidebar-offcanvas" style="height: 1000px; background-color: #024038;" id="sidebar">
         <ul class="nav">
@@ -39,6 +39,7 @@
                 </div>
               </a>
             </div>
+            
               <div class="profile-name">
                 <p style="color: white;">Hai,</p>
                 <p class="name" style="color: white;">{{Auth::user()->name_user}}</p>

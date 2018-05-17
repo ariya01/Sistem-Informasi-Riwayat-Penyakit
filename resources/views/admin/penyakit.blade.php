@@ -4,8 +4,12 @@
 src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <script src="https://unpkg.com/promise-polyfill@7.1.0/dist/promise.min.js"></script>
 <script src="https://unpkg.com/sweetalert2@7.18.0/dist/sweetalert2.all.js"></script>
-<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.js"></script>
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.css">
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.16/js/dataTables.semanticui.min.js"></script>
+<script type="text/javascript" charset="utf8" src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.0/semantic.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.0/semantic.min.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/dataTables.semanticui.min.css">
+<style type="text/css">
 <style type="text/css">
 #loaderSvgWrapper{
   position: fixed;
@@ -96,7 +100,7 @@ path{
   swal
   ({
     title: 'Berhasil',
-    text: 'Berhasil Mengubah {{session('data')}}',
+    text: 'Berhasil Merubah {{session('nama')}} Menjadi {{session('data')}}',
     type: 'success',
     confirmButtonText: 'Iya'
   })
@@ -128,11 +132,11 @@ path{
     </span>
   </div>
 </div>
-<table id="myTable" class="table table-bordered">
+<table id="myTable" class="ui celled table">
   <thead>
     <tr>
-      <th width="6%"></th>
-      <th width="30%;">Nama Penyakit</th>
+      <th width="5%" data-orderable="false"></th>
+      <th >Nama Penyakit</th>
       <th>Keterangan</th>
       <!-- <th width="30%;" class="text-center">Bantuan</th> -->
     </tr>
@@ -176,78 +180,22 @@ path{
     <i class="fa fa-plus" style="margin-left: 2%; margin-top: 1%" aria-hidden="true"></i>
     <span style="font-size: 80%;">Tambah Penyakit</span>
     </a>
-<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Tambah Penyakit</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <form class="forms-sample" method="post" action="{{url('/tambahpenyakit')}}">
-        <div class="modal-body">
-          <div class="form-group row">
-            <label for="exampleInputEmail2" class="col-sm-3 col-form-label">Nama</label>
-            <div class="col-sm-9">
-              <input type="text" class="form-control" name="nama" placeholder="Masukan Nama">
-            </div>
-          </div>
-          <div class="form-group row">
-            <label for="exampleInputEmail2" class="col-sm-3 col-form-label">Keterangan</label>
-            <div class="col-sm-9">
-              <input type="text" class="form-control" name="ket" placeholder="Masukan Keterangan">
-            </div>
-          </div>
-        </div>
-        {{ csrf_field() }}
-        <div class="modal-footer">
-          <button type="button" class="btn btn-danger" data-dismiss="modal">Batal</button>
-          <button type="submit" class="btn btn-primary" >Tambah</button>
-        </div>
-      </form>
-    </div>
-  </div>
-</div>
-<div class="modal fade" id="exampleModalCenter1" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Ubah Obat</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-            <form class="forms-sample" method="post" action="{{url('/editpenyakit')}}">
-        <div class="modal-body">
-          <div class="form-group row">
-            <label for="exampleInputEmail2" class="col-sm-3 col-form-label">Nama</label>
-            <div class="col-sm-9">
-              <input type="text" class="form-control" name="nama" placeholder="Masukan Nama">
-            </div>
-          </div>
-          <div class="form-group row">
-            <label for="exampleInputEmail2" class="col-sm-3 col-form-label">Keterangan</label>
-            <div class="col-sm-9">
-              <input type="text" class="form-control" name="ket" placeholder="Masukan Keterangan">
-            </div>
-          </div>
-        </div>
-        <input type="hidden" name="id_user" id="id_user">
-        {{ csrf_field() }}
-        <div class="modal-footer">
-          <button type="button" class="btn btn-danger" data-dismiss="modal">Batal</button>
-          <button type="submit" class="btn btn-primary" >Ubah</button>
-        </div>
-      </form>
-    </div>
-  </div>
-</div>
+
 @endsection
 @section('js')
 <script type="text/javascript">
   $(document).ready( function () {
-    $('#myTable').DataTable();
+    $('#myTable').DataTable({ order: [[1, 'asc']],bPaginate: $('#myTable tbody tr').length>10,
+      "oLanguage": {
+        "oPaginate": {
+          "sNext": "Selanjutnya",
+          "sPrevious": "Sebelumnya"
+        },
+        "sInfo": "Menampilkan _START_ hingga _END_ dari _TOTAL_ Baris",
+        "sInfoEmpty": "Showing 0 to 0 of 0 entries",
+        "sLengthMenu": "Tampilan _MENU_ Baris",
+        "sSearch": "Cari"
+      }});
   } );
 </script>
 <script type="text/javascript">
@@ -271,8 +219,8 @@ path{
       text: 'Apa Kamu Yakin Menghapus ? ',
       type: 'warning',
       showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#3085d6',
       confirmButtonText: 'Ya Hapus!',
       cancelButtonText: 'Batal'
     }).then((result) => {

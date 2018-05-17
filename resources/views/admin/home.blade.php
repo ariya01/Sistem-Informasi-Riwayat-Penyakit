@@ -66,10 +66,20 @@ path{
     <path style="stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter" d="M 58.26475,43.628481 42.49585,16.366995 26.77116,43.654011 Z" id="T6"/>
   </svg>
 </div>
+<div class="row">
+   <div class="col-md-12 grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body">
+                <h1>Dashboard</h1>
+              </div>
+              </div>
+            </div>
+
+</div>
 <div class="row purchace-popup">
   <div class="col-12">
     <span class="d-flex alifn-items-center">
-      <p class="h4"><b>Data Warehouse</b></p>
+      <p class="h4"><b>Semua Data</b></p>
     </span>
   </div>
 </div>
@@ -226,7 +236,7 @@ jQuery.each(data, function(index, value){
                 }
               }); 
 
- console.log(Years);
+ console.log(jumlah);
 </script>
 <script type="text/javascript">
   (function($) {

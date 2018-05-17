@@ -117,8 +117,8 @@ path{
       <i class="fa fa-arrow-left" style="margin-left: 2%; margin-top: 1%" aria-hidden="true"></i>
       <span style="font-size: 80%;"> Kembali ke Detail Dokter </span>
     </a>
-    <h4 style="margin-top: 5%;" class="card-title">Detail Akun</h4>
-    <form class="forms-sample" method="post" action="{{url('isidetail')}} ">
+    <h4 style="margin-top: 5%;" class="card-title">Detail Dokter</h4>
+    <form class="forms-sample col-4" method="post" action="{{url('isidetail')}} ">
       <div class="form-group">
         <label for="exampleInputPassword1">Alamat</label>
         <div class="input-group">

@@ -2,6 +2,8 @@
 @section('css')
 <script
 src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script
+src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.js"></script>
 <script src="https://unpkg.com/promise-polyfill@7.1.0/dist/promise.min.js"></script>
 <script src="https://unpkg.com/sweetalert2@7.18.0/dist/sweetalert2.all.js"></script>
 <style type="text/css">
@@ -110,16 +112,15 @@ path{
 </script>
 @endif
 <div class="col-12">
-  <div
-  class="card">
+  <div  class="card" >
   <div class="card-body">
     <a href="{{url('detailnya/'.$id)}}">
       <i class="fa fa-arrow-left" style="margin-left: 2%; margin-top: 1%" aria-hidden="true"></i>
       <span style="font-size: 80%;"> Kembali ke Detail Pasien </span>
     </a>
-    <h4 style="margin-top: 5%;" class="card-title">Detail Akun</h4>
-    <form class="forms-sample" method="post" action="{{url('isidetail1')}} ">
-      <div class="form-group">
+    <h4 style="margin-top: 5%;" class="card-title">Detail Pasien</h4>
+    <form class="forms-sample col-4" method="post" action="{{url('isidetail1')}} ">
+      <div class="form-group" >
         <label for="exampleInputPassword1">Alamat</label>
         <div class="input-group">
           <div class="input-group-prepend">
@@ -134,14 +135,14 @@ path{
         <div class="input-group">
           <div class="input-group-prepend">
           </div>
-          <input type="text" class="form-control" name="ktp" id="ktp" placeholder="5365XXXXXXXXX">
+          <input type="number" class="form-control" name="ktp" id="ktp" placeholder="5365XXXXXXXXX">
           <div class="input-group-append">
           </div>
         </div>
       </div>
       <div class="form-group">
         <label for="exampleInputPassword1">Berat</label>
-        <div class="input-group">
+        <div class="input-group" >
           <div class="input-group-prepend">
           </div>
           <input type="number" class="form-control" name="berat" id="berat" placeholder="Contoh: 60" >
@@ -163,7 +164,7 @@ path{
         </div>
       </div>
       <div class="form-group">
-        <label for="exampleFormControlSelect2">Pilih Jenis Kelamin</label>
+        <label for="exampleFormControlSelect2">Golongan Darah</label>
         <select class="form-control" name="gol" id="gol">
           <option value="A">A</option>
           <option value="AB">AB</option>
@@ -176,7 +177,7 @@ path{
         <div class="input-group">
           <div class="input-group-prepend">
           </div>
-          <input type="date" class="form-control" name="tanggal" id="lahir" >
+          <input class="datepicker form-control " data-date-format="mm/dd/yyyy" name="tanggal" id="lahir" required>
           <div class="input-group-append">
           </div>
         </div>
@@ -253,6 +254,12 @@ path{
               $('#preloader').delay(350).fadeOut('slow');
               $('body').delay(350).css({'overflow':'visible'});
             });
+          </script>
+          <script type="text/javascript">
+$('.datepicker').datepicker({
+    format: 'mm/dd/yyyy',
+    startDate: '-3d'
+});
           </script>
           <!-- <script src="{{asset('node_modules/jquery/dist/jquery.min.js')}}"></script> -->
           @endsection

@@ -1,4 +1,4 @@
-@extends('admin.master')
+@extends('dokter.master')
 @section('tombol')
 active
 @endsection

@@ -2,11 +2,15 @@
 @section('css')
 <script
 src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.css">
 <script src="https://unpkg.com/promise-polyfill@7.1.0/dist/promise.min.js"></script>
 <script src="https://unpkg.com/sweetalert2@7.18.0/dist/sweetalert2.all.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2"></script>
-<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.js"></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.16/js/dataTables.semanticui.min.js"></script>
+<script type="text/javascript" charset="utf8" src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.0/semantic.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.0/semantic.min.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/dataTables.semanticui.min.css">
+<style type="text/css">
 <style type="text/css">
   .tooltip-wrapper {
   display: inline-block; /* display: block works as well */
@@ -166,10 +170,10 @@ path{
     </span>
   </div>
 </div>
-<table class="hover" id="myTable" class="table table-bordered">
+<table id="myTable" class="ui celled table">
   <thead>
     <tr>
-      <th style="width: 5%;"></th>
+      <th width="5%" data-orderable="false"></th>
       <th>Nama</th>
       <th>Email</th>
       <th>Role</th>
@@ -234,119 +238,6 @@ path{
     <i class="fa fa-plus" style="margin-left: 2%; margin-top: 1%" aria-hidden="true"></i>
     <span style="font-size: 80%;">Tambah akun</span>
     </a>
-<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Tambah Akun Baru</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <form class="forms-sample" method="post" action="{{url('/tambahakun')}}">
-        <div class="modal-body">
-          <div class="form-group row">
-            <label for="exampleInputEmail2" class="col-sm-3 col-form-label">Nama</label>
-            <div class="col-sm-9">
-              <input type="text" class="form-control" name="nama" placeholder="Masukan Nama">
-            </div>
-          </div>
-          <div class="form-group row">
-            <label for="exampleInputEmail2" class="col-sm-3 col-form-label">Email</label>
-            <div class="col-sm-9">
-              <input type="email" class="form-control" name="email" placeholder="Masukan email">
-            </div>
-          </div>
-          <div class="form-group row">
-            <label for="exampleInputPassword2" class="col-sm-3 col-form-label">Password</label>
-            <div class="col-sm-9">
-              <input type="password" class="form-control" id="password" name="password" placeholder="Password">
-            </div>
-          </div>
-          <div class="form-group row">
-            <label for="exampleInputPassword2" class="col-sm-3 col-form-label">Retype Password</label>
-            <div class="col-sm-9">
-              <input type="password" class="form-control" id="confirm_password" placeholder="Password">
-              <label id="message" style="visibility: hidden;" class="badge badge-info"></label>
-            </div>
-          </div>
-          <div class="form-group row">
-            <label class="col-sm-3 col-form-label">Role</label>
-            <div class="col-sm-9">
-              <select class="form-control" name="role">
-                @foreach($role as $role)
-                <option value="{{$role->id}}">{{$role->display_name}}</option>
-                @endforeach
-              </select>
-            </div>
-          </div>
-        </div>
-        {{ csrf_field() }}
-        <div class="modal-footer">
-          <button type="button" class="btn btn-danger" data-dismiss="modal">Batal</button>
-          <button type="submit" class="btn btn-primary" >Edit</button>
-        </div>
-      </form>
-    </div>
-  </div>
-</div>
-<div class="modal fade" id="exampleModalCenter1" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Ubah Akun</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <form class="forms-sample" method="post" action="{{url('/ubahakun')}}">
-        <div class="modal-body">
-          <div class="form-group row">
-            <label for="exampleInputEmail2" class="col-sm-3 col-form-label">Nama</label>
-            <div class="col-sm-9">
-              <input type="text" class="form-control" name="nama1" placeholder="Masukan Nama">
-            </div>
-          </div>
-          <div class="form-group row">
-            <label for="exampleInputEmail2" class="col-sm-3 col-form-label">Email</label>
-            <div class="col-sm-9">
-              <input type="email" class="form-control" name="email1" placeholder="Masukan email">
-            </div>
-          </div>
-          <div class="form-group row">
-            <label for="exampleInputPassword2" class="col-sm-3 col-form-label">Password</label>
-            <div class="col-sm-9">
-              <input type="password" class="form-control" id="password1" name="password" placeholder="Password">
-            </div>
-          </div>
-          <div class="form-group row">
-            <label for="exampleInputPassword2" class="col-sm-3 col-form-label">Retype Password</label>
-            <div class="col-sm-9">
-              <input type="password" class="form-control" id="confirm_password1" placeholder="Password">
-              <label id="message1" style="visibility: hidden;" class="badge badge-info"></label>
-            </div>
-          </div>
-          <div class="form-group row">
-            <label class="col-sm-3 col-form-label">Role</label>
-            <div class="col-sm-9">
-              <select class="form-control" name="role">
-                @foreach($role1 as $role)
-                <option value="{{$role->id}}">{{$role->display_name}}</option>
-                @endforeach
-              </select>
-            </div>
-          </div>
-        </div>
-        {{ csrf_field() }}
-        <input type="hidden" name="id_user" id="id_user">
-        <div class="modal-footer">
-          <button type="button" class="btn btn-danger" data-dismiss="modal">Batal</button>
-          <button type="submit" class="btn btn-primary" >Ubah</button>
-        </div>
-      </form>
-    </div>
-  </div>
-</div>
 
 @endsection
 @section('js')
@@ -357,7 +248,17 @@ $(function() {
 </script>
 <script type="text/javascript">
   $(document).ready( function () {
-    $('#myTable').DataTable();
+    $('#myTable').DataTable({ order: [[1, 'asc']],bPaginate: $('#myTable tbody tr').length>10,
+      "oLanguage": {
+        "oPaginate": {
+          "sNext": "Selanjutnya",
+          "sPrevious": "Sebelumnya"
+        },
+        "sInfo": "Menampilkan _START_ hingga _END_ dari _TOTAL_ Baris",
+        "sInfoEmpty": "Showing 0 to 0 of 0 entries",
+        "sLengthMenu": "Tampilan _MENU_ Baris",
+        "sSearch": "Cari"
+      }});
   } );
 </script>
 <script type="text/javascript">
@@ -414,8 +315,8 @@ $(function() {
       text: 'Apa Kamu Yakin Menghapus ? ',
       type: 'warning',
       showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#3085d6',
       confirmButtonText: 'Ya Hapus!',
       cancelButtonText: 'Batal'
     }).then((result) => {

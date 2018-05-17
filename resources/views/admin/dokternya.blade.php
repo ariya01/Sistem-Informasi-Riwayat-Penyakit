@@ -157,7 +157,7 @@ path{
             <span class="d-flex alifn-items-center">           
               <p class="h4"><b>Data Pribadi Dokter</b></p>
              
-              <a href="{{url('detail/'.$personal->id)}}" style="margin-left: 50%; color: blue;"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+              <a href="{{url('detail/'.$personal->id)}}" style="margin-left: 50%; color: blue;"><i style="color: green" class="fa fa-pencil-square-o" aria-hidden="true"></i>
               </a>
             </span>
           </div>

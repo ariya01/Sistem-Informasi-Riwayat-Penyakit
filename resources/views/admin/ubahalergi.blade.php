@@ -118,14 +118,14 @@ path{
       <span style="font-size: 80%;"> Kembali Alergi </span>
     </a>
   <div class="card-body">
-    <h4 class="card-title">Obat</h4>
+    <h4 class="card-title">Alergi</h4>
     <form class="forms-sample" method="post" action="{{url('kirim3')}} ">
       <div class="form-group">
         <label for="exampleInputPassword1">Nama Alergi</label>
         <div class="input-group">
           <div class="input-group-prepend">
           </div>
-          <input type="text" class="form-control" name="nama" id="nama" placeholder="Seafood">
+          <input type="text" class="form-control" name="nama" id="nama" placeholder="Seafood" required>
           <div class="input-group-append bg-primary border-primary">
           </div>
         </div>
@@ -135,7 +135,7 @@ path{
         <div class="input-group">
           <div class="input-group-prepend">
           </div>
-          <input type="text" class="form-control" name="ket" id="ket" placeholder="alergi makanan Seafood" >
+          <input type="text" class="form-control" name="ket" id="ket" placeholder="alergi makanan Seafood" required>
           <div class="input-group-append">
           </div>
         </div>
