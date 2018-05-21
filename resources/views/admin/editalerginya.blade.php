@@ -1,4 +1,7 @@
 @extends('admin.master')
+@section('tombol')
+active
+@endsection
 @section('css')
 <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <script src="https://unpkg.com/promise-polyfill@7.1.0/dist/promise.min.js"></script>
@@ -142,7 +145,7 @@ path{
       <input type="hidden" name="id_user" id="id_user" value="{{$id_user}}">
       {{ csrf_field() }}
       <button type="submit" class="btn btn-primary">Kirim</button>
-      <button type="reset" class="btn btn-light">Reset</button>
+      <button type="reset" onclick="myFunction(event)" class="btn btn-light">Reset</button>
     </form>
   </div>
 </div>
@@ -193,5 +196,36 @@ path{
 
 });
           </script>
+                       <script type="text/javascript">
+          function myFunction(event)
+          {
+            var nama =$("#ktp").val();
+    // alert(nama);
+    if (nama=="")
+    {
+      nama = "Detail Alergi"
+    }
+    event.preventDefault(); // prevent form submit
+    var form = event.target.form;
+    swal({
+      title: 'Mereset Alergi' ,
+      text: 'Apa Kamu Yakin Mereset ? ',
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#3085d6',
+      confirmButtonText: 'Ya Reset!',
+      cancelButtonText: 'Batal'
+    }).then((result) => {
+      if (result.value) {
+        form.reset();
+      }
+    })
+  }
+</script>
+<script type="text/javascript">
+ $('#icon').removeClass('icon-md');
+ $('#icon').addClass('icon-lg');
+</script>
           <!-- <script src="{{asset('node_modules/jquery/dist/jquery.min.js')}}"></script> -->
           @endsection

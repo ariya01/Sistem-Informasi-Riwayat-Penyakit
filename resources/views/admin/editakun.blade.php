@@ -117,66 +117,75 @@ path{
       <i class="fa fa-arrow-left" style="margin-left: 2%; margin-top: 1%" aria-hidden="true"></i>
       <span style="font-size: 80%;"> Kembali Akun </span>
     </a>
-  <div class="card-body">
-    <h4 class="card-title">Akun</h4>
-    <form class="forms-sample" method="post" action="{{url('editnya')}} ">
-      <div class="form-group">
-        <label for="exampleInputPassword1">Nama</label>
-        <div class="input-group">
-          <div class="input-group-prepend">
+    <div class="card-body">
+      <h4 class="card-title">Akun</h4>
+      <form class="forms-sample" method="post" action="{{url('editnya')}} ">
+        <div class="row">
+          <div class="col-6">
+            <div class="form-group">
+              <label for="exampleInputPassword1">Nama</label>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                </div>
+                <input type="text" class="form-control" name="nama" id="nama" placeholder="Ariya" required>
+                <div class="input-group-append bg-primary border-primary">
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="exampleInputPassword1">Email</label>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                </div>
+                <input type="email" class="form-control" name="email" id="email" placeholder="email@exampel.com" required>
+                <div class="input-group-append">
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="exampleFormControlSelect2">Role</label>
+              <select class="form-control" name="role" id="role" required>
+                @foreach($kelamins as $role)
+                <option value="{{$role->id}}">{{$role->name}}</option>
+                @endforeach
+              </select>
+            </div>
           </div>
-          <input type="text" class="form-control" name="nama" id="nama" placeholder="Ariya" required>
-          <div class="input-group-append bg-primary border-primary">
+          <div class="col-6">
+            <div class="form-group">
+              <label for="exampleInputPassword1">Password</label>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                </div>
+                <input type="password" class="form-control" id="password1" name="password" placeholder="Password" required>
+                <div class="input-group-append">
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="exampleInputPassword1">Tulis Kembali Password</label>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                </div>
+                <input type="password" class="form-control" id="confirm_password1" placeholder="Password" required>
+
+                <div class="input-group-append">
+                </div>
+              </div>
+              <label id="message1" style="visibility: hidden;" class="badge badge-info"></label>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="form-group">
-        <label for="exampleInputPassword1">Email</label>
-        <div class="input-group">
-          <div class="input-group-prepend">
-          </div>
-          <input type="email" class="form-control" name="email" id="email" placeholder="email@exampel.com" required>
-          <div class="input-group-append">
-          </div>
-        </div>
-      </div>
-      <div class="form-group">
-        <label for="exampleInputPassword1">Password</label>
-        <div class="input-group">
-          <div class="input-group-prepend">
-          </div>
-          <input type="password" class="form-control" id="password1" name="password" placeholder="Password" required>
-          <div class="input-group-append">
-          </div>
-        </div>
-      </div>
-      <div class="form-group">
-        <label for="exampleInputPassword1">Tulis Kembali Password</label>
-        <div class="input-group">
-          <div class="input-group-prepend">
-          </div>
-          <input type="password" class="form-control" id="confirm_password1" placeholder="Password" required>
-          
-          <div class="input-group-append">
-          </div>
-        </div>
-          <label id="message1" style="visibility: hidden;" class="badge badge-info"></label>
-      </div>
-      <div class="form-group">
-        <label for="exampleFormControlSelect2">Role</label>
-        <select class="form-control" name="role" id="role" required>
-          @foreach($kelamins as $role)
-          <option value="{{$role->id}}">{{$role->name}}</option>
-          @endforeach
-        </select>
-      </div>
-      <input type="hidden" id="id_user" name="id_user">
-      {{ csrf_field() }}
-      <button type="submit" class="btn btn-primary">Kirim</button>
-      <button type="reset" class="btn btn-light">Reset</button>
-    </form>
+
+
+
+        <input type="hidden" id="id_user" name="id_user">
+        {{ csrf_field() }}
+        <button type="submit" class="btn btn-primary">Kirim</button>
+        <button type="reset" onclick="myFunction(event)" class="btn btn-light">Reset</button>
+      </form>
+    </div>
   </div>
-</div>
 </div>
 @if ($data!=null)
 <input type="hidden" name="id" id="id" value="{{$data->id}}">
@@ -218,44 +227,71 @@ path{
             });
           </script>
           <script type="text/javascript">
-  $('#password, #confirm_password').on('keyup', function () {
-    if ($('#password').val() == $('#confirm_password').val()) 
+            $('#password, #confirm_password').on('keyup', function () {
+              if ($('#password').val() == $('#confirm_password').val()) 
+              {
+                $('#message').css('visibility','visible');
+                $('#message').html('Matching').css('color', 'white');
+                $('#message').addClass("badge-info");
+                $('#message').removeClass("badge-danger");
+              } 
+              else
+              {
+                $('#message').css('visibility','visible');
+                $('#message').removeClass("badge-info");
+                $('#message').addClass("badge-danger");
+                $('#message').html('Not Matching').css('color', 'white');
+              } 
+            });
+          </script>
+          <script type="text/javascript">
+            $('#password1, #confirm_password1').on('keyup', function () {
+              if ($('#password1').val() == $('#confirm_password1').val()) 
+              {
+                $('#message1').css('visibility','visible');
+                $('#message1').html('Matching').css('color', 'white');
+                $('#message1').addClass("badge-info");
+                $('#message1').removeClass("badge-danger");
+              } 
+              else
+              {
+                $('#message1').css('visibility','visible');
+                $('#message1').removeClass("badge-info");
+                $('#message1').addClass("badge-danger");
+                $('#message1').html('Not Matching').css('color', 'white');
+              } 
+            });
+          </script>
+          <script type="text/javascript">
+           $('#icon6').removeClass('icon-md');
+           $('#icon6').addClass('icon-lg');
+         </script>
+         <script type="text/javascript">
+          function myFunction(event)
+          {
+            var nama =$("#nama").val();
+    // alert(nama);
+    if (nama=="")
     {
-      $('#message').css('visibility','visible');
-      $('#message').html('Matching').css('color', 'white');
-      $('#message').addClass("badge-info");
-      $('#message').removeClass("badge-danger");
-    } 
-    else
-    {
-      $('#message').css('visibility','visible');
-      $('#message').removeClass("badge-info");
-      $('#message').addClass("badge-danger");
-      $('#message').html('Not Matching').css('color', 'white');
-    } 
-  });
+      nama = "Akun"
+    }
+    event.preventDefault(); // prevent form submit
+    var form = event.target.form;
+    swal({
+      title: 'Mereset '+ nama,
+      text: 'Apa Kamu Yakin Mereset ? ',
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#3085d6',
+      confirmButtonText: 'Ya Reset!',
+      cancelButtonText: 'Batal'
+    }).then((result) => {
+      if (result.value) {
+        form.reset();
+      }
+    })
+  }
 </script>
-<script type="text/javascript">
-  $('#password1, #confirm_password1').on('keyup', function () {
-    if ($('#password1').val() == $('#confirm_password1').val()) 
-    {
-      $('#message1').css('visibility','visible');
-      $('#message1').html('Matching').css('color', 'white');
-      $('#message1').addClass("badge-info");
-      $('#message1').removeClass("badge-danger");
-    } 
-    else
-    {
-      $('#message1').css('visibility','visible');
-      $('#message1').removeClass("badge-info");
-      $('#message1').addClass("badge-danger");
-      $('#message1').html('Not Matching').css('color', 'white');
-    } 
-  });
-</script>
-<script type="text/javascript">
-   $('#icon6').removeClass('icon-md');
-   $('#icon6').addClass('icon-lg');
-</script>
-          <!-- <script src="{{asset('node_modules/jquery/dist/jquery.min.js')}}"></script> -->
-          @endsection
+<!-- <script src="{{asset('node_modules/jquery/dist/jquery.min.js')}}"></script> -->
+@endsection

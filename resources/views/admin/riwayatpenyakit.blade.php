@@ -219,6 +219,9 @@ path{
     <i class="fa fa-plus" style="margin-left: 2%; margin-top: 1%" aria-hidden="true"></i>
     <span style="font-size: 80%;">Tambah Penyakit</span>
     </a>
+    <br>
+    <br>
+    <br>
       </div>
     </div>
   </div>

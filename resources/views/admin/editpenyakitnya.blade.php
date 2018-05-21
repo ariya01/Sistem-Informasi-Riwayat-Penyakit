@@ -1,6 +1,6 @@
 @extends('admin.master')
 @section('tombol')
-
+active
 @endsection
 @section('css')
 <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -59,6 +59,10 @@ path{
     stroke-opacity: 1;
   }
 }  
+.invis
+{
+  display: none;
+}
 </style>
 @endsection
 @section('content')
@@ -131,6 +135,23 @@ path{
           @endforeach
         </select>
       </div>
+           <div class="form-group">
+        <label for="exampleFormControlSelect2">Status Keadaan Penyakit</label>
+        <select class="form-control" name="Status" id="Status" required>
+          <option value="1">Ada</option>
+          <option value="0">Tidak</option>
+        </select>
+      </div>
+      <div id="halo" class="form-group invis">
+        <label for="exampleInputPassword1">Nama Penyakit Baru</label>
+        <div class="input-group">
+          <div class="input-group-prepend">
+          </div>
+          <input type="text" class="form-control" name="baru" id="baru" placeholder="Cacar Air">
+          <div class="input-group-append">
+          </div>
+        </div>
+      </div>
       <div class="form-group">
         <label for="exampleInputPassword1">Tanggal Sakit</label>
         <div class="input-group">
@@ -145,7 +166,7 @@ path{
       <input type="hidden" name="id_user" id="id_user" value="{{$id_user}}">
       {{ csrf_field() }}
       <button type="submit" class="btn btn-primary">Kirim</button>
-      <button type="reset" class="btn btn-light">Reset</button>
+      <button type="reset" onclick="myFunction(event)" class="btn btn-light">Reset</button>
     </form>
   </div>
 </div>
@@ -156,6 +177,18 @@ path{
 @endsection
 @section('js')
 <script type="text/javascript">
+$("#Status").on('change', function() {
+    if ($(this).val() == '0'){
+        $('#halo').removeClass('invis');
+        $('#penyakit').prop('disabled', true);
+    } else {
+        $('#halo').addClass('invis');
+        $('#penyakit').prop('disabled', false);
+    }
+});
+</script>
+<script type="text/javascript">
+  
   var bla = $('#id').val();
             // alert(bla);
             if(bla)
@@ -199,6 +232,33 @@ path{
           <script type="text/javascript">
  $('#icon').removeClass('icon-md');
  $('#icon').addClass('icon-lg');
+</script>
+             <script type="text/javascript">
+          function myFunction(event)
+          {
+            var nama =$("#nama").val();
+    // alert(nama);
+    if (nama=="")
+    {
+      nama = "Riwayat Penyakit"
+    }
+    event.preventDefault(); // prevent form submit
+    var form = event.target.form;
+    swal({
+      title: 'Mereset Riwayat' ,
+      text: 'Apa Kamu Yakin Mereset ? ',
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#3085d6',
+      confirmButtonText: 'Ya Hapus!',
+      cancelButtonText: 'Batal'
+    }).then((result) => {
+      if (result.value) {
+        form.reset();
+      }
+    })
+  }
 </script>
           <!-- <script src="{{asset('node_modules/jquery/dist/jquery.min.js')}}"></script> -->
           @endsection

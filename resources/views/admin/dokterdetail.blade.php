@@ -28,8 +28,9 @@ src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLN
         </div>
       </div>
     </div>
-    <div class="card-body">
-            <div class="row purchace-popup">
+    <div class="row" style="padding: 5%;">
+      <div class="col-6">
+                    <div class="row purchace-popup">
         <div class="col-12">
           <span class="d-flex alifn-items-center">
             <a href="{{url('/dokternya/'.$personal->id)}}">
@@ -39,6 +40,20 @@ src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLN
           </span>
         </div>
       </div>
+      </div>
+      <div class="col-6">
+          <div class="row purchace-popup">
+        <div class="col-12">
+          <span class="d-flex alifn-items-center">
+            <a href="{{url('/care/'.$personal->id)}}">  
+            <p style="color: black;" class="h4"><b>Pasien</b></p>
+            </a>
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+
 <!--       <div class="row purchace-popup">
         <div class="col-12">
           <span class="d-flex alifn-items-center">
@@ -49,15 +64,7 @@ src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLN
           </span>
         </div>
       </div> -->
-      <div class="row purchace-popup">
-        <div class="col-12">
-          <span class="d-flex alifn-items-center">
-            <a href="{{url('/care/'.$personal->id)}}">  
-            <p style="color: black;" class="h4"><b>Pasien</b></p>
-            </a>
-          </span>
-        </div>
-      </div>
+    
 <!--       <div class="row purchace-popup">
         <div class="col-12">
           <span class="d-flex alifn-items-center">

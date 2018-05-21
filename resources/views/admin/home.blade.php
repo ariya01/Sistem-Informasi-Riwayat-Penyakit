@@ -198,7 +198,7 @@ path{
   <div class="col-12 grid-margin">
     <div class="card">
       <div class="card-body">
-        <h5 class="card-title mb-4">Targets</h5>
+        <h5 class="card-title mb-4">Pemeriksaan</h5>
         <canvas id="dashoard-area-chart" height="100px"></canvas>
       </div>
     </div>

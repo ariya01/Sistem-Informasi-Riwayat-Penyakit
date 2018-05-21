@@ -12,7 +12,7 @@ src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLN
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/dataTables.semanticui.min.css">
 <style type="text/css">
 <style type="text/css">
-  .tooltip-wrapper {
+.tooltip-wrapper {
   display: inline-block; /* display: block works as well */
   /*margin: 50px;  make some space so the tooltip is visible */
 }
@@ -28,7 +28,7 @@ src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLN
 }
 </style>
 <style type="text/css">
-  #loaderSvgWrapper{
+#loaderSvgWrapper{
   position: fixed;
   top: 0;
   left: 0;
@@ -146,15 +146,15 @@ path{
 @endif
 @endif
 <div id="loaderSvgWrapper">
-            <svg xmlns:svg="http://www.w3.org/2000/svg" viewbox="0 0 100 100" id="preLoader" width="100px" height="100px">
-                <path style="stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter" d="m 58.26475,43.628481 15.7247,-27.287018 -31.4936,0.02553 z" id="T1"/>
-                <path style="stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter" d="m 58.26475,43.628481 31.4936,-0.02553 -15.7689,-27.261492 z" id="T2"/>
-                <path style="stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter" d="M 58.26475,43.628481 74.03365,70.88997 89.75835,43.602954 Z" id="T3"/>
-                <path style="stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter" d="M 58.26475,43.628481 42.54006,70.915503 74.03365,70.889973 Z" id="T4"/>
-                <path style="stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter" d="m 58.26475,43.628481 -31.49359,0.02553 15.7689,27.261491 z" id="T5"/>
-                <path style="stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter" d="M 58.26475,43.628481 42.49585,16.366995 26.77116,43.654011 Z" id="T6"/>
-            </svg>
-        </div>
+  <svg xmlns:svg="http://www.w3.org/2000/svg" viewbox="0 0 100 100" id="preLoader" width="100px" height="100px">
+    <path style="stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter" d="m 58.26475,43.628481 15.7247,-27.287018 -31.4936,0.02553 z" id="T1"/>
+    <path style="stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter" d="m 58.26475,43.628481 31.4936,-0.02553 -15.7689,-27.261492 z" id="T2"/>
+    <path style="stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter" d="M 58.26475,43.628481 74.03365,70.88997 89.75835,43.602954 Z" id="T3"/>
+    <path style="stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter" d="M 58.26475,43.628481 42.54006,70.915503 74.03365,70.889973 Z" id="T4"/>
+    <path style="stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter" d="m 58.26475,43.628481 -31.49359,0.02553 15.7689,27.261491 z" id="T5"/>
+    <path style="stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter" d="M 58.26475,43.628481 42.49585,16.366995 26.77116,43.654011 Z" id="T6"/>
+  </svg>
+</div>
 <!-- <div class="row purchace-popup">
   <div class="col-12">
     <span class="d-flex alifn-items-center">
@@ -163,59 +163,58 @@ path{
   </div>
 </div> -->
 <!-- <button data-toggle="modal" data-target="#exampleModalCenter" style="margin-bottom: 2%;" type="button" class="btn btn-primary btn-rounded btn-sm"><i class="fa fa-plus" aria-hidden="true"></i></button> -->
-<div class="row purchace-popup">
-  <div class="col-12">
-    <span class="d-flex alifn-items-center">
-      <p class="h4"><b>Tabel Akun di Sistem</b></p>
-    </span>
-  </div>
-</div>
-<table id="myTable" class="ui celled table">
-  <thead>
-    <tr>
-      <th width="5%" data-orderable="false"></th>
-      <th>Nama</th>
-      <th>Email</th>
-      <th>Role</th>
-      <!-- <th>Perintah</th> -->
-      <!-- <th>Detail</th> -->
-      <!-- <th>Bantuan</th> -->
-    </tr>
-  </thead>
-  <tbody>
-    @foreach($data as $a)
-    <tr >
-      <td>
-        <div class="row" style="margin-left: 5%;">
-          <div style="margin-right: 20%;">
-            <!-- <button type="button" data-toggle="modal" value="{{$a->id}}" id="idnya" data-target="#exampleModalCenter1" class="btn btn-primary btn-rounded xyz btn-sm"> -->
-            <a href="{{url('editakun/'.$a->id)}}"> 
-            <i style="color: green;" class="fa fa-pencil-square-o" aria-hidden="true"></i><!-- Ubah --><!-- </button> -->
-            </a>
-          </div>
-          <div>
-            <!-- <button type="button" id="getajax" onclick="myFunction()" class="btn btn-primary btn-rounded btn-fw"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>Ubah</button> -->
-            <form method="post" action="{{url('/hapusakun')}}">
-              @if(Auth::user()->id==$a->id)
-              <input type="hidden" name="id_user" value="{{$a->id}}">
-              {{ csrf_field() }}
-              <div class="tooltip-wrapper disabled" data-title="Kamu tidak bisa menghapus dirmu sendiri">
-                <!-- <button id="hapus" type="submit" class="btn btn-danger btn-rounded btn-sm" disabled><i class="fa fa-times" aria-hidden="true"></i></button> -->
-                <a><i style="color: grey;" pointer-events: none;" class="fa fa-times" aria-hidden="true"></i></a>
-              </div>
-              @else
-              <input type="hidden" name="id_user" value="{{$a->id}}">
-              {{ csrf_field() }}
-              <!-- <button type="submit" onclick="myFunction()" class="btn btn-danger btn-rounded btn-sm"><i class="fa fa-times" aria-hidden="true"></i></button> -->
-              <a href="{{'deleteakun/'.$a->id}}" onclick="myFunction(event);"><i style="color: red;" class="fa fa-times" aria-hidden="true"></i></a>
-              @endif
-            </form>
-          </div>
-        </div>
-      </td>
-      <td>{{$a->name_user}}</td>
-      <td>{{$a->email}}</td>
-      <td>{{$a->name}}</td>
+
+<div class="row">
+ <div class="col-md-12 grid-margin stretch-card">
+  <div class="card">
+    <div class="card-body">
+      <h1 class="text-center card-title">Daftar Akun</h1>
+      <table id="myTable" class="ui celled table">
+        <thead>
+          <tr>
+            <th width="5%" data-orderable="false"></th>
+            <th>Nama</th>
+            <th>Email</th>
+            <th>Role</th>
+            <!-- <th>Perintah</th> -->
+            <!-- <th>Detail</th> -->
+            <!-- <th>Bantuan</th> -->
+          </tr>
+        </thead>
+        <tbody>
+          @foreach($data as $a)
+          <tr >
+            <td>
+              <div class="row" style="margin-left: 5%;">
+                <div style="margin-right: 20%;">
+                  <!-- <button type="button" data-toggle="modal" value="{{$a->id}}" id="idnya" data-target="#exampleModalCenter1" class="btn btn-primary btn-rounded xyz btn-sm"> -->
+                    <a href="{{url('editakun/'.$a->id)}}"> 
+                      <i style="color: green;" class="fa fa-pencil-square-o" aria-hidden="true"></i><!-- Ubah --><!-- </button> -->
+                    </a>
+                  </div>
+                  <div>
+                    <!-- <button type="button" id="getajax" onclick="myFunction()" class="btn btn-primary btn-rounded btn-fw"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>Ubah</button> -->
+                    <form method="post" action="{{url('/hapusakun')}}">
+                      @if(Auth::user()->id==$a->id)
+                      <input type="hidden" name="id_user" value="{{$a->id}}">
+                      {{ csrf_field() }}
+                      <div class="tooltip-wrapper disabled" data-title="Kamu tidak bisa menghapus dirmu sendiri">
+                        <!-- <button id="hapus" type="submit" class="btn btn-danger btn-rounded btn-sm" disabled><i class="fa fa-times" aria-hidden="true"></i></button> -->
+                        <a><i style="color: grey;" pointer-events: none;" class="fa fa-times" aria-hidden="true"></i></a>
+                      </div>
+                      @else
+                      <input type="hidden" name="id_user" value="{{$a->id}}">
+                      {{ csrf_field() }}
+                      <!-- <button type="submit" onclick="myFunction()" class="btn btn-danger btn-rounded btn-sm"><i class="fa fa-times" aria-hidden="true"></i></button> -->
+                      <a href="{{'deleteakun/'.$a->id}}" onclick="myFunction(event);"><i style="color: red;" class="fa fa-times" aria-hidden="true"></i></a>
+                      @endif
+                    </form>
+                  </div>
+                </div>
+              </td>
+              <td>{{$a->name_user}}</td>
+              <td>{{$a->email}}</td>
+              <td>{{$a->name}}</td>
        <!-- <td>
         @if($a->id_det==null)
         <label class="badge badge-warning">Belum Terisi</label>
@@ -234,17 +233,23 @@ path{
     @endforeach
   </tbody>
 </table>
- <a href="{{url('editakun/'.$angka)}}">
-    <i class="fa fa-plus" style="margin-left: 2%; margin-top: 1%" aria-hidden="true"></i>
-    <span style="font-size: 80%;">Tambah akun</span>
-    </a>
+<a href="{{url('editakun/'.$angka)}}">
+  <i class="fa fa-plus" style="margin-left: 2%; margin-top: 1%" aria-hidden="true"></i>
+  <span style="font-size: 80%;">Tambah akun</span>
+</a>
+</div>
+</div>
+</div>
+
+</div>
+
 
 @endsection
 @section('js')
 <script>
-$(function() {
+  $(function() {
     $('.tooltip-wrapper').tooltip({position: "bottom"});
-});
+  });
 </script>
 <script type="text/javascript">
   $(document).ready( function () {
@@ -300,7 +305,7 @@ $(function() {
 <script type="text/javascript">
   var nilai;
   $('.xyz').on('click', function() {
-  nilai = $(this).prop("value");
+    nilai = $(this).prop("value");
   // console.log(nilai);
   $('#id_user').val(nilai);
 });
@@ -327,14 +332,14 @@ $(function() {
   }
 </script>
 <script type="text/javascript">
-   $('#icon6').removeClass('icon-md');
-   $('#icon6').addClass('icon-lg');
+ $('#icon6').removeClass('icon-md');
+ $('#icon6').addClass('icon-lg');
 </script>
 <script type="text/javascript">
   $(window).on('load', function(){
-                $('#loaderSvgWrapper').fadeOut(500);
-                $('#preloader').delay(350).fadeOut('slow');
-                $('body').delay(350).css({'overflow':'visible'});
-            });
+    $('#loaderSvgWrapper').fadeOut(500);
+    $('#preloader').delay(350).fadeOut('slow');
+    $('body').delay(350).css({'overflow':'visible'});
+  });
 </script>
 @endsection

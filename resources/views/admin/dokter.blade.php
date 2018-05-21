@@ -11,15 +11,13 @@ src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLN
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/dataTables.semanticui.min.css">
 @endsection
 @section('content')
-<div class="row purchace-popup">
-  <div class="col-12">
-    <span class="d-flex alifn-items-center">
-      <p class="h4"><b>Daftar Dokter</b></p>
-    </span>
-  </div>
-</div>
 
-<table id="myTable" class="ui celled table">
+<div class="row">
+   <div class="col-md-12 grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body">
+                  <h1 class="card-title text-center">Daftar Dokter</h1>
+                <table id="myTable" class="ui celled table">
   <thead>
     <tr>
       <th width="5%;" data-orderable="false"></th>
@@ -90,6 +88,11 @@ src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLN
     @endforeach
   </tbody>
 </table>
+              </div>
+              </div>
+            </div>
+</div>
+
 @endsection
 @section('js')
 <script type="text/javascript">

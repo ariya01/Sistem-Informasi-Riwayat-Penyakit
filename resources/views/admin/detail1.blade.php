@@ -119,13 +119,15 @@ path{
       <span style="font-size: 80%;"> Kembali ke Detail Pasien </span>
     </a>
     <h4 style="margin-top: 5%;" class="card-title">Detail Pasien</h4>
-    <form class="forms-sample col-4" method="post" action="{{url('isidetail1')}} ">
-      <div class="form-group" >
+    <form class="forms-sample" method="post" action="{{url('isidetail1')}} ">
+      <div class="row">
+        <div class="col-6">
+                <div class="form-group" >
         <label for="exampleInputPassword1">Alamat</label>
         <div class="input-group">
           <div class="input-group-prepend">
           </div>
-          <input type="text" class="form-control" name="alamat" id="alamat" placeholder="Contoh: Perumahan Dosen">
+          <input type="text" class="form-control" name="alamat" id="alamat" placeholder="Contoh: Perumahan Dosen" required>
           <div class="input-group-append">
           </div>
         </div>
@@ -135,7 +137,7 @@ path{
         <div class="input-group">
           <div class="input-group-prepend">
           </div>
-          <input type="number" class="form-control" name="ktp" id="ktp" placeholder="5365XXXXXXXXX">
+          <input type="number" class="form-control" name="ktp" id="ktp" placeholder="5365XXXXXXXXX" required>
           <div class="input-group-append">
           </div>
         </div>
@@ -145,7 +147,7 @@ path{
         <div class="input-group" >
           <div class="input-group-prepend">
           </div>
-          <input type="number" class="form-control" name="berat" id="berat" placeholder="Contoh: 60" >
+          <input type="number" class="form-control" name="berat" id="berat" placeholder="Contoh: 60" required>
           <div class="input-group-append bg-primary border-primary">
             <span class="input-group-text  bg-transparent text-white">Kg</span>
           </div>
@@ -157,14 +159,16 @@ path{
         <div class="input-group">
           <div class="input-group-prepend">
           </div>
-          <input type="number" class="form-control" name="tinggi" id="tinggi" placeholder="Contoh: 150">
+          <input type="number" class="form-control" name="tinggi" id="tinggi" placeholder="Contoh: 150" required>
           <div class="input-group-append bg-primary border-primary">
             <span class="input-group-text  bg-transparent text-white">cm</span>
           </div>
         </div>
       </div>
-      <div class="form-group">
-        <label for="exampleFormControlSelect2">Golongan Darah</label>
+        </div>
+        <div class="col-6">
+                <div class="form-group">
+        <label for="exampleFormControlSelect2">Pilih Golongan Darah</label>
         <select class="form-control" name="gol" id="gol">
           <option value="A">A</option>
           <option value="AB">AB</option>
@@ -172,41 +176,46 @@ path{
           <option value="O">O</option>
         </select>
       </div>
-      <div class="form-group">
-        <label for="exampleInputPassword1">Tanggal</label>
-        <div class="input-group">
-          <div class="input-group-prepend">
-          </div>
-          <input class="datepicker form-control " data-date-format="mm/dd/yyyy" name="tanggal" id="lahir" required>
-          <div class="input-group-append">
-          </div>
-        </div>
-      </div>
-      <div class="form-group">
-        <label for="exampleInputPassword1" >Kontak</label>
-        <div class="input-group">
-          <div class="input-group-prepend">
-          </div>
-          <input type="text" class="form-control" name="kontak" id="kontak" placeholder="Contoh: 089XXXXXXXXX">
-          <div class="input-group-append">
-          </div>
-        </div>
-      </div>
-      <div class="form-group">
+            <div class="form-group">
         <label for="exampleFormControlSelect2">Pilih Jenis Kelamin</label>
-        <select class="form-control" name="kel" id="kel">
+        <select class="form-control" name="kel" id="kel" >
           @foreach($kelamins as $role)
           <option value="{{$role->id_kel}}">{{$role->JenisKelamin}}</option>
           @endforeach
         </select>
       </div>
+     
+      <div class="form-group">
+        <label for="exampleInputPassword1" >Kontak</label>
+        <div class="input-group">
+          <div class="input-group-prepend">
+          </div>
+          <input type="text" class="form-control" name="kontak" id="kontak" placeholder="Contoh: 089XXXXXXXXX" required>
+          <div class="input-group-append">
+          </div>
+        </div>
+      </div>
+ <div class="form-group">
+        <label for="exampleInputPassword1">Tanggal Lahir</label>
+        <div class="input-group">
+          <div class="input-group-prepend">
+          </div>
+          <input type="date" class="datepicker form-control " data-date-format="mm/dd/yyyy" name="tanggal" id="lahir" required>
+          <div class="input-group-append">
+          </div>
+        </div>
+      </div>
+        </div>
+      </div>
+
+
       <input type="hidden" name="id_user" value="{{$id}}">
       @if ($data!=null)
       <input type="hidden" name="id" value="{{$id}}">
       @endif
       {{ csrf_field() }}
       <button type="submit" class="btn btn-primary">Kirim</button>
-      <button type="reset" class="btn btn-light">Reset</button>
+      <button type="reset" onclick="myFunction(event)" class="btn btn-light">Reset</button>
     </form>
   </div>
 </div>
@@ -255,11 +264,38 @@ path{
               $('body').delay(350).css({'overflow':'visible'});
             });
           </script>
-          <script type="text/javascript">
+                    <script type="text/javascript">
+          function myFunction(event)
+          {
+            var nama =$("#ktp").val();
+    // alert(nama);
+    if (nama=="")
+    {
+      nama = "Detail Pasien"
+    }
+    event.preventDefault(); // prevent form submit
+    var form = event.target.form;
+    swal({
+      title: 'Mereset Pasien' ,
+      text: 'Apa Kamu Yakin Mereset ? ',
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#3085d6',
+      confirmButtonText: 'Ya Reset!',
+      cancelButtonText: 'Batal'
+    }).then((result) => {
+      if (result.value) {
+        form.reset();
+      }
+    })
+  }
+</script>
+          <!-- <script type="text/javascript">
 $('.datepicker').datepicker({
     format: 'mm/dd/yyyy',
     startDate: '-3d'
 });
-          </script>
+          </script> -->
           <!-- <script src="{{asset('node_modules/jquery/dist/jquery.min.js')}}"></script> -->
           @endsection

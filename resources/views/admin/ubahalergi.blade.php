@@ -143,7 +143,7 @@ path{
       <input type="hidden" id="id_alergi" name="id_alergi">
       {{ csrf_field() }}
       <button type="submit" class="btn btn-primary">Kirim</button>
-      <button type="reset" class="btn btn-light">Reset</button>
+      <button type="reset" onclick="myFunction(event)" class="btn btn-light">Reset</button>
     </form>
   </div>
 </div>
@@ -189,6 +189,33 @@ path{
           <script type="text/javascript">
    $('#icon7').removeClass('icon-md');
    $('#icon7').addClass('icon-lg');
+</script>
+<script type="text/javascript">
+          function myFunction(event)
+          {
+            var nama =$("#nama").val();
+    // alert(nama);
+    if (nama=="")
+    {
+      nama = "Alergi"
+    }
+    event.preventDefault(); // prevent form submit
+    var form = event.target.form;
+    swal({
+      title: 'Mereset '+ nama,
+      text: 'Apa Kamu Yakin Mereset ? ',
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#3085d6',
+      confirmButtonText: 'Ya Reset!',
+      cancelButtonText: 'Batal'
+    }).then((result) => {
+      if (result.value) {
+        form.reset();
+      }
+    })
+  }
 </script>
           <!-- <script src="{{asset('node_modules/jquery/dist/jquery.min.js')}}"></script> -->
           @endsection

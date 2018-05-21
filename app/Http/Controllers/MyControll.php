@@ -932,32 +932,65 @@ class MyControll extends Controller
   }
   public function kirim(Request $request)
   {
-    $nama = Db::table('penyakit')->where('id_penyakit','=',$request->penyakit)->first();
-    if($request->id_penyakitnya==null)
+    if ($request->baru!=null)
     {
-      $data = DB::table('penyakitnya')->insert(['id_penyakitnya'=>$request->id_penyakitnya,'id_penyakit'=>$request->penyakit,'id_user'=>$request->id_user,'created_at'=>$request->tanggal]);
-      if ($data)
+      $new = DB::table('penyakit')->insert(['nama_penyakit'=>$request->baru,'keterangan_penyakit'=>"penyakit baru"]);
+      $cari = DB::table('penyakit')->where('nama_penyakit','=',$request->baru)->first();
+      // dd($cari->id_penyakit);
+      if($request->id_penyakitnya==null)
       {
-        return redirect()->route('penyakitnya',$request->id_user)->with('message','Berhasil1')->with('data',$nama->nama_penyakit);
+        $data = DB::table('penyakitnya')->insert(['id_penyakitnya'=>$request->id_penyakitnya,'id_penyakit'=>$cari->id_penyakit,'id_user'=>$request->id_user,'created_at'=>$request->tanggal]);
+        if ($data)
+        {
+          return redirect()->route('penyakitnya',$request->id_user)->with('message','Berhasil1')->with('data',$cari->nama_penyakit);
+        }
+        else
+        {
+          return redirect()->route('penyakitnya',$request->id_user)->with('message','Gagal');
+        }
       }
       else
       {
+        $data=DB::table('penyakitnya')->where('id_penyakitnya','=',$request->id_penyakitnya)->update(['id_penyakit'=>$request->penyakit,'created_at'=>$request->tanggal]);
+        if ($data)
+        {
+         return redirect()->route('penyakitnya',$request->id_user)->with('message','Berhasil2')->with('data',$cari->nama_penyakit);
+       }
+       else
+       {
         return redirect()->route('penyakitnya',$request->id_user)->with('message','Gagal');
       }
     }
+    }
     else
     {
-      $data=DB::table('penyakitnya')->where('id_penyakitnya','=',$request->id_penyakitnya)->update(['id_penyakit'=>$request->penyakit,'created_at'=>$request->tanggal]);
-      if ($data)
+      $nama = Db::table('penyakit')->where('id_penyakit','=',$request->penyakit)->first();
+      if($request->id_penyakitnya==null)
       {
-       return redirect()->route('penyakitnya',$request->id_user)->with('message','Berhasil2')->with('data',$nama->nama_penyakit);
-     }
-     else
-     {
-      return redirect()->route('penyakitnya',$request->id_user)->with('message','Gagal');
+        $data = DB::table('penyakitnya')->insert(['id_penyakitnya'=>$request->id_penyakitnya,'id_penyakit'=>$request->penyakit,'id_user'=>$request->id_user,'created_at'=>$request->tanggal]);
+        if ($data)
+        {
+          return redirect()->route('penyakitnya',$request->id_user)->with('message','Berhasil1')->with('data',$nama->nama_penyakit);
+        }
+        else
+        {
+          return redirect()->route('penyakitnya',$request->id_user)->with('message','Gagal');
+        }
+      }
+      else
+      {
+        $data=DB::table('penyakitnya')->where('id_penyakitnya','=',$request->id_penyakitnya)->update(['id_penyakit'=>$request->penyakit,'created_at'=>$request->tanggal]);
+        if ($data)
+        {
+         return redirect()->route('penyakitnya',$request->id_user)->with('message','Berhasil2')->with('data',$nama->nama_penyakit);
+       }
+       else
+       {
+        return redirect()->route('penyakitnya',$request->id_user)->with('message','Gagal');
       }
     }
   }
+}
   public function ajax5(Request $request,$id)
   {
     $personal =DB::table('penyakitnya')->where('id_penyakitnya','=',$id)->first();
@@ -977,7 +1010,7 @@ class MyControll extends Controller
     $data = DB::table('penyakitnya')->where('id_penyakitnya','=',$id_penyakit)->delete();
     if ($data)
     {
-      return redirect()->route('penyakitnya',$id_user)->with('message','Berhasil1')->with('data',$nama->nama_penyakit);
+      return redirect()->route('penyakitnya',$id_user)->with('message','Berhasil')->with('data',$nama->nama_penyakit);
     }
     else
     {

@@ -116,14 +116,12 @@ path{
 </script>
 @endif
 @endif
-<div class="row purchace-popup">
-  <div class="col-12">
-    <span class="d-flex alifn-items-center">
-      <p class="h4"><b>Daftar Alergi</b></p>
-    </span>
-  </div>
-</div>
-<table id="myTable" class="ui celled table">
+<div class="row">
+   <div class="col-md-12 grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body">
+                  <h1 class="card-title text-center">Daftar Alergi</h1>
+                <table id="myTable" class="ui celled table">
   <thead>
     <tr>
       <th width="5%;" data-orderable="false"></th>
@@ -157,6 +155,12 @@ path{
     <i class="fa fa-plus" style="margin-left: 2%; margin-top: 1%" aria-hidden="true"></i>
     <span style="font-size: 80%;">Tambah Alergi</span>
     </a>
+              </div>
+              </div>
+            </div>
+
+</div>
+
 @endsection
 @section('js')
 <script type="text/javascript">

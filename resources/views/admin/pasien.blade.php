@@ -72,15 +72,12 @@ path{
                 <path style="stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter" d="M 58.26475,43.628481 42.49585,16.366995 26.77116,43.654011 Z" id="T6"/>
             </svg>
         </div>
-<!-- <img width="100%" src='https://unsplash.it/3000/3000/?random' /> -->
-<div class="row purchace-popup">
-  <div class="col-12">
-    <span class="d-flex alifn-items-center">
-      <p class="h4"><b>Daftar Pasien</b></p>
-    </span>
-  </div>
-</div>
-<table id="myTable" class="ui celled table">
+<div class="row">
+   <div class="col-md-12 grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body">
+                  <h1 class="card-title text-center">Daftar Pasien</h4>
+                <table id="myTable" class="ui celled table">
   <thead>
     <tr>
       <th width="5%;" data-orderable="false"></th>
@@ -107,6 +104,12 @@ path{
     @endforeach
   </tbody>
 </table>
+              </div>
+              </div>
+            </div>
+
+</div>
+
 @endsection
 @section('js')
 <script type="text/javascript">

@@ -156,8 +156,8 @@ path{
           <div class="col-12">
             <span class="d-flex alifn-items-center">           
               <p class="h4"><b>Data Pribadi Dokter</b></p>
-             
-              <a href="{{url('detail/'.$personal->id)}}" style="margin-left: 50%; color: blue;"><i style="color: green" class="fa fa-pencil-square-o" aria-hidden="true"></i>
+              
+              <a href="{{url('detail/'.$personal->id)}}" style="margin-left: 55%; color: blue;"><i style="color: green" class="fa fa-pencil-square-o" aria-hidden="true"></i>
               </a>
             </span>
           </div>
@@ -194,7 +194,7 @@ path{
           Belum di Isi
           @endif
         </p>
-         <div class="row purchace-popup">
+        <div class="row purchace-popup">
           <div class="col-12">
             <span class="d-flex alifn-items-center">           
               <p class="h4"><b>Data Kesehatan</b></p>
@@ -239,18 +239,18 @@ path{
     </div>
   </div>
 </div>
-  @endsection
-  @section('js')
-  <script type="text/javascript">
-    $(document).ready( function () {
-      $('#myTable').DataTable();
-    } );
-  </script>
-  <script type="text/javascript">
-   $('#icon2').removeClass('icon-md');
-   $('#icon2').addClass('icon-lg');
- </script>
- <script type="text/javascript">
+@endsection
+@section('js')
+<script type="text/javascript">
+  $(document).ready( function () {
+    $('#myTable').DataTable();
+  } );
+</script>
+<script type="text/javascript">
+ $('#icon2').removeClass('icon-md');
+ $('#icon2').addClass('icon-lg');
+</script>
+<script type="text/javascript">
   $(window).on('load', function(){
     $('#loaderSvgWrapper').fadeOut(500);
     $('#preloader').delay(350).fadeOut('slow');
