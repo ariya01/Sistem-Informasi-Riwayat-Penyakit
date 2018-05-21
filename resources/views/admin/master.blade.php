@@ -24,10 +24,11 @@
         <ul class="nav">
           <li class="nav-item nav-profile">
             <div class="nav-link">
+              <div class="profile-image"> <img src="{{asset('images/profile/page.jpg')}}" alt="image"/></div> 
               <a id="messageDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
-              <div class="profile-image"> <img src="{{asset('images/profile/page.jpg')}}" alt="image"/> <span class="online-status online"></span> </div> 
+              <div><p class="text-center" style="color: white;">Hai, <i class="fa fa-angle-down" aria-hidden="true"></i></p></div> 
               </a>
-              <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="messageDropdown">
+              <div style="margin-top: -3%;" class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="messageDropdown">
               <div class="dropdown-divider"></div>
               <a href="{{url('logout')}}" class="dropdown-item preview-item">
                 <div class="preview-thumbnail">
@@ -41,7 +42,6 @@
             </div>
             
               <div class="profile-name">
-                <p style="color: white;">Hai,</p>
                 <p class="name" style="color: white;">{{Auth::user()->name_user}}</p>
                 <p class="designation" style="color: white;">{{Auth::user()->roles->first()->name}}</p>
               </div>
