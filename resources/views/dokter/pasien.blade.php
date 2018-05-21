@@ -74,14 +74,12 @@ path{
             </svg>
         </div>
 <!-- <img width="100%" src='https://unsplash.it/3000/3000/?random' /> -->
-<div class="row purchace-popup">
-  <div class="col-12">
-    <span class="d-flex alifn-items-center">
-      <p class="h4"><b>Daftar Pasien</b></p>
-    </span>
-  </div>
-</div>
-<table id="myTable" class="ui celled table">
+<div class="row">
+   <div class="col-md-12 grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body">
+                <h1 class="card-title text-center">Daftar Pasien</h1>
+                <table id="myTable" class="ui celled table">
   <thead>
     <tr>
       <th width="10"></th>
@@ -107,6 +105,12 @@ path{
     @endforeach
   </tbody>
 </table>
+              </div>
+              </div>
+            </div>
+
+</div>
+
 @endsection
 @section('js')
 <script type="text/javascript">

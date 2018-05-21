@@ -1,5 +1,5 @@
 @extends('dokter.master')
-@section('tombol')
+@section('tombol2')
 active
 @endsection
 @section('css')
@@ -94,8 +94,9 @@ path{
         {{$personal->display_name}}
       </p>
     </div>
-    <div class="card-body">
-      <div class="row purchace-popup">
+    <div class="row" style="padding-top: 5%;padding-right: 5%;padding-left: 5%;">
+      <div class="col-6">
+              <div class="row purchace-popup">
         <div class="col-12">
           <span class="d-flex alifn-items-center">
             <a href="{{url('/hehe/'.$personal->id)}}">
@@ -105,7 +106,9 @@ path{
           </span>
         </div>
       </div>
-      <div class="row purchace-popup">
+      </div>
+      <div class="col-6">
+              <div class="row purchace-popup">
         <div class="col-12">
           <span class="d-flex alifn-items-center">
             <a href="{{url('/lihat/'.$personal->id)}}">
@@ -115,7 +118,11 @@ path{
           </span>
         </div>
       </div>
-      <div class="row purchace-popup">
+      </div>
+    </div>
+    <div class="row" style="padding-left: 5%;padding-right: 5%;">
+      <div class="col-6">
+        <div class="row purchace-popup">
         <div class="col-12">
           <span class="d-flex alifn-items-center">
             <a href="{{url('/lihat1/'.$personal->id)}}">  
@@ -124,6 +131,23 @@ path{
           </span>
         </div>
       </div>
+      </div>
+      <div class="col-6">
+              <div class="row purchace-popup">
+        <div class="col-12">
+          <span class="d-flex alifn-items-center">
+            <a href="{{url('/lihat2/'.$personal->id)}}">
+            <p style="color: black;" class="h4"><b>Riwayat Pemeriksaan</b></p>
+            </a>
+          </span>
+        </div>
+      </div>
+      </div>
+    </div>
+    <div class="card-body">
+
+
+      
 <!--       <div class="row purchace-popup">
         <div class="col-12">
           <span class="d-flex alifn-items-center">
@@ -133,15 +157,7 @@ path{
           </span>
         </div>
       </div> -->
-      <div class="row purchace-popup">
-        <div class="col-12">
-          <span class="d-flex alifn-items-center">
-            <a href="{{url('/lihat2/'.$personal->id)}}">
-            <p style="color: black;" class="h4"><b>Riwayat Pemeriksaan</b></p>
-            </a>
-          </span>
-        </div>
-      </div>
+
     </div>
   </div>
 </div>

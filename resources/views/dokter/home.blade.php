@@ -1,7 +1,4 @@
 @extends('dokter.master')
-@section('tombol')
-active
-@endsection
 @section('css')
 <script
 src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -69,10 +66,20 @@ path{
     <path style="stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter" d="M 58.26475,43.628481 42.49585,16.366995 26.77116,43.654011 Z" id="T6"/>
   </svg>
 </div>
+<div class="row">
+   <div class="col-md-12 grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body">
+                <h1>Dashboard</h1>
+              </div>
+              </div>
+            </div>
+
+</div>
 <div class="row purchace-popup">
   <div class="col-12">
     <span class="d-flex alifn-items-center">
-      <p class="h4"><b>Data Warehouse</b></p>
+      <p class="h4"><b>Semua Data</b></p>
     </span>
   </div>
 </div>
@@ -85,9 +92,9 @@ path{
             <i class="fa fa-wheelchair text-primary icon-lg"></i>
           </div>
           <div class="float-right">
-            <p class="card-text text-right">Telah Menangani</p>
+            <p class="card-text text-right">Jumlah Pemeriksaan</p>
             <div class="fluid-container">
-              <h3 class="card-title font-weight-bold text-right mb-0"></h3>
+              <h3 class="card-title font-weight-bold text-right mb-0">{{$jumlah}}</h3>
             </div>
           </div>
         </div>
@@ -106,7 +113,7 @@ path{
   <div class="col-12 grid-margin">
     <div class="card">
       <div class="card-body">
-        <h5 class="card-title mb-4">Targets</h5>
+        <h5 class="card-title mb-4">Pemeriksaan</h5>
         <canvas id="dashoard-area-chart" height="100px"></canvas>
       </div>
     </div>
@@ -125,5 +132,82 @@ path{
     $('#preloader').delay(350).fadeOut('slow');
     $('body').delay(350).css({'overflow':'visible'});
   });
+</script>
+<script type="text/javascript">
+ var Years = new Array();
+ var jumlah = new Array();
+ $.ajax({    
+                type: 'get',
+                url: '/ajax11/',
+                datatype: 'JSON',
+                success:function(data){
+                  // console.log(JSON.parse(data));
+                  var data=$.parseJSON(data);
+jQuery.each(data, function(index, value){
+            // console.log(value.periksa);
+            jumlah.push(value.periksa);
+            Years.push(value.tahun);
+        }); 
+                }
+              }); 
+
+ console.log(jumlah);
+</script>
+<script type="text/javascript">
+  (function($) {
+  'use strict';
+  $(function() {
+    if ($('#dashoard-area-chart').length) {
+      var lineChartCanvas = $("#dashoard-area-chart").get(0).getContext("2d");
+      var data = {
+        labels: Years,
+        datasets: [{
+            label: 'Jumlah Pemeriksaan',
+            data: jumlah,
+            backgroundColor: 'rgba(25, 145 ,235, 0.7)',
+            borderColor: [
+              'rgba(25, 145 ,235, 1)'
+            ],
+            borderWidth: 3,
+            fill: true
+          },
+        ]
+      };
+      var options = {
+        scales: {
+          yAxes: [{
+            ticks: {
+              beginAtZero: true
+            },
+            gridLines: {
+              display: true
+            }
+          }],
+          xAxes: [{
+            ticks: {
+              beginAtZero: true
+            },
+            gridLines: {
+              display: false
+            }
+          }]
+        },
+        legend: {
+          display: false
+        },
+        elements: {
+          point: {
+            radius: 3
+          }
+        }
+      };
+      var lineChart = new Chart(lineChartCanvas, {
+        type: 'line',
+        data: data,
+        options: options
+      });
+    }
+  });
+})(jQuery);
 </script>
 @endsection

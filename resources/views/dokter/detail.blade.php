@@ -1,5 +1,5 @@
 @extends('dokter.master')
-@section('tombol')
+@section('tombol2')
 active
 @endsection
 @section('css')

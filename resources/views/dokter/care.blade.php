@@ -1,5 +1,5 @@
 @extends('dokter.master')
-@section('tombol')
+@section('tombol2')
 active
 @endsection
 @section('css')
@@ -66,7 +66,57 @@ path{
 </style>
 @endsection
 @section('content')
-
+@if(session()->get('message')=='Berhasil')
+<script type="text/javascript">
+  swal
+  ({
+    title: 'Berhasil',
+    text: 'Akun berhasil terhapus',
+    type: 'success',
+    confirmButtonText: 'Iya'
+  })
+</script>
+@elseif(session()->get('message')=='Gagal')
+<script type="text/javascript">
+  swal
+  ({
+    title: 'Gagal',
+    text: 'Coba lagi',
+    type: 'error',
+    confirmButtonText: 'Iya'
+  })
+</script>
+@elseif(session()->get('message')=='Gagal1')
+<script type="text/javascript">
+  swal
+  ({
+    title: 'Gagal',
+    text: 'Coba lagi',
+    type: 'error',
+    confirmButtonText: 'Iya'
+  })
+</script>
+@elseif(session()->get('message')=='Berhasil1')
+<script type="text/javascript">
+  swal
+  ({
+    title: 'Berhasil',
+    text: 'Akun berhasil di tambahkan',
+    type: 'success',
+    confirmButtonText: 'Iya'
+  })
+</script>
+@elseif(session()->get('message')=='Berhasil2')
+<script type="text/javascript">
+  swal
+  ({
+    title: 'Berhasil',
+    text: 'Akun berhasil di ubah',
+    type: 'success',
+    confirmButtonText: 'Iya'
+  })
+</script>
+@endif
 <div id="loaderSvgWrapper">
   <svg xmlns:svg="http://www.w3.org/2000/svg" viewbox="0 0 100 100" id="preLoader" width="100px" height="100px">
     <path style="stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter" d="m 58.26475,43.628481 15.7247,-27.287018 -31.4936,0.02553 z" id="T1"/>
@@ -90,7 +140,7 @@ path{
         <div class="col-md-4">
           <div class="container" style="margin-top: 5%;">
             <div class="row">
-              <div class="col-md-12" style="padding: 10%;">
+              <div class="col-md-12" style="padding: 5%;">
                 <div class="row purchace-popup">
                   <div class="col-12">
                     <span class="d-flex alifn-items-center">
@@ -142,7 +192,7 @@ path{
             </div>
           </div>
         </div>
-        <div class="col-md-7" style="margin-top: 6%;">
+        <div class="col-md-8" style="margin-top: 6%;">
           <table id="myTable" class="ui celled table" style="width: 100%;">
             <thead>
               <tr>
@@ -192,7 +242,7 @@ path{
 <script type="text/javascript">
   $(document).ready( function () {
     $('#myTable').DataTable({ "columnDefs": [
-    { "width": "10%", "targets": 0 }
+    { "width": "8%", "targets": 0 }
   ],order: [[1, 'asc']],bPaginate: $('#myTable tbody tr').length>10,
       "oLanguage": {
         "oPaginate": {
@@ -222,5 +272,26 @@ path{
     $('#preloader').delay(350).fadeOut('slow');
     $('body').delay(350).css({'overflow':'visible'});
   });
+</script>
+<script type="text/javascript">
+  function myFunction(event)
+  {
+    event.preventDefault(); // prevent form submit
+    var href = event.currentTarget.getAttribute('href');
+    swal({
+      title: 'Hapus Riwayat',
+      text: 'Apa Kamu Yakin Riwayat ? ',
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#3085d6',
+      confirmButtonText: 'Ya Hapus!',
+      cancelButtonText: 'Batal'
+    }).then((result) => {
+      if (result.value) {
+        window.location = href; 
+      }
+    })
+  }
 </script>
 @endsection

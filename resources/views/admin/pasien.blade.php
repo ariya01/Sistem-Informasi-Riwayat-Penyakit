@@ -63,50 +63,50 @@ path{
 @endsection
 @section('content')
 <div id="loaderSvgWrapper">
-            <svg xmlns:svg="http://www.w3.org/2000/svg" viewbox="0 0 100 100" id="preLoader" width="100px" height="100px">
-                <path style="stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter" d="m 58.26475,43.628481 15.7247,-27.287018 -31.4936,0.02553 z" id="T1"/>
-                <path style="stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter" d="m 58.26475,43.628481 31.4936,-0.02553 -15.7689,-27.261492 z" id="T2"/>
-                <path style="stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter" d="M 58.26475,43.628481 74.03365,70.88997 89.75835,43.602954 Z" id="T3"/>
-                <path style="stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter" d="M 58.26475,43.628481 42.54006,70.915503 74.03365,70.889973 Z" id="T4"/>
-                <path style="stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter" d="m 58.26475,43.628481 -31.49359,0.02553 15.7689,27.261491 z" id="T5"/>
-                <path style="stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter" d="M 58.26475,43.628481 42.49585,16.366995 26.77116,43.654011 Z" id="T6"/>
-            </svg>
-        </div>
+  <svg xmlns:svg="http://www.w3.org/2000/svg" viewbox="0 0 100 100" id="preLoader" width="100px" height="100px">
+    <path style="stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter" d="m 58.26475,43.628481 15.7247,-27.287018 -31.4936,0.02553 z" id="T1"/>
+    <path style="stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter" d="m 58.26475,43.628481 31.4936,-0.02553 -15.7689,-27.261492 z" id="T2"/>
+    <path style="stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter" d="M 58.26475,43.628481 74.03365,70.88997 89.75835,43.602954 Z" id="T3"/>
+    <path style="stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter" d="M 58.26475,43.628481 42.54006,70.915503 74.03365,70.889973 Z" id="T4"/>
+    <path style="stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter" d="m 58.26475,43.628481 -31.49359,0.02553 15.7689,27.261491 z" id="T5"/>
+    <path style="stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter" d="M 58.26475,43.628481 42.49585,16.366995 26.77116,43.654011 Z" id="T6"/>
+  </svg>
+</div>
 <div class="row">
-   <div class="col-md-12 grid-margin stretch-card">
-              <div class="card">
-                <div class="card-body">
-                  <h1 class="card-title text-center">Daftar Pasien</h4>
-                <table id="myTable" class="ui celled table">
-  <thead>
-    <tr>
-      <th width="5%;" data-orderable="false"></th>
-      <th >Nomor Identitas</th>
-      <th >Nama Pasien</th>
-      <!-- <th>Rumah Sakit</th> -->
-    </tr>
-  </thead>
-  <tbody>
-     @foreach($data as $a)
-    <tr >
-      <td>
-        <div class="profile-image"> <img style="border-radius: 50%;" src="{{asset('images/profile/page.jpg')}}" alt="image"/> <span class="online-status online"></span> </div>
-      </td>
-      <td>@if ($a->ktp!=null)
-        {{$a->ktp}}
-        @else
-        Belum di isi
-        @endif
-      </td>
-      <td><a href="{{url('/detailpasien/'.$a->id)}}">{{$a->name_user}}</a></td>
-      <!-- <td>RSUD Magetan</td> -->
-    </tr>
-    @endforeach
-  </tbody>
-</table>
-              </div>
-              </div>
-            </div>
+ <div class="col-md-12 grid-margin stretch-card">
+  <div class="card">
+    <div class="card-body">
+      <h1 class="card-title text-center">Daftar Pasien</h4>
+        <table id="myTable" class="ui celled table">
+          <thead>
+            <tr>
+              <th width="5%;" data-orderable="false"></th>
+              <th >Nomor Identitas</th>
+              <th >Nama Pasien</th>
+              <!-- <th>Rumah Sakit</th> -->
+            </tr>
+          </thead>
+          <tbody>
+           @foreach($data as $a)
+           <tr >
+            <td>
+              <div class="profile-image"> <img style="border-radius: 50%;" src="{{asset('images/profile/page.jpg')}}" alt="image"/> <span class="online-status online"></span> </div>
+            </td>
+            <td>@if ($a->ktp!=null)
+              {{$a->ktp}}
+              @else
+              Belum di isi
+              @endif
+            </td>
+            <td><a href="{{url('/detailpasien/'.$a->id)}}">{{$a->name_user}}</a></td>
+            <!-- <td>RSUD Magetan</td> -->
+          </tr>
+          @endforeach
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
 
 </div>
 
@@ -128,14 +128,14 @@ path{
   } );
 </script>
 <script type="text/javascript">
-   $('#icon').removeClass('icon-md');
-   $('#icon').addClass('icon-lg');
+ $('#icon').removeClass('icon-md');
+ $('#icon').addClass('icon-lg');
 </script>
 <script type="text/javascript">
   $(window).on('load', function(){
-                $('#loaderSvgWrapper').fadeOut(500);
-                $('#preloader').delay(350).fadeOut('slow');
-                $('body').delay(350).css({'overflow':'visible'});
-            });
+    $('#loaderSvgWrapper').fadeOut(500);
+    $('#preloader').delay(350).fadeOut('slow');
+    $('body').delay(350).css({'overflow':'visible'});
+  });
 </script>
 @endsection

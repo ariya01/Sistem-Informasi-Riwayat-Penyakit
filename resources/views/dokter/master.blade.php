@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="{{asset('css/style.css')}}">
   <link rel="shortcut icon" href="{{asset('images/favicon.png')}}" />
+  <link rel="icon" href="{{asset('1.png')}}" type="image/gif" sizes="16x16">
   <style type="text/css"> 
   </style>
   @yield('css')
@@ -58,10 +59,11 @@
         <ul class="nav">
           <li class="nav-item nav-profile">
             <div class="nav-link">
+              <div class="profile-image"> <img src="{{asset('images/profile/page.jpg')}}" alt="image"/></div> 
               <a id="messageDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
-              <div class="profile-image"> <img src="{{asset('images/profile/page.jpg')}}" alt="image"/> <span class="online-status online"></span> </div> 
+              <div><p class="text-center" style="color: white;">Hai, <i class="fa fa-angle-down" aria-hidden="true"></i></p></div> 
               </a>
-              <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="messageDropdown">
+              <div style="margin-top: -1%;" class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="messageDropdown">
               <div class="dropdown-divider"></div>
               <a href="{{url('logout')}}" class="dropdown-item preview-item">
                 <div class="preview-thumbnail">
@@ -73,15 +75,18 @@
                 </div>
               </a>
             </div>
+            
               <div class="profile-name">
-                <p style="color: white;">Hai,</p>
                 <p class="name" style="color: white;">{{Auth::user()->name_user}}</p>
                 <p class="designation" style="color: white;">{{Auth::user()->roles->first()->name}}</p>
               </div>
             </div>
           </li>
-          <li class="nav-item @yield('tombol')"><a class="nav-link" href="{{url('rumah')}}">
-            <i id="icon" style="margin-right: 7%;" class="fa fa-wheelchair icon-md"></i>
+          <li class="nav-item @yield('tombol1')"><a class="nav-link" href="{{url('rumah')}}">
+            <i id="icon1" style="margin-right: 7%;" class="fa fa-home icon-md"></i>
+            <span class="menu-title">Dashboard</span></a></li>
+            <li class="nav-item @yield('tombol2')"><a class="nav-link" href="{{url('utama')}}">
+            <i id="icon2" style="margin-right: 7%;" class="fa fa-wheelchair icon-md"></i>
             <span class="menu-title">Pasien</span></a></li>
              <!-- <li class="nav-item @yield('tombol5')"><a class="nav-link" href="{{url('logout')}}"><i id="icon6" style="margin-right: 7%; color: red;" class="fa fa-sign-out icon-md"></i><span style="color: red;" class="menu-title">Log Out</span></a></li> -->
         </ul>
@@ -108,7 +113,7 @@
   <script src="{{asset('node_modules/chart.js/dist/Chart.min.js')}}"></script>
   <script src="{{asset('js/off-canvas.js')}}"></script>
   <script src="{{asset('js/misc.js')}}"></script>
-  <script src="{{asset('js/dashboard.js')}}"></script>
+  <!-- <script src="{{asset('js/dashboard.js')}}"></script> -->
   <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB5NXz9eVnyJOA81wimI8WYE08kW_JMe8g&callback=initMap" async defer></script> -->
   <script src="{{asset('js/maps.js')}}"></script>
 </body>

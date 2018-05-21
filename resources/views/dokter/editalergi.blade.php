@@ -1,5 +1,5 @@
 @extends('dokter.master')
-@section('tombol')
+@section('tombol2')
 active
 @endsection
 @section('css')
@@ -128,7 +128,7 @@ path{
         <div class="input-group">
           <div class="input-group-prepend">
           </div>
-          <input type="text" class="form-control"  name="subyek" id="subyek" maxlength="100">
+          <input type="text" class="form-control"  name="subyek" id="subyek" maxlength="100" placeholder="Ny. A umur 28 tahun, periksa hamil tanggal 7 ">
           <div class="input-group-append bg-primary border-primary">
           </div>
         </div>
@@ -138,7 +138,7 @@ path{
         <div class="input-group">
           <div class="input-group-prepend">
           </div>
-          <input type="text" class="form-control" name="objek" id="objek" maxlength="100">
+          <input type="text" class="form-control" name="objek" id="objek" maxlength="100" placeholder="Janin hidup tunggal intra uterin">
           <div class="input-group-append bg-primary border-primary">
           </div>
         </div>
@@ -148,7 +148,7 @@ path{
         <div class="input-group">
           <div class="input-group-prepend">
           </div>
-          <input type="text" class="form-control" name="asssesmen" id="asssesmen" maxlength="100">
+          <input type="text" class="form-control" name="asssesmen" id="asssesmen" maxlength="100" placeholder="K/U ibu baik, kesadaran composmentis.">
           <div class="input-group-append bg-primary border-primary">
           </div>
         </div>
@@ -158,7 +158,7 @@ path{
         <div class="input-group">
           <div class="input-group-prepend">
           </div>
-          <input type="text" class="form-control" name="plan" id="plan" maxlength="100">
+          <input type="text" class="form-control" name="plan" id="plan" maxlength="100" placeholder="Anjurkan kepada ibu ">
           <div class="input-group-append bg-primary border-primary">
           </div>
         </div>
@@ -167,7 +167,7 @@ path{
       <input type="hidden" name="id_user" id="id_user" value="{{$id_user}}">
       {{ csrf_field() }}
       <button type="submit" class="btn btn-primary">Kirim</button>
-      <button type="reset" class="btn btn-light">Reset</button>
+      <button type="reset" onclick="myFunction(event)" class="btn btn-light">Reset</button>
     </form>
   </div>
 </div>
@@ -221,5 +221,32 @@ path{
 
 });
           </script>
+           <script type="text/javascript">
+          function myFunction(event)
+          {
+            var nama =$("#nama").val();
+    // alert(nama);
+    if (nama=="")
+    {
+      nama = "Riwayat Penyakit"
+    }
+    event.preventDefault(); // prevent form submit
+    var form = event.target.form;
+    swal({
+      title: 'Mereset Riwayat' ,
+      text: 'Apa Kamu Yakin Mereset ? ',
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#3085d6',
+      confirmButtonText: 'Ya Reset!',
+      cancelButtonText: 'Batal'
+    }).then((result) => {
+      if (result.value) {
+        form.reset();
+      }
+    })
+  }
+</script>
           <!-- <script src="{{asset('node_modules/jquery/dist/jquery.min.js')}}"></script> -->
           @endsection

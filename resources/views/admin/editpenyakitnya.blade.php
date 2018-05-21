@@ -251,7 +251,7 @@ $("#Status").on('change', function() {
       showCancelButton: true,
       confirmButtonColor: '#d33',
       cancelButtonColor: '#3085d6',
-      confirmButtonText: 'Ya Hapus!',
+      confirmButtonText: 'Ya Reset!',
       cancelButtonText: 'Batal'
     }).then((result) => {
       if (result.value) {

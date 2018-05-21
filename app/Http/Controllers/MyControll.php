@@ -82,6 +82,12 @@ class MyControll extends Controller
     // dd($personal);    
     return json_encode($personal);
  }
+  public function ajax11()
+ {
+  $personal =DB::table('riwayat')->where('dokter','=',Auth::user()->id)->groupBy('tahun')->select(DB::raw('tahun,count(*) as periksa'))->get();
+    // dd($personal);    
+    return json_encode($personal);
+ }
  public function akun()
  {
 
@@ -100,7 +106,8 @@ class MyControll extends Controller
   }
   public function rumah()
   {
-    return view('dokter.home');
+    $jumlah = DB::table('riwayat')->where('dokter','=',Auth::user()->id)->count();
+    return view('dokter.home',compact('jumlah'));
   } 
   public function hak()
   {
