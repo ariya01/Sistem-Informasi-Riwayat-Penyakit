@@ -113,7 +113,7 @@ path{
 @endif
 <div class="col-12">
   <div  class="card">
-        <a href="{{url('ubah')}}">
+        <a href="{{url('alergiku')}}">
       <i class="fa fa-arrow-left" style="margin-left: 2%; margin-top: 1%" aria-hidden="true"></i>
       <span style="font-size: 80%;"> Kembali Alergi </span>
     </a>

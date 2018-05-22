@@ -1,4 +1,7 @@
 @extends('admin.master')
+@section('tombol')
+active
+@endsection
 @section('css')
 <script
 src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -190,7 +193,7 @@ path{
         <div class="input-group">
           <div class="input-group-prepend">
           </div>
-          <input type="text" class="form-control" name="kontak" id="kontak" placeholder="Contoh: 089XXXXXXXXX" required>
+          <input type="number" class="form-control"  name="kontak" id="kontak" placeholder="Contoh: 089XXXXXXXXX" required>
           <div class="input-group-append">
           </div>
         </div>

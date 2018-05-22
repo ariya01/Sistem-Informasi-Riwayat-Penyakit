@@ -109,7 +109,7 @@ path{
   swal
   ({
     title: 'Berhasil',
-    text: 'Berhasil Berubah Menjadi {{session('data')}}',
+    text: 'Berhasil{{session('nama')}} Berubah Menjadi {{session('data')}}',
     type: 'success',
     confirmButtonText: 'Iya'
   })

@@ -163,19 +163,19 @@ path{
           </div>
         </div>
         <p class="card-description font-weight-bold">
-          Nama Pasien
+          Nama Dokter
         </p>
         <p style="margin-top: -2%;">
           {{$personal->name_user}}
         </p>
         <p class="card-description font-weight-bold">
-          Email User
+          Email Dokter
         </p>
         <p style="margin-top: -2%;">
           {{$personal->email}}
         </p>
         <p class="card-description font-weight-bold">
-          Alamat Pasien
+          Alamat Dokter
         </p>
         <p style="margin-top: -2%;">
           @if($detail)
@@ -221,7 +221,7 @@ path{
           Belum di Isi
           @endif
         </p>
-        <p class="card-description font-weight-bold">
+        <!-- <p class="card-description font-weight-bold">
           Perlu check Up
         </p>
         <p style="margin-top: -2%;">
@@ -234,7 +234,7 @@ path{
           @else
           Belum di Isi
           @endif
-        </p>  
+        </p>   -->
       </div>
     </div>
   </div>

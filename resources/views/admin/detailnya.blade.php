@@ -186,7 +186,7 @@ path{
           {{$personal->name_user}}
         </p>
         <p class="card-description font-weight-bold">
-          Email User
+          Email Pasien
         </p>
         <p style="margin-top: -2%;">
           {{$personal->email}}
