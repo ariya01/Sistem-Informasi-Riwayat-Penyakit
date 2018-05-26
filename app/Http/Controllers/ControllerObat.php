@@ -12,7 +12,7 @@ use Illuminate\Http\Request;
 
 class ControllerObat extends Controller
 {
-    public function index()
+  public function index()
   {
     $data = DB::table('obat')->get();
     $terakhir = DB::table('obat')->orderBy('id_obat', 'desc')->first();
@@ -27,9 +27,8 @@ class ControllerObat extends Controller
     return view('admin.obat',compact('data','angka')); 
   }
 
-   public function editobat($id)
+  public function editobat($id)
   {
-    // $kelamins =DB::table('roles')->get();
     $data = Db::table('obat')->where('id_obat','=',$id)->first();
     return view('admin.editobat',compact('kelamins','data','id'));
   }
@@ -62,7 +61,7 @@ class ControllerObat extends Controller
       }
     }
   }
-    public function hapusobat($id)
+  public function hapusobat($id)
   {
     $nama = DB::table('obat')->where('id_obat','=',$id)->first();
     $data = DB::table('obat')->where('id_obat','=',$id)->delete();

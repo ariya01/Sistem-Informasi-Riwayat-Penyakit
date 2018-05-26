@@ -12,7 +12,7 @@ use Illuminate\Http\Request;
 
 class ControllerPenyakit extends Controller
 {
-    public function index()
+  public function index()
   {
     $data = DB::table('penyakit')->get();
     $terakhir = DB::table('penyakit')->orderBy('id_penyakit', 'desc')->first();
@@ -24,16 +24,15 @@ class ControllerPenyakit extends Controller
     {
       $angka= $terakhir->id_penyakit+1;  
     }
-    // dd($terakhir);
     return view('admin.penyakit',compact('data','angka')); 
   }
-    public function edit($id)
+  public function edit($id)
   {
     $kelamins =DB::table('roles')->get();
     $data = Db::table('penyakit')->where('id_penyakit','=',$id)->first();
     return view('admin.editpenyakit',compact('kelamins','data','id'));
   }
-    public function hapus($id)
+  public function hapus($id)
   {
     $nama = DB::table('penyakit')->where('id_penyakit','=',$id)->first();
     $data = DB::table('penyakit')->where('id_penyakit','=',$id)->delete();
@@ -46,11 +45,9 @@ class ControllerPenyakit extends Controller
       return redirect()->route('penyakit')->with('message','Gagal');
     }
   }
-   public function masukkandata(Request $request)
+  public function masukkandata(Request $request)
   {
-    // dd($request->id_penyakit);
     $nama= DB::table('penyakit')->where('id_penyakit','=',$request->id_penyakit)->first();
-    // dd($nama);
     if($request->id_penyakit==null)
     {
       $data = DB::table('penyakit')->insert(['nama_penyakit'=>$request->nama,'keterangan_penyakit'=>$request->ket]);

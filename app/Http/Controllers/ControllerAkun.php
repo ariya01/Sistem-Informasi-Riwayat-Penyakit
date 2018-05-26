@@ -12,7 +12,7 @@ use Illuminate\Http\Request;
 
 class ControllerAkun extends Controller
 {
-    public function home()
+  public function home()
  	{
     	$dokter = DB::table('users')->leftJoin('role_user','users.id','role_user.user_id')->leftJoin('roles','role_id','roles.id')->where('name','=','dokter')->select('users.*','roles.name')->count();
     	$pasien = DB::table('users')->leftJoin('role_user','users.id','role_user.user_id')->leftJoin('roles','role_id','roles.id')->where('name','=','pasien')->select('users.*','roles.name')->count();
@@ -22,8 +22,8 @@ class ControllerAkun extends Controller
     	$penyakit = DB::table('penyakit')->count();
   	 	return view ('admin.home',compact('dokter','pasien','admin','penyakit','rs','obat'));
  	}
- 	public function index()
- 	{
+ 	  public function index()
+ 	  {
  		$data = DB::table('users')->leftJoin('role_user','users.id','role_user.user_id')->leftJoin('roles','role_id','roles.id')->leftJoin('detail','users.id','id_user')->select('users.*','roles.name','detail.id_det')->get();
     	$terakhir = DB::table('users')->orderBy('id', 'desc')->first();
     	$angka= $terakhir->id+1;
@@ -52,7 +52,6 @@ class ControllerAkun extends Controller
   	}
   	public function masukkandata(Request $request)
   	{
-    // dd($request->id_user);
     if($request->id_user==null)
     {
       if (User::where('email', '=', $request->email)->exists())
@@ -84,8 +83,6 @@ class ControllerAkun extends Controller
     else
     {
       $sendiri = DB::table('users')->where('id','=',$request->id_user)->first();
-      // dd($sendiri->email,$request->email);
-
       if (User::where('email', '=', $request->email)->exists() && $sendiri->email!=$request->email)
       {
         return redirect()->route('akun')->with('message','Gagal');
@@ -98,8 +95,6 @@ class ControllerAkun extends Controller
         $data->password = bcrypt($request->password);
         $data->save();
         $role = Rolenya::where('user_id','=',$request->id_user)->firstOrFail()->delete();
-      // $role->delete();
-      // dd($role);
         $role = new Rolenya;
         $role->user_id = $request->id_user;
         $role->role_id = $request->role;

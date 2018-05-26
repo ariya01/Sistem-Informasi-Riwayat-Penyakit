@@ -12,7 +12,7 @@ use Illuminate\Http\Request;
 
 class ControllerAlergi extends Controller
 {
-  	public function index()
+  public function index()
   {
     $data = DB::table('alergi')->get();
     $terakhir = DB::table('alergi')->orderBy('id_alergi', 'desc')->first();
@@ -26,14 +26,13 @@ class ControllerAlergi extends Controller
     }
     return view('admin.alerginya',compact('data','angka'));
   }
-    public function ubah($id)
+  public function ubah($id)
   {
     $data = Db::table('alergi')->where('id_alergi','=',$id)->first();
     return view('admin.ubahalergi',compact('kelamins','data','id'));
   }
   public function masukkandata(Request $request)
   {
-    // dd($request->id_alergi);
     $nama = db::table('alergi')->where('id_alergi','=',$request->id_alergi)->first();
     if($request->id_alergi==null)
     {
@@ -60,7 +59,7 @@ class ControllerAlergi extends Controller
       }
     }
   }
-   public function hapus($id)
+  public function hapus($id)
   {
     $nama = DB::table('alergi')->where('id_alergi','=',$id)->first();
     $data = DB::table('alergi')->where('id_alergi','=',$id)->delete();
