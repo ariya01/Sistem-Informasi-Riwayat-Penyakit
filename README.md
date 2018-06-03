@@ -9,9 +9,10 @@ Sistem ini dibuat untuk menggantikan cara tradisional yang menggunakan kertas un
 1. Dokter
 2. Admin
 
+
 ## Fitur
 ### Login
-![alt text](https://github.com/ariya01/Sistem-Informasi-Riwayat-Penyakit/blob/master/gambar/login.png "Logo Title Text 1")
+![alt text](https://github.com/ariya01/Sistem-Informasi-Riwayat-Penyakit/blob/master/gambar/login2.png "Logo Title Text 1")
 ### Admin
 #### Dashboard Admin
 ![alt text](https://github.com/ariya01/Sistem-Informasi-Riwayat-Penyakit/blob/master/gambar/dasbord.png "Logo Title Text 1")
